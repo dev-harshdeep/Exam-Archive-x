@@ -11,7 +11,7 @@
 
 ## Introduction
 
-"Lack of access to past university exam papers can hinder effective student preparation and academic success. "Exam Archive X" is an upcoming project initiated by Graphic Era Hill University to address this issue. This repository provides an introduction to "Exam Archive X" and its purpose.
+"Lack of access to past university exam papers can hinder effective student preparation and academic success. "Exam Archive X" is an upcoming project initiated by Students of Graphic Era Hill University to address this issue. This repository provides an introduction to "Exam Archive X" and its purpose.
 
 ## Project Overview
 
