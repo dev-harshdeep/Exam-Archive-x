@@ -22,7 +22,7 @@ def list_files_in_directory(directory_path):
                 file_list.append(file)
     else:
         print(f"The directory '{directory_path}' does not exist.")
-    
+        print(file_list)
     return file_list
 
 # Example usage:
