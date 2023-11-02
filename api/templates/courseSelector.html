@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Course Folders</title>
+  </head>
+  <body>
+    <div id="mainDiv">
+      <!-- Folders will be created here -->
+    </div>
+
+    <script>
+      // Function to make a GET request to /getCourses endpoint and create folders
+      function createCourseFolders() {
+        const mainDiv = document.getElementById('mainDiv');
+        const getCoursesEndpoint = '/getCourses'; // Replace with the actual endpoint
+
+        fetch(getCoursesEndpoint)
+          .then((response) => response.json())
+          .then((courses, index) => {
+            courses.forEach((course, index) => {
+              const folder = document.createElement('div');
+              folder.cid = index; // Store the course index as a property
+              folder.textContent = course;
+              folder.classList.add('folder');
+              folder.addEventListener('click', () => {
+                // When a folder is clicked, make a request to /getSub with the course index
+                makeSubRequest(folder.cid); // Pass the course index to the function
+              });
+
+              mainDiv.appendChild(folder);
+            });
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+      }
+
+      // Function to make a GET request to /getSub endpoint for a specific course
+      function makeSubRequest(courseIndex) {
+        const endpoint = `/SemSelect/${courseIndex}`; // Use the course index as a parameter
+
+        // Redirect to the /getSub endpoint with the course index as a parameter
+        window.location.href = endpoint;
+      }
+
+      // Call the function to create course folders
+      createCourseFolders();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Subject Selection</title>
+  </head>
+  <body>
+    <h1>Subject Selection</h1>
+    <div id="mainDiv">
+      <!-- Subjects will be displayed here -->
+    </div>
+
+    <script>
+      // Function to extract the course ID (cid) and semester (sem) from the URL
+      function getCourseIdAndSemesterFromUrl() {
+        const url = window.location.href;
+        const match = url.match(/\/subSelect\/(\d+)\/(.+)/); // Adapt the regex to match your URL format
+        if (match) {
+          return { cid: match[1], sem: match[2] };
+        }
+        return null;
+      }
+
+      // Replace this URL with your API endpoint that returns subjects
+      const baseEndpoint = '/getSub/';
+      const mainDiv = document.getElementById('mainDiv');
+
+      // Function to fetch subjects and display them
+      function displaySubjects(cid, sem) {
+        const subjectsEndpoint = `${baseEndpoint}${cid}/${sem}`;
+
+        fetch(subjectsEndpoint)
+          .then((response) => response.json())
+          .then((subjects) => {
+            subjects.forEach((subject) => {
+              const subjectDiv = document.createElement('div');
+              subjectDiv.textContent = `Code: ${subject.Code}, Name: ${subject.Name}`;
+              subjectDiv.classList.add('subject');
+
+              mainDiv.appendChild(subjectDiv);
+            });
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+      }
+
+      // Get the course ID (cid) and semester (sem) from the URL
+      const courseInfo = getCourseIdAndSemesterFromUrl();
+
+      if (courseInfo) {
+        const { cid, sem } = courseInfo;
+        // Call the function to display subjects with the extracted cid and sem
+        displaySubjects(cid, sem);
+      }
+    </script>
+  </body>
+</html>

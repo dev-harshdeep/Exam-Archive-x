@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Semester Folders</title>
+  </head>
+  <body>
+    <h1>Semester Folders</h1>
+    <div id="mainDiv">
+      <!-- Folders will be created here -->
+    </div>
+
+    <script>
+      // Function to extract the course ID (cid) from the URL
+      function getCourseIdFromUrl() {
+        const url = window.location.href;
+        const match = url.match(/\/SemSelect\/(\d+)/); // Regex to match the course ID
+        if (match) {
+          return match[1];
+        }
+        return null;
+      }
+
+      // Replace this URL with your API endpoint that returns semester data
+      const baseEndpoint = '/getSem/';
+      const mainDiv = document.getElementById('mainDiv');
+
+      // Function to fetch semester data and create folders
+      function createSemesterFolders(cid) {
+        const semesterDataEndpoint = baseEndpoint + cid;
+
+        fetch(semesterDataEndpoint)
+          .then((response) => response.json())
+          .then((semesterData) => {
+            semesterData.forEach((semester) => {
+              const folder = document.createElement('div');
+              folder.textContent = semester;
+              folder.classList.add('folder');
+              folder.addEventListener('click', () => {
+                // Navigate to the subject selection page with the course ID (cid) and semester (semester)
+                window.location.href = `/subSelect/${cid}/${semester}`;
+              });
+
+              mainDiv.appendChild(folder);
+            });
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+      }
+
+      // Get the course ID from the URL
+      const cid = getCourseIdFromUrl();
+
+      if (cid) {
+        // Call the function to create semester folders with the extracted cid
+        createSemesterFolders(cid);
+      }
+    </script>
+  </body>
+</html>
