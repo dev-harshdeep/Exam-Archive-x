@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Show Papers</title>
+  </head>
+  <body>
+    <h1>Show Papers</h1>
+    <div id="paperList">
+      <!-- Paper list will be displayed here -->
+    </div>
+
+    <script>
+      const code = '{{ code }}'; // Get the code from Flask template
+
+      // Function to fetch papers and display them
+      function fetchPapers() {
+        const paperList = document.getElementById('paperList');
+
+        fetch(`/getPapers/${code}`)
+          .then((response) => response.json())
+          .then((data) => {
+            // Clear existing content
+            paperList.innerHTML = '';
+
+            // Display papers
+            data.forEach((paper) => {
+              const paperItem = document.createElement('p');
+              paperItem.textContent = paper;
+              paperList.appendChild(paperItem);
+            });
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+      }
+
+      // Call the function to fetch and display papers
+      fetchPapers();
+    </script>
+  </body>
+</html>

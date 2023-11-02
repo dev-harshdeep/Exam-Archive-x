@@ -9,7 +9,37 @@ with open('output.json', 'r') as file:
 cources = []
 for i in range(0, len(data)):
     cources.append(data[i]['Course'])
-print(cources)
+import os
+
+def list_files_in_directory(directory_path):
+    file_list = []
+    
+    # Check if the directory exists
+    if os.path.exists(directory_path):
+        # Iterate through all the files and subdirectories in the given directory
+        for root, dirs, files in os.walk(directory_path):
+            for file in files:
+                file_list.append(file)
+    else:
+        print(f"The directory '{directory_path}' does not exist.")
+    
+    return file_list
+
+# Example usage:
+directory_path = "pdfs"
+files = list_files_in_directory(directory_path)
+print("No of files :",len(files))
+# print(cources)
+
+
+def searchFile(filter):
+    arr=[]
+    for file in files:
+        if filter in file:
+            arr.append(file)
+    return arr
+
+print(searchFile('TCS-101'))
 
 app = Flask(__name__)
 cources = []
@@ -73,6 +103,16 @@ def getSub(cid, sem):
             return sem[sanitized_sem]
 
     return jsonify(data[int(cid)])
+
+@app.route('/getPapers/<code>')
+def getPapers(code):
+    return jsonify(searchFile(code))
+
+
+@app.route("/showPapers/<code>")
+def showPapers(code):
+    return render_template('showPaper.html',code=code)
+    
 
 
 if __name__ == "__main__":
