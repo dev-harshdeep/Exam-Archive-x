@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Show Papers</title>
+    <style>
+      * {
+        box-sizing: border-box;
+    }
+
+    body{
+      max-width : 100vw;
+    }
+ 
+    h1{
+        color: white;
+        font-family: sans-serif;
+        text-align: center;
+    }
+    .container {
+        width: 150px;
+        height: 100px;
+        margin: 40px auto ;
+        position: relative;
+         flex:1;
+         text-align:center;
+         
+        
+  
+    }
+    
+
+    @import "nib"
+
+    body{
+      background: #f5f5f5;
+      font-size: 13px;
+      padding: 5em;
+    }
+
+    .pdf-icon
+    {
+      font-size: 100%;
+      box-sizing: border-box;
+      display: block;
+      position: relative;
+      width: 6em;
+      height: 8.5em;
+      background-color: #eee;
+      background-image: url("{{ url_for('static', filename='lZ5SgDE.png') }}");
+      background-repeat: no-repeat;
+      background-size: 85% auto;
+      background-position: center 2em;
+      border-radius: 1px 2em 1px 1px;
+      border: 1px solid #ddd;
+    }
+      .pdf-icon:after
+      {
+        content: 'PDF';
+        font-family: Arial;
+        font-weight: bold;
+        font-size: 1.2em;
+        text-align: center;
+        padding: .2em 0 .1em;
+        color: white;
+        display: block;
+        position: absolute;
+        top: .7em;
+        left: -1.5em;
+        width: 3.4em;
+        height: auto;
+        background: #da2525;
+        border-radius: 2px;
+      }
+      
+
+    #paperList{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 10px; 
+      justify-items: center; 
+    }
+    
+    .empty-container{
+      display:flex;
+      flex-direction:column;
+       width:400px;
+       height:300px;
+       text-align:center;
+       justify-content:center;
+       align-items:center;
+    }
+
+     
+    .inner-container{
+      display:flex;
+    }
+
+     .view-container{
+
+      width: 28px;  
+      height: 24px;  
+      background-image: url("{{ url_for('static', filename='eye-solid.svg') }}");  
+      background-size: cover;  
+      background-repeat: no-repeat;
+      text-indent: -9999px;  
+      cursor: pointer;  
+      margin-left:9px;
+      color: #fff;
+     }
+
+
+     .download-container{
+      width: 24px;  
+      height: 24px;  
+      background-image: url("{{ url_for('static', filename='download-solid.svg') }}");  
+      background-size: cover;  
+      background-repeat: no-repeat;
+      text-indent: -9999px;  
+      cursor: pointer;  
+      margin-top:10px;
+      margin-left:10px;
+     }
+    
+    
+    
+    
+    
+    </style>
+  </head>
+  <body>
+ 
+    <div id="paperList">
+      <!-- Paper list will be displayed here -->
+    </div>
+
+    <script>
+      const code = '{{ code }}'; // Get the code from Flask template
+
+      // Function to fetch papers and display them
+      function fetchPapers() {
+        const paperList = document.getElementById('paperList');
+
+        fetch(`/getPapers/${code}`)
+          .then((response) => response.json())
+          .then((data) => {
+            // Clear existing content
+            paperList.innerHTML = '';
+
+            // Display papers
+            data.forEach((paper) => {
+              const paperItem = document.createElement('p');
+              const container = document.createElement('div')
+              const emptyContainer = document.createElement('div')
+              const pdfIcon =  document.createElement('div')
+              const innerContainer = document.createElement('div')
+              const viewContainer = document.createElement('div')
+              const supperInnerContainer = document.createElement('div')
+              supperInnerContainer.classList.add('super-inner-container')
+              innerContainer.classList.add('inner-container')
+              const downloadContainer = document.createElement('div')
+              downloadContainer.classList.add('download-container')
+              viewContainer.classList.add("view-container")
+
+              
+              container.appendChild(innerContainer)
+              innerContainer.appendChild(pdfIcon)
+              innerContainer.appendChild(supperInnerContainer)
+              supperInnerContainer.appendChild(viewContainer)
+              supperInnerContainer.appendChild(downloadContainer)
+              pdfIcon.classList.add('pdf-icon')
+              emptyContainer.classList.add('empty-container')
+              container.classList.add('container')
+              emptyContainer.appendChild(container)
+              paperList.appendChild(emptyContainer)
+              paperItem.textContent = paper;
+            
+              container.appendChild(paperItem);
+            });
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+      }
+
+      // Call the function to fetch and display papers
+      fetchPapers();
+    </script>
+  </body>
+</html>

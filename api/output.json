@@ -1,0 +1,2709 @@
+[
+    {
+        "Course": "B.Tech (Computer Science and Engineering) CURRICULUM STRUCTURE",
+        "data": [
+            {   
+                "SEMESTER: I": [
+                    {
+                        "Code": "CODE",
+                        "Name": "TITLE"
+                    },
+                    {
+                        "Code": "TMA101",
+                        "Name": "Engineering Mathematics-I"
+                    },
+                    {
+                        "Code": "TCS101",
+                        "Name": "Fundamental of Computer & Introduction to Programming"
+                    },
+                    {
+                        "Code": "TPH101/201",
+                        "Name": "Engineering Physics"
+                    },
+                    {
+                        "Code": "TEE101/201",
+                        "Name": "Basic Electrical Engineering"
+                    },
+                    {
+                        "Code": "TCE101/201",
+                        "Name": "Basic Civil Engineering"
+                    },
+                    {
+                        "Code": "THU101",
+                        "Name": "Professional Communication"
+                    },
+                    {
+                        "Code": "THF101/201 ",
+                        "Name": "Healthy Living & Fitness"
+                    },
+                    {
+                        "Code": "PCS151 ",
+                        "Name": "Computer Lab- I "
+                    },
+                    {
+                        "Code": "PPH151/251 ",
+                        "Name": "Physics Lab"
+                    },
+                    {
+                        "Code": "PEE151/251",
+                        "Name": "Basic Electrical Engineering Lab. "
+                    },
+                    {
+                        "Code": "PME151/251",
+                        "Name": "Workshop and Manufacturing Practices"
+                    },
+                    {
+                        "Code": "GP101",
+                        "Name": "General Proficiency-I /NCC/Yoga/ Sports /Cultural"
+                    }
+                ]
+            },
+            {
+                "SEMESTER: II": [
+                    {
+                        "Code": "CODE",
+                        "Name": "TITLE"
+                    },
+                    {
+                        "Code": "TMA201 ",
+                        "Name": "Engineering Mathematics-II"
+                    },
+                    {
+                        "Code": "TCS201 ",
+                        "Name": "Programming for Problem Solving"
+                    },
+                    {
+                        "Code": "TCH101/201",
+                        "Name": "Engineering Chemistry "
+                    },
+                    {
+                        "Code": "TEC101/201",
+                        "Name": "Basic Electronics Engineering"
+                    },
+                    {
+                        "Code": "THU201",
+                        "Name": "Advanced Professional Communication"
+                    },
+                    {
+                        "Code": "TEV101/201",
+                        "Name": "Environmental Science"
+                    },
+                    {
+                        "Code": "PCS151/251",
+                        "Name": "Computer Lab \u2013II"
+                    },
+                    {
+                        "Code": "PCH151/251",
+                        "Name": "Chemistry Lab"
+                    },
+                    {
+                        "Code": "PEC151/251",
+                        "Name": "Basic Electronics Engineering Lab."
+                    },
+                    {
+                        "Code": "PME153/253",
+                        "Name": "Engg. Graphics and Design Lab."
+                    },
+                    {
+                        "Code": "GP201",
+                        "Name": "General Proficiency-II /NCC/Yoga/ Sports /Cultural "
+                    }
+                ]
+            },
+            {
+                "SEMESTER: III": [
+                    {
+                        "Code": "CODE",
+                        "Name": "TITLE"
+                    },
+                    {
+                        "Code": "TCS-308 ",
+                        "Name": "Logic Design and Computer Organization"
+                    },
+                    {
+                        "Code": "TCS-302",
+                        "Name": "Data Structures with C"
+                    },
+                    {
+                        "Code": "TCS-307",
+                        "Name": "Object Oriented Programming with C++"
+                    },
+                    {
+                        "Code": "TMA-316",
+                        "Name": "Discrete Structures and Combinatorics"
+                    },
+                    {
+                        "Code": "XCS-301 ",
+                        "Name": "Career Skills"
+                    },
+                    {
+                        "Code": "PCS-308",
+                        "Name": "Logic Design and Computer Organization Lab"
+                    },
+                    {
+                        "Code": "PCS-302",
+                        "Name": "Data Structures Lab"
+                    },
+                    {
+                        "Code": "PCS-307",
+                        "Name": "OOPS with C++ Lab"
+                    },
+                    {
+                        "Code": "CSP-301",
+                        "Name": "Mini Project"
+                    },
+                    {
+                        "Code": "GP-301",
+                        "Name": "General Proficiency"
+                    }
+                ]
+            },
+            {
+                "SEMESTER: IV": [
+                    {
+                        "Code": "CODE",
+                        "Name": "TITLE"
+                    },
+                    {
+                        "Code": "TCS-408",
+                        "Name": "Programming in Java"
+                    },
+                    {
+                        "Code": "TCS-402",
+                        "Name": "Finite Automata and Formal Languages"
+                    },
+                    {
+                        "Code": "TCS-403 ",
+                        "Name": "Microprocessors"
+                    },
+                    {
+                        "Code": "TCS-409",
+                        "Name": "Design and Analysis of Algorithms"
+                    },
+                    {
+                        "Code": "XCS-401",
+                        "Name": "Career Skills"
+                    },
+                    {
+                        "Code": "PCS-408",
+                        "Name": "Java Programming Lab"
+                    },
+                    {
+                        "Code": "PCS-403",
+                        "Name": "Microprocessors Lab"
+                    },
+                    {
+                        "Code": "PCS-409",
+                        "Name": "DAA Lab"
+                    },
+                    {
+                        "Code": "CSP-401",
+                        "Name": "Mini Project"
+                    },
+                    {
+                        "Code": "GP- 401",
+                        "Name": "General Proficiency"
+                    }
+                ]
+            },
+            {
+                "SEMESTER: V": [
+                    {
+                        "Code": "CODE",
+                        "Name": "TITLE"
+                    },
+                    {
+                        "Code": "TCS-501",
+                        "Name": "System Software"
+                    },
+                    {
+                        "Code": "TCS-502 ",
+                        "Name": "Operating Systems"
+                    },
+                    {
+                        "Code": "TCS-503 ",
+                        "Name": "Data Base Management Systems"
+                    },
+                    {
+                        "Code": "TMA-502",
+                        "Name": "Computer Based Numerical and Statistical techniques"
+                    },
+                    {
+                        "Code": "XCS-501",
+                        "Name": "Career Skills"
+                    },
+                    {
+                        "Code": "PCS-506",
+                        "Name": "Operating Systems Lab"
+                    },
+                    {
+                        "Code": "PCS-503",
+                        "Name": "DBMS Lab"
+                    },
+                    {
+                        "Code": "PMA-502",
+                        "Name": "CBNST Lab"
+                    },
+                    {
+                        "Code": "CSP-501",
+                        "Name": "Mini Project"
+                    },
+                    {
+                        "Code": "GP-501",
+                        "Name": "General Proficiency"
+                    }
+                ]
+            },
+            {
+                "SEMESTER: VI": [
+                    {
+                        "Code": "CODE",
+                        "Name": "TITLE"
+                    },
+                    {
+                        "Code": "TCS-601",
+                        "Name": "Compiler Design"
+                    },
+                    {
+                        "Code": "TCS-611",
+                        "Name": "Software Engineering"
+                    },
+                    {
+                        "Code": "TCS-604",
+                        "Name": "Computer Networks-I"
+                    },
+                    {
+                        "Code": "TCS 693",
+                        "Name": "Full Stack Web Development"
+                    },
+                    {
+                        "Code": "PCS-601",
+                        "Name": "Compiler Design Lab"
+                    },
+                    {
+                        "Code": "PCS604",
+                        "Name": "Computer Networks Lab"
+                    },
+                    {
+                        "Code": "PCS 693",
+                        "Name": "Web Development Lab"
+                    },
+                    {
+                        "Code": "XCS-601",
+                        "Name": "Career Skills"
+                    },
+                    {
+                        "Code": "CSP-601",
+                        "Name": "Mini Project"
+                    },
+                    {
+                        "Code": "GP-601",
+                        "Name": "General Proficiency"
+                    }
+                ]
+            },
+            {
+                "SEMESTER: VII": [
+                    {
+                        "Code": "CODE",
+                        "Name": "TITLE"
+                    },
+                    {
+                        "Code": "TCS-703 ",
+                        "Name": "Computer Networks-II"
+                    },
+                    {
+                        "Code": "TCS-704",
+                        "Name": "Advanced Computer Architecture"
+                    },
+                    {
+                        "Code": "TRM-701",
+                        "Name": "Research Methodology and IPR"
+                    },
+                    {
+                        "Code": "SCS-701",
+                        "Name": "Seminar on Industrial Interaction"
+                    },
+                    {
+                        "Code": "CSP-701",
+                        "Name": "Major Project Phase I"
+                    },
+                    {
+                        "Code": "GP-701",
+                        "Name": "General Proficiency"
+                    }
+                ]
+            },
+            {
+                "SEMESTER: VIII": [
+                    {
+                        "Code": "CODE",
+                        "Name": "TITLE"
+                    },
+                    {
+                        "Code": "TDM-881",
+                        "Name": "Disaster Management"
+                    },
+                    {
+                        "Code": "CSC-801",
+                        "Name": "Comprehensive Viva-Voce"
+                    },
+                    {
+                        "Code": "CSP-801",
+                        "Name": "Major Project Phase II"
+                    },
+                    {
+                        "Code": "GP-801",
+                        "Name": "General Proficiency"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "Course": "B.Tech (Computer Science and Business Systems) CURRICULUM STRUCTURE ",
+        "data": [
+            {
+                "SEMESTER: I": [
+                    {
+                        "Code": "CODE",
+                        "Name": "TITLE"
+                    },
+                    {
+                        "Code": "TTC101",
+                        "Name": "Discrete Mathematics"
+                    },
+                    {
+                        "Code": "TTC102",
+                        "Name": "Introductory Topics in Statistics, Probability and Calculus"
+                    },
+                    {
+                        "Code": "TCS101 ",
+                        "Name": "Fundamentals of Computer and Introduction to Programming"
+                    },
+                    {
+                        "Code": "TTC104",
+                        "Name": "Principles of Electrical Engineering"
+                    },
+                    {
+                        "Code": "TTC105",
+                        "Name": "Physics for Computing Science"
+                    },
+                    {
+                        "Code": "TTC106",
+                        "Name": "Business Communication & Value Science - I"
+                    },
+                    {
+                        "Code": "PCS151",
+                        "Name": "Computer Lab- I"
+                    },
+                    {
+                        "Code": "PTC105",
+                        "Name": "Physics Lab"
+                    },
+                    {
+                        "Code": "PTC104",
+                        "Name": "Electrical Engineering Lab."
+                    },
+                    {
+                        "Code": "PME151",
+                        "Name": "Workshop and Manufacturing Practices"
+                    },
+                    {
+                        "Code": "THF101",
+                        "Name": "Healthy Living & Fitness"
+                    },
+                    {
+                        "Code": "GP101 ",
+                        "Name": "General Proficiency-I /NCC/Yoga/ Sports /Cultural"
+                    },
+                    {
+                        "Code": "NTC101",
+                        "Name": "Induction Program"
+                    }
+                ]
+            },
+            {
+                "SEMESTER: II": [
+                    {
+                        "Code": "CODE",
+                        "Name": "TITLE"
+                    },
+                    {
+                        "Code": "TTC201",
+                        "Name": "Linear Algebra"
+                    },
+                    {
+                        "Code": "TTC202",
+                        "Name": "Statistical Methods"
+                    },
+                    {
+                        "Code": "TTC203",
+                        "Name": "Fundamentals of Economics "
+                    },
+                    {
+                        "Code": "TTC201",
+                        "Name": "Programming for Problem Solving"
+                    },
+                    {
+                        "Code": "TTC204",
+                        "Name": "Principles of Electronics"
+                    },
+                    {
+                        "Code": "TTC205",
+                        "Name": "Business Communication & Value Science \u2013 II"
+                    },
+                    {
+                        "Code": "PCS251",
+                        "Name": "Computer Lab \u2013II"
+                    },
+                    {
+                        "Code": "PTC202",
+                        "Name": "Statistical Methods Lab"
+                    },
+                    {
+                        "Code": "PTC204",
+                        "Name": "Principles of Electronics Lab"
+                    },
+                    {
+                        "Code": "PME253",
+                        "Name": "Engg. Graphics and Design Lab."
+                    },
+                    {
+                        "Code": "TEV201",
+                        "Name": "Environmental Science"
+                    },
+                    {
+                        "Code": "GP201 ",
+                        "Name": "General Proficiency-II /NCC/Yoga/ Sports /Cultural"
+                    }
+                ]
+            },
+            {
+                "SEMESTER: III": [
+                    {
+                        "Code": "CODE",
+                        "Name": "TITLE"
+                    },
+                    {
+                        "Code": "TTC301",
+                        "Name": "Formal Language and Automata Theory"
+                    },
+                    {
+                        "Code": "TTC302",
+                        "Name": "Data Structures & Algorithms"
+                    },
+                    {
+                        "Code": "TTC303",
+                        "Name": "Object Oriented Programming"
+                    },
+                    {
+                        "Code": "TTC304",
+                        "Name": "Computational Statistics"
+                    },
+                    {
+                        "Code": "TTC305",
+                        "Name": "Computer Organization & Architecture"
+                    },
+                    {
+                        "Code": "TTC306",
+                        "Name": "Database Management Systems"
+                    },
+                    {
+                        "Code": "PTC304 ",
+                        "Name": "Computational Statistics"
+                    },
+                    {
+                        "Code": "PTC302",
+                        "Name": "Data Structures Lab"
+                    },
+                    {
+                        "Code": "PTC303",
+                        "Name": "OOPS with C++ Lab"
+                    },
+                    {
+                        "Code": "PTC306",
+                        "Name": "DBMS Lab"
+                    },
+                    {
+                        "Code": "XCS-301",
+                        "Name": "Career Skills"
+                    },
+                    {
+                        "Code": "CSP-301",
+                        "Name": "Mini Project"
+                    },
+                    {
+                        "Code": "GP-301",
+                        "Name": "General Proficiency"
+                    },
+                    {
+                        "Code": "NTC301 ",
+                        "Name": "Indian Constitution"
+                    }
+                ]
+            },
+            {
+                "SEMESTER: IV": [
+                    {
+                        "Code": "CODE",
+                        "Name": "TITLE"
+                    },
+                    {
+                        "Code": "TTC401",
+                        "Name": "Operating Systems"
+                    },
+                    {
+                        "Code": "TTC402",
+                        "Name": "Design And Analysis of Algorithms"
+                    },
+                    {
+                        "Code": "TTC403",
+                        "Name": "Software Engineering"
+                    },
+                    {
+                        "Code": "TTC405",
+                        "Name": "Introduction to Innovation, IP Management & Entrepreneurship"
+                    },
+                    {
+                        "Code": "TTC406",
+                        "Name": "Design Thinking"
+                    },
+                    {
+                        "Code": "TTC407",
+                        "Name": "Operations Research"
+                    },
+                    {
+                        "Code": "PTC401",
+                        "Name": "Operating Systems Lab"
+                    },
+                    {
+                        "Code": "PTC402",
+                        "Name": "Algorithms Lab"
+                    },
+                    {
+                        "Code": "PTC403",
+                        "Name": "Software Engineering Lab"
+                    },
+                    {
+                        "Code": "PTC407",
+                        "Name": "Operations Research Lab"
+                    },
+                    {
+                        "Code": "XCS-401",
+                        "Name": "Career Skills"
+                    },
+                    {
+                        "Code": "CSP-401",
+                        "Name": "Mini Project"
+                    },
+                    {
+                        "Code": "GP-401",
+                        "Name": "General Proficiency"
+                    },
+                    {
+                        "Code": "NTC401",
+                        "Name": "Essence of Indian Traditional Knowledge"
+                    }
+                ]
+            },
+            {
+                "SEMESTER: V": [
+                    {
+                        "Code": "CODE",
+                        "Name": "TITLE"
+                    },
+                    {
+                        "Code": "TTC501",
+                        "Name": "Software Design with UML"
+                    },
+                    {
+                        "Code": "TTC502",
+                        "Name": "Compiler Design"
+                    },
+                    {
+                        "Code": "TTC503",
+                        "Name": "Fundamentals of Management"
+                    },
+                    {
+                        "Code": "TTC504",
+                        "Name": "Business Strategy"
+                    },
+                    {
+                        "Code": "TTC505",
+                        "Name": "Business Communication & Value Science \u2013 III"
+                    },
+                    {
+                        "Code": "PTC501",
+                        "Name": "Software Design with UML Lab"
+                    },
+                    {
+                        "Code": "PTC502",
+                        "Name": "Compiler Design Lab"
+                    },
+                    {
+                        "Code": "XCS-501",
+                        "Name": "Career Skills"
+                    },
+                    {
+                        "Code": "CSP-501",
+                        "Name": "Mini Project"
+                    },
+                    {
+                        "Code": "GP-501",
+                        "Name": "General Proficiency"
+                    }
+                ]
+            },
+            {
+                "SEMESTER: VI": [
+                    {
+                        "Code": "CODE",
+                        "Name": "TITLE"
+                    },
+                    {
+                        "Code": "TTC601",
+                        "Name": "Computer Networks"
+                    },
+                    {
+                        "Code": "TTC602",
+                        "Name": "Information Security"
+                    },
+                    {
+                        "Code": "TTC603",
+                        "Name": "Artificial Intelligence"
+                    },
+                    {
+                        "Code": "TTC604",
+                        "Name": "Financial & Cost Accounting"
+                    },
+                    {
+                        "Code": "TTC605",
+                        "Name": "Business Communication & Value Science \u2013 IV"
+                    },
+                    {
+                        "Code": "PTC601 ",
+                        "Name": "Computer Networks Lab"
+                    },
+                    {
+                        "Code": "PTC602",
+                        "Name": "Information Lab"
+                    },
+                    {
+                        "Code": "PTC603 ",
+                        "Name": "Artificial Intelligence Lab"
+                    },
+                    {
+                        "Code": "XCS-601",
+                        "Name": "Career Skills"
+                    },
+                    {
+                        "Code": "CSP-601",
+                        "Name": "Mini Project"
+                    },
+                    {
+                        "Code": "GP-601",
+                        "Name": "General Proficiency"
+                    }
+                ]
+            },
+            {
+                "SEMESTER: VII": [
+                    {
+                        "Code": "CODE",
+                        "Name": "TITLE"
+                    },
+                    {
+                        "Code": "TTC701",
+                        "Name": "Usability Design of Software Applications"
+                    },
+                    {
+                        "Code": "TTC702",
+                        "Name": "IT Workshop Skylab / Matlab"
+                    },
+                    {
+                        "Code": "TTC703",
+                        "Name": "Financial Management"
+                    },
+                    {
+                        "Code": "TTC704",
+                        "Name": "Human Resource Management"
+                    },
+                    {
+                        "Code": "PTC701",
+                        "Name": "Usability Design of Software Applications Lab"
+                    },
+                    {
+                        "Code": "PTC702",
+                        "Name": "IT Workshop Skylab / Matlab"
+                    },
+                    {
+                        "Code": "SCS\u0002701",
+                        "Name": "Seminar on Industrial Interaction"
+                    },
+                    {
+                        "Code": "CTC-701",
+                        "Name": "Major Project Phase I"
+                    },
+                    {
+                        "Code": "GP-701",
+                        "Name": "General Proficiency"
+                    }
+                ]
+            },
+            {
+                "SEMESTER: VIII": [
+                    {
+                        "Code": "CODE",
+                        "Name": "TITLE"
+                    },
+                    {
+                        "Code": "TTC801 ",
+                        "Name": "Services Science & Service Operational Management"
+                    },
+                    {
+                        "Code": "TTC802",
+                        "Name": "IT Project Management"
+                    },
+                    {
+                        "Code": "PTC801",
+                        "Name": "Services Science & Service Operational Management Lab"
+                    },
+                    {
+                        "Code": "PTC802",
+                        "Name": "IT Project Management Lab"
+                    },
+                    {
+                        "Code": "CSC-801",
+                        "Name": "Comprehensive Viva-Voce"
+                    },
+                    {
+                        "Code": "CTC-801",
+                        "Name": "Major Project Phase II"
+                    },
+                    {
+                        "Code": "GP-801",
+                        "Name": "General Proficiency"
+                    }
+                ]
+            }]},
+
+    {
+        "Course": "B.Tech Computer Science and Engineering (AI & ML) CURRICULUM STRUCTURE",
+        "data": [
+            {
+                "SEMESTER: I": [
+                    {
+                        "Code": "CODE",
+                        "Name": "TITLE"
+                    },
+                    {
+                        "Code": "TMA101",
+                        "Name": "Engineering Mathematics-I"
+                    },
+                    {
+                        "Code": "TCS101",
+                        "Name": "Fundamental of Computer & Introduction to Programming"
+                    },
+                    {
+                        "Code": "TPH101/201",
+                        "Name": "Engineering Physics"
+                    },
+                    {
+                        "Code": "TEE101/201",
+                        "Name": "Basic Electrical Engineering"
+                    },
+                    {
+                        "Code": "TCE101/201",
+                        "Name": "Basic Civil Engineering"
+                    },
+                    {
+                        "Code": "THU101",
+                        "Name": "Professional Communication"
+                    },
+                    {
+                        "Code": "THF101/201 ",
+                        "Name": "Healthy Living & Fitness"
+                    },
+                    {
+                        "Code": "PCS151 ",
+                        "Name": "Computer Lab- I "
+                    },
+                    {
+                        "Code": "PPH151/251 ",
+                        "Name": "Physics Lab"
+                    },
+                    {
+                        "Code": "PEE151/251",
+                        "Name": "Basic Electrical Engineering Lab. "
+                    },
+                    {
+                        "Code": "PME151/251",
+                        "Name": "Workshop and Manufacturing Practices"
+                    },
+                    {
+                        "Code": "GP101",
+                        "Name": "General Proficiency-I /NCC/Yoga/ Sports /Cultural"
+                    }
+                ]
+            },
+            {
+                "SEMESTER: II": [
+                    {
+                        "Code": "CODE",
+                        "Name": "TITLE"
+                    },
+                    {
+                        "Code": "TMA201 ",
+                        "Name": "Engineering Mathematics-II"
+                    },
+                    {
+                        "Code": "TCS201 ",
+                        "Name": "Programming for Problem Solving"
+                    },
+                    {
+                        "Code": "TCH101/201",
+                        "Name": "Engineering Chemistry "
+                    },
+                    {
+                        "Code": "TEC101/201",
+                        "Name": "Basic Electronics Engineering"
+                    },
+                    {
+                        "Code": "THU201",
+                        "Name": "Advanced Professional Communication"
+                    },
+                    {
+                        "Code": "TEV101/201",
+                        "Name": "Environmental Science"
+                    },
+                    {
+                        "Code": "PCS151/251",
+                        "Name": "Computer Lab \u2013II"
+                    },
+                    {
+                        "Code": "PCH151/251",
+                        "Name": "Chemistry Lab"
+                    },
+                    {
+                        "Code": "PEC151/251",
+                        "Name": "Basic Electronics Engineering Lab."
+                    },
+                    {
+                        "Code": "PME153/253",
+                        "Name": "Engg. Graphics and Design Lab."
+                    },
+                    {
+                        "Code": "GP201",
+                        "Name": "General Proficiency-II /NCC/Yoga/ Sports /Cultural "
+                    }
+                ]
+            },
+            {
+                "SEMESTER: III": [
+                    {
+                        "Code": "CODE",
+                        "Name": "TITLE"
+                    },
+                    {
+                        "Code": "TCS-308 ",
+                        "Name": "Logic Design and Computer Organization"
+                    },
+                    {
+                        "Code": "TCS-302",
+                        "Name": "Data Structures with C"
+                    },
+                    {
+                        "Code": "TCS-307",
+                        "Name": "Object Oriented Programming with C++"
+                    },
+                    {
+                        "Code": "TCS-343",
+                        "Name": "Mathematical Foundations for Artificial Intelligence "
+                    },
+                    {
+                        "Code": "XCS-301 ",
+                        "Name": "Career Skills"
+                    },
+                    {
+                        "Code": "PCS-308",
+                        "Name": "Logic Design and Computer Organization Lab"
+                    },
+                    {
+                        "Code": "PCS-302",
+                        "Name": "Data Structures Lab"
+                    },
+                    {
+                        "Code": "PCS-307",
+                        "Name": "OOPS with C++ Lab"
+                    },
+                    {
+                        "Code": "CSP-301",
+                        "Name": "Mini Project"
+                    },
+                    {
+                        "Code": "GP-301",
+                        "Name": "General Proficiency"
+                    }
+                ]
+            },
+            {
+                "SEMESTER: IV": [
+                    {
+                        "Code": "CODE",
+                        "Name": "TITLE"
+                    },
+                    {
+                        "Code": "TCS-408",
+                        "Name": "Programming in Java"
+                    },
+                    {
+                        "Code": "TCS-402",
+                        "Name": "Finite Automata and Formal Languages"
+                    },
+                    {
+                        "Code": "TCS-403 ",
+                        "Name": "Microprocessors"
+                    },
+                    {
+                        "Code": "TCS-409",
+                        "Name": "Design and Analysis of Algorithms"
+                    },
+                    {
+                        "Code": "XCS-401",
+                        "Name": "Career Skills"
+                    },
+                    {
+                        "Code": "PCS-408",
+                        "Name": "Java Programming Lab"
+                    },
+                    {
+                        "Code": "PCS-403",
+                        "Name": "Microprocessors Lab"
+                    },
+                    {
+                        "Code": "PCS-409",
+                        "Name": "DAA Lab"
+                    },
+                    {
+                        "Code": "CSP-401",
+                        "Name": "Mini Project"
+                    },
+                    {
+                        "Code": "GP- 401",
+                        "Name": "General Proficiency"
+                    }
+                ]
+            },
+            {
+                "SEMESTER: V": [
+                    {
+                        "Code": "CODE",
+                        "Name": "TITLE"
+                    },
+                    {
+                        "Code": "TCS-582",
+                        "Name": "Introduction to Artificial Intelligence and Machine Learning "
+                    },
+                    {
+                        "Code": "TCS-502 ",
+                        "Name": "Operating Systems"
+                    },
+                    {
+                        "Code": "TCS-503 ",
+                        "Name": "Data Base Management Systems"
+                    },
+                    {
+                        "Code": "TMA-511",
+                        "Name": "Computer Networks"
+                    },
+                    {
+                        "Code": "XCS-501",
+                        "Name": "Career Skills"
+                    },
+                    {
+                        "Code": "PCS-582",
+                        "Name": "Artificial Intelligence and Machine Learning Lab "
+                    },
+                    {
+                        "Code": "PCS-503",
+                        "Name": "DBMS Lab"
+                    },
+                    {
+                        "Code": "PMA-511",
+                        "Name": "Computer Networks Lab "
+                    },
+                    {
+                        "Code": "CSP-501",
+                        "Name": "Mini Project"
+                    },
+                    {
+                        "Code": "GP-501",
+                        "Name": "General Proficiency"
+                    }
+                ]
+            },
+            {
+                "SEMESTER: VI": [
+                    {
+                        "Code": "CODE",
+                        "Name": "TITLE"
+                    },
+                    {
+                        "Code": "TCS-601",
+                        "Name": "Compiler Design"
+                    },
+                    {
+                        "Code": "TCS-611",
+                        "Name": "Software Engineering"
+                    },
+                    {
+                        "Code": "TCS-682",
+                        "Name": "Advanced Machine Learning "
+                    },
+                    {
+                        "Code": "TCS 693",
+                        "Name": "Full Stack Web Development"
+                    },
+                    {
+                        "Code": "PCS-601",
+                        "Name": "Compiler Design Lab"
+                    },
+                    {
+                        "Code": "PCS682",
+                        "Name": "Advanced Machine Learning Lab "
+                    },
+                    {
+                        "Code": "PCS 693",
+                        "Name": "Web Development Lab"
+                    },
+                    {
+                        "Code": "XCS-601",
+                        "Name": "Career Skills"
+                    },
+                    {
+                        "Code": "CSP-601",
+                        "Name": "Mini Project"
+                    },
+                    {
+                        "Code": "GP-601",
+                        "Name": "General Proficiency"
+                    }
+                ]
+            },
+            {
+                "SEMESTER: VII": [
+                    {
+                        "Code": "CODE",
+                        "Name": "TITLE"
+                    },
+                    {
+                        "Code": "TCS-797",
+                        "Name": "Deep Learning "
+                    },
+                    {
+                        "Code": "TCS-704",
+                        "Name": "Advanced Computer Architecture"
+                    },
+                    {
+                        "Code": "TRM-701",
+                        "Name": "Research Methodology and IPR"
+                    },
+                    {
+                        "Code": "SCS-701",
+                        "Name": "Seminar on Industrial Interaction"
+                    },
+                    {
+                        "Code": "CSP-701",
+                        "Name": "Major Project Phase I"
+                    },
+                    {
+                        "Code": "GP-701",
+                        "Name": "General Proficiency"
+                    }
+                ]
+            },
+            {
+                "SEMESTER: VIII": [
+                    {
+                        "Code": "CODE",
+                        "Name": "TITLE"
+                    },
+                    {
+                        "Code": "TDM-881",
+                        "Name": "Disaster Management"
+                    },
+                    {
+                        "Code": "CSC-801",
+                        "Name": "Comprehensive Viva-Voce"
+                    },
+                    {
+                        "Code": "CSP-801",
+                        "Name": "Major Project Phase II"
+                    },
+                    {
+                        "Code": "GP-801",
+                        "Name": "General Proficiency"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "Course": "B.Tech Computer Science and Engineering (AI) CURRICULUM STRUCTURE",
+        "data": [    {
+            "SEMESTER: I": [
+                {
+                    "Code": "CODE",
+                    "Name": "TITLE"
+                },
+                {
+                    "Code": "TMA101",
+                    "Name": "Engineering Mathematics-I"
+                },
+                {
+                    "Code": "TCS101",
+                    "Name": "Fundamental of Computer & Introduction to Programming"
+                },
+                {
+                    "Code": "TPH101/201",
+                    "Name": "Engineering Physics"
+                },
+                {
+                    "Code": "TEE101/201",
+                    "Name": "Basic Electrical Engineering"
+                },
+                {
+                    "Code": "TCE101/201",
+                    "Name": "Basic Civil Engineering"
+                },
+                {
+                    "Code": "THU101",
+                    "Name": "Professional Communication"
+                },
+                {
+                    "Code": "THF101/201 ",
+                    "Name": "Healthy Living & Fitness"
+                },
+                {
+                    "Code": "PCS151 ",
+                    "Name": "Computer Lab- I "
+                },
+                {
+                    "Code": "PPH151/251 ",
+                    "Name": "Physics Lab"
+                },
+                {
+                    "Code": "PEE151/251",
+                    "Name": "Basic Electrical Engineering Lab. "
+                },
+                {
+                    "Code": "PME151/251",
+                    "Name": "Workshop and Manufacturing Practices"
+                },
+                {
+                    "Code": "GP101",
+                    "Name": "General Proficiency-I /NCC/Yoga/ Sports /Cultural"
+                }
+            ]
+        },
+        {
+            "SEMESTER: II": [
+                {
+                    "Code": "CODE",
+                    "Name": "TITLE"
+                },
+                {
+                    "Code": "TMA201 ",
+                    "Name": "Engineering Mathematics-II"
+                },
+                {
+                    "Code": "TCS201 ",
+                    "Name": "Programming for Problem Solving"
+                },
+                {
+                    "Code": "TCH101/201",
+                    "Name": "Engineering Chemistry "
+                },
+                {
+                    "Code": "TEC101/201",
+                    "Name": "Basic Electronics Engineering"
+                },
+                {
+                    "Code": "THU201",
+                    "Name": "Advanced Professional Communication"
+                },
+                {
+                    "Code": "TEV101/201",
+                    "Name": "Environmental Science"
+                },
+                {
+                    "Code": "PCS151/251",
+                    "Name": "Computer Lab \u2013II"
+                },
+                {
+                    "Code": "PCH151/251",
+                    "Name": "Chemistry Lab"
+                },
+                {
+                    "Code": "PEC151/251",
+                    "Name": "Basic Electronics Engineering Lab."
+                },
+                {
+                    "Code": "PME153/253",
+                    "Name": "Engg. Graphics and Design Lab."
+                },
+                {
+                    "Code": "GP201",
+                    "Name": "General Proficiency-II /NCC/Yoga/ Sports /Cultural "
+                }
+            ]
+        },
+        {
+            "SEMESTER: III": [
+                {
+                    "Code": "CODE",
+                    "Name": "TITLE"
+                },
+                {
+                    "Code": "TCS-308 ",
+                    "Name": "Logic Design and Computer Organization"
+                },
+                {
+                    "Code": "TCS-302",
+                    "Name": "Data Structures with C"
+                },
+                {
+                    "Code": "TCS-307",
+                    "Name": "Object Oriented Programming with C++"
+                },
+                {
+                    "Code": "TCS-343",
+                    "Name": "Mathematical Foundations for Artificial Intelligence "
+                },
+                {
+                    "Code": "XCS-301 ",
+                    "Name": "Career Skills"
+                },
+                {
+                    "Code": "PCS-308",
+                    "Name": "Logic Design and Computer Organization Lab"
+                },
+                {
+                    "Code": "PCS-302",
+                    "Name": "Data Structures Lab"
+                },
+                {
+                    "Code": "PCS-307",
+                    "Name": "OOPS with C++ Lab"
+                },
+                {
+                    "Code": "CSP-301",
+                    "Name": "Mini Project"
+                },
+                {
+                    "Code": "GP-301",
+                    "Name": "General Proficiency"
+                }
+            ]
+        },
+        {
+            "SEMESTER: IV": [
+                {
+                    "Code": "CODE",
+                    "Name": "TITLE"
+                },
+                {
+                    "Code": "TCS-408",
+                    "Name": "Programming in Java"
+                },
+                {
+                    "Code": "TCS-402",
+                    "Name": "Finite Automata and Formal Languages"
+                },
+                {
+                    "Code": "TCS-403 ",
+                    "Name": "Microprocessors"
+                },
+                {
+                    "Code": "TCS-409",
+                    "Name": "Design and Analysis of Algorithms"
+                },
+                {
+                    "Code": "XCS-401",
+                    "Name": "Career Skills"
+                },
+                {
+                    "Code": "PCS-408",
+                    "Name": "Java Programming Lab"
+                },
+                {
+                    "Code": "PCS-403",
+                    "Name": "Microprocessors Lab"
+                },
+                {
+                    "Code": "PCS-409",
+                    "Name": "DAA Lab"
+                },
+                {
+                    "Code": "CSP-401",
+                    "Name": "Mini Project"
+                },
+                {
+                    "Code": "GP- 401",
+                    "Name": "General Proficiency"
+                }
+            ]
+        },
+        {
+            "SEMESTER: V": [
+                {
+                    "Code": "CODE",
+                    "Name": "TITLE"
+                },
+                {
+                    "Code": "TCS-542",
+                    "Name": "Introduction to Artificial Intelligence "
+                },
+                {
+                    "Code": "TCS-502 ",
+                    "Name": "Operating Systems"
+                },
+                {
+                    "Code": "TCS-503 ",
+                    "Name": "Data Base Management Systems"
+                },
+                {
+                    "Code": "TMA-511",
+                    "Name": "Computer Networks"
+                },
+                {
+                    "Code": "XCS-501",
+                    "Name": "Career Skills"
+                },
+                {
+                    "Code": "PCS-542",
+                    "Name": "Artificial Intelligence Lab"
+                },
+                {
+                    "Code": "PCS-503",
+                    "Name": "DBMS Lab"
+                },
+                {
+                    "Code": "PMA-511",
+                    "Name": "Computer Networks Lab "
+                },
+                {
+                    "Code": "CSP-501",
+                    "Name": "Mini Project"
+                },
+                {
+                    "Code": "GP-501",
+                    "Name": "General Proficiency"
+                }
+            ]
+        },
+        {
+            "SEMESTER: VI": [
+                {
+                    "Code": "CODE",
+                    "Name": "TITLE"
+                },
+                {
+                    "Code": "TCS-601",
+                    "Name": "Compiler Design"
+                },
+                {
+                    "Code": "TCS-611",
+                    "Name": "Software Engineering"
+                },
+                {
+                    "Code": "TCS-662",
+                    "Name": "Machine Learning "
+                },
+                {
+                    "Code": "TCS 693",
+                    "Name": "Full Stack Web Development"
+                },
+                {
+                    "Code": "PCS-601",
+                    "Name": "Compiler Design Lab"
+                },
+                {
+                    "Code": "PCS662",
+                    "Name": "Machine Learning Lab "
+                },
+                {
+                    "Code": "PCS 693",
+                    "Name": "Web Development Lab"
+                },
+                {
+                    "Code": "XCS-601",
+                    "Name": "Career Skills"
+                },
+                {
+                    "Code": "CSP-601",
+                    "Name": "Mini Project"
+                },
+                {
+                    "Code": "GP-601",
+                    "Name": "General Proficiency"
+                }
+            ]
+        },
+        {
+            "SEMESTER: VII": [
+                {
+                    "Code": "CODE",
+                    "Name": "TITLE"
+                },
+                {
+                    "Code": "TCS-742",
+                    "Name": "Deep Learning "
+                },
+                {
+                    "Code": "TCS-704",
+                    "Name": "Advanced Computer Architecture"
+                },
+                {
+                    "Code": "TRM-701",
+                    "Name": "Research Methodology "
+                },
+                {
+                    "Code": "SCS-701",
+                    "Name": "Seminar on Industrial Interaction"
+                },
+                {
+                    "Code": "CSP-701",
+                    "Name": "Major Project Phase I"
+                },
+                {
+                    "Code": "GP-701",
+                    "Name": "General Proficiency"
+                }
+            ]
+        },
+        {
+            "SEMESTER: VIII": [
+                {
+                    "Code": "CODE",
+                    "Name": "TITLE"
+                },
+                {
+                    "Code": "TDM-881",
+                    "Name": "Disaster Management"
+                },
+                {
+                    "Code": "CSC-801",
+                    "Name": "Comprehensive Viva-Voce"
+                },
+                {
+                    "Code": "CSP-801",
+                    "Name": "Major Project Phase II"
+                },
+                {
+                    "Code": "GP-801",
+                    "Name": "General Proficiency"
+                }
+            ]
+        }]
+    },
+    {
+        "Course": "B.Tech Computer Science and Engineering (AI & DS) CURRICULUM STRUCTURE",
+        "data": [{
+            "SEMESTER: I": [
+                {
+                    "Code": "CODE",
+                    "Name": "TITLE"
+                },
+                {
+                    "Code": "TMA101",
+                    "Name": "Engineering Mathematics-I"
+                },
+                {
+                    "Code": "TCS101",
+                    "Name": "Fundamental of Computer & Introduction to Programming"
+                },
+                {
+                    "Code": "TPH101/201",
+                    "Name": "Engineering Physics"
+                },
+                {
+                    "Code": "TEE101/201",
+                    "Name": "Basic Electrical Engineering"
+                },
+                {
+                    "Code": "TCE101/201",
+                    "Name": "Basic Civil Engineering"
+                },
+                {
+                    "Code": "THU101",
+                    "Name": "Professional Communication"
+                },
+                {
+                    "Code": "THF101/201 ",
+                    "Name": "Healthy Living & Fitness"
+                },
+                {
+                    "Code": "PCS151 ",
+                    "Name": "Computer Lab- I "
+                },
+                {
+                    "Code": "PPH151/251 ",
+                    "Name": "Physics Lab"
+                },
+                {
+                    "Code": "PEE151/251",
+                    "Name": "Basic Electrical Engineering Lab. "
+                },
+                {
+                    "Code": "PME151/251",
+                    "Name": "Workshop and Manufacturing Practices"
+                },
+                {
+                    "Code": "GP101",
+                    "Name": "General Proficiency-I /NCC/Yoga/ Sports /Cultural"
+                }
+            ]
+        },
+        {
+            "SEMESTER: II": [
+                {
+                    "Code": "CODE",
+                    "Name": "TITLE"
+                },
+                {
+                    "Code": "TMA201 ",
+                    "Name": "Engineering Mathematics-II"
+                },
+                {
+                    "Code": "TCS201 ",
+                    "Name": "Programming for Problem Solving"
+                },
+                {
+                    "Code": "TCH101/201",
+                    "Name": "Engineering Chemistry "
+                },
+                {
+                    "Code": "TEC101/201",
+                    "Name": "Basic Electronics Engineering"
+                },
+                {
+                    "Code": "THU201",
+                    "Name": "Advanced Professional Communication"
+                },
+                {
+                    "Code": "TEV101/201",
+                    "Name": "Environmental Science"
+                },
+                {
+                    "Code": "PCS151/251",
+                    "Name": "Computer Lab \u2013II"
+                },
+                {
+                    "Code": "PCH151/251",
+                    "Name": "Chemistry Lab"
+                },
+                {
+                    "Code": "PEC151/251",
+                    "Name": "Basic Electronics Engineering Lab."
+                },
+                {
+                    "Code": "PME153/253",
+                    "Name": "Engg. Graphics and Design Lab."
+                },
+                {
+                    "Code": "GP201",
+                    "Name": "General Proficiency-II /NCC/Yoga/ Sports /Cultural "
+                }
+            ]
+        },
+        {
+            "SEMESTER: III": [
+                {
+                    "Code": "CODE",
+                    "Name": "TITLE"
+                },
+                {
+                    "Code": "TCS-308 ",
+                    "Name": "Logic Design and Computer Organization"
+                },
+                {
+                    "Code": "TCS-302",
+                    "Name": "Data Structures with C"
+                },
+                {
+                    "Code": "TCS-307",
+                    "Name": "Object Oriented Programming with C++"
+                },
+                {
+                    "Code": "TCS-343",
+                    "Name": "Mathematical Foundations for Artificial Intelligence "
+                },
+                {
+                    "Code": "XCS-301 ",
+                    "Name": "Career Skills"
+                },
+                {
+                    "Code": "PCS-308",
+                    "Name": "Logic Design and Computer Organization Lab"
+                },
+                {
+                    "Code": "PCS-302",
+                    "Name": "Data Structures Lab"
+                },
+                {
+                    "Code": "PCS-307",
+                    "Name": "OOPS with C++ Lab"
+                },
+                {
+                    "Code": "CSP-301",
+                    "Name": "Mini Project"
+                },
+                {
+                    "Code": "GP-301",
+                    "Name": "General Proficiency"
+                }
+            ]
+        },
+        {
+            "SEMESTER: IV": [
+                {
+                    "Code": "CODE",
+                    "Name": "TITLE"
+                },
+                {
+                    "Code": "TCS-408",
+                    "Name": "Programming in Java"
+                },
+                {
+                    "Code": "TCS-402",
+                    "Name": "Finite Automata and Formal Languages"
+                },
+                {
+                    "Code": "TCS-403 ",
+                    "Name": "Microprocessors"
+                },
+                {
+                    "Code": "TCS-409",
+                    "Name": "Design and Analysis of Algorithms"
+                },
+                {
+                    "Code": "XCS-401",
+                    "Name": "Career Skills"
+                },
+                {
+                    "Code": "PCS-408",
+                    "Name": "Java Programming Lab"
+                },
+                {
+                    "Code": "PCS-403",
+                    "Name": "Microprocessors Lab"
+                },
+                {
+                    "Code": "PCS-409",
+                    "Name": "DAA Lab"
+                },
+                {
+                    "Code": "CSP-401",
+                    "Name": "Mini Project"
+                },
+                {
+                    "Code": "GP- 401",
+                    "Name": "General Proficiency"
+                }
+            ]
+        },
+        {
+            "SEMESTER: V": [
+                {
+                    "Code": "CODE",
+                    "Name": "TITLE"
+                },
+                {
+                    "Code": "TCS-562",
+                    "Name": "Introduction to Artificial Intelligence and Data Science"
+                },
+                {
+                    "Code": "TCS-502 ",
+                    "Name": "Operating Systems"
+                },
+                {
+                    "Code": "TCS-503 ",
+                    "Name": "Data Base Management Systems"
+                },
+                {
+                    "Code": "TCS-511",
+                    "Name": "Computer Networks"
+                },
+                {
+                    "Code": "XCS-501",
+                    "Name": "Career Skills"
+                },
+                {
+                    "Code": "PCS-562",
+                    "Name": "Introduction to Artificial Intelligence and Data Science Lab"
+                },
+                {
+                    "Code": "PCS-503",
+                    "Name": "DBMS Lab"
+                },
+                {
+                    "Code": "PCS-511",
+                    "Name": "Computer Networks Lab "
+                },
+                {
+                    "Code": "CSP-501",
+                    "Name": "Mini Project"
+                },
+                {
+                    "Code": "GP-501",
+                    "Name": "General Proficiency"
+                }
+            ]
+        },
+        {
+            "SEMESTER: VI": [
+                {
+                    "Code": "CODE",
+                    "Name": "TITLE"
+                },
+                {
+                    "Code": "TCS-601",
+                    "Name": "Compiler Design"
+                },
+                {
+                    "Code": "TCS-611",
+                    "Name": "Software Engineering"
+                },
+                {
+                    "Code": "TCS-662",
+                    "Name": "Machine Learning "
+                },
+                {
+                    "Code": "TCS 693",
+                    "Name": "Full Stack Web Development"
+                },
+                {
+                    "Code": "PCS-601",
+                    "Name": "Compiler Design Lab"
+                },
+                {
+                    "Code": "PCS662",
+                    "Name": "Machine Learning Lab "
+                },
+                {
+                    "Code": "PCS 693",
+                    "Name": "Web Development Lab"
+                },
+                {
+                    "Code": "XCS-601",
+                    "Name": "Career Skills"
+                },
+                {
+                    "Code": "CSP-601",
+                    "Name": "Mini Project"
+                },
+                {
+                    "Code": "GP-601",
+                    "Name": "General Proficiency"
+                }
+            ]
+        },
+        {
+            "SEMESTER: VII": [
+                {
+                    "Code": "CODE",
+                    "Name": "TITLE"
+                },
+                {
+                    "Code": "TCS-762",
+                    "Name": "NoSQl Database "
+                },
+                {
+                    "Code": "TCS-704",
+                    "Name": "Advanced Computer Architecture"
+                },
+                {
+                    "Code": "TRM-701",
+                    "Name": "Research Methodology "
+                },
+                {
+                    "Code": "SCS-701",
+                    "Name": "Seminar on Industrial Interaction"
+                },
+                {
+                    "Code": "CSP-701",
+                    "Name": "Major Project Phase I"
+                },
+                {
+                    "Code": "GP-701",
+                    "Name": "General Proficiency"
+                }
+            ]
+        },
+        {
+            "SEMESTER: VIII": [
+                {
+                    "Code": "CODE",
+                    "Name": "TITLE"
+                },
+                {
+                    "Code": "TDM-881",
+                    "Name": "Disaster Management"
+                },
+                {
+                    "Code": "CSC-801",
+                    "Name": "Comprehensive Viva-Voce"
+                },
+                {
+                    "Code": "CSP-801",
+                    "Name": "Major Project Phase II"
+                },
+                {
+                    "Code": "GP-801",
+                    "Name": "General Proficiency"
+                }
+            ]
+        }]
+    },
+    {
+        "Course": "B.Tech Computer Science and Engineering (IoT and Cyber Security including Blockchain Technology) CURRICULUM STRUCTURE",
+        "data": [{
+            "SEMESTER: I": [
+                {
+                    "Code": "CODE",
+                    "Name": "TITLE"
+                },
+                {
+                    "Code": "TMA101",
+                    "Name": "Engineering Mathematics-I"
+                },
+                {
+                    "Code": "TCS101",
+                    "Name": "Fundamental of Computer & Introduction to Programming"
+                },
+                {
+                    "Code": "TPH101/201",
+                    "Name": "Engineering Physics"
+                },
+                {
+                    "Code": "TEE101/201",
+                    "Name": "Basic Electrical Engineering"
+                },
+                {
+                    "Code": "TCE101/201",
+                    "Name": "Basic Civil Engineering"
+                },
+                {
+                    "Code": "THU101",
+                    "Name": "Professional Communication"
+                },
+                {
+                    "Code": "THF101/201 ",
+                    "Name": "Healthy Living & Fitness"
+                },
+                {
+                    "Code": "PCS151 ",
+                    "Name": "Computer Lab- I "
+                },
+                {
+                    "Code": "PPH151/251 ",
+                    "Name": "Physics Lab"
+                },
+                {
+                    "Code": "PEE151/251",
+                    "Name": "Basic Electrical Engineering Lab. "
+                },
+                {
+                    "Code": "PME151/251",
+                    "Name": "Workshop and Manufacturing Practices"
+                },
+                {
+                    "Code": "GP101",
+                    "Name": "General Proficiency-I /NCC/Yoga/ Sports /Cultural"
+                }
+            ]
+        },
+        {
+            "SEMESTER: II": [
+                {
+                    "Code": "CODE",
+                    "Name": "TITLE"
+                },
+                {
+                    "Code": "TMA201 ",
+                    "Name": "Engineering Mathematics-II"
+                },
+                {
+                    "Code": "TCS201 ",
+                    "Name": "Programming for Problem Solving"
+                },
+                {
+                    "Code": "TCH101/201",
+                    "Name": "Engineering Chemistry "
+                },
+                {
+                    "Code": "TEC101/201",
+                    "Name": "Basic Electronics Engineering"
+                },
+                {
+                    "Code": "THU201",
+                    "Name": "Advanced Professional Communication"
+                },
+                {
+                    "Code": "TEV101/201",
+                    "Name": "Environmental Science"
+                },
+                {
+                    "Code": "PCS151/251",
+                    "Name": "Computer Lab \u2013II"
+                },
+                {
+                    "Code": "PCH151/251",
+                    "Name": "Chemistry Lab"
+                },
+                {
+                    "Code": "PEC151/251",
+                    "Name": "Basic Electronics Engineering Lab."
+                },
+                {
+                    "Code": "PME153/253",
+                    "Name": "Engg. Graphics and Design Lab."
+                },
+                {
+                    "Code": "GP201",
+                    "Name": "General Proficiency-II /NCC/Yoga/ Sports /Cultural "
+                }
+            ]
+        },
+        {
+            "SEMESTER: III": [
+                {
+                    "Code": "CODE",
+                    "Name": "TITLE"
+                },
+                {
+                    "Code": "TCS-308 ",
+                    "Name": "Logic Design and Computer Organization"
+                },
+                {
+                    "Code": "TCS-302",
+                    "Name": "Data Structures with C"
+                },
+                {
+                    "Code": "TCS-307",
+                    "Name": "Object Oriented Programming with C++"
+                },
+                {
+                    "Code": "TMA-316",
+                    "Name": "Discrete Structures and Combinatorics "
+                },
+                {
+                    "Code": "XCS-301 ",
+                    "Name": "Career Skills"
+                },
+                {
+                    "Code": "PCS-308",
+                    "Name": "Logic Design and Computer Organization Lab"
+                },
+                {
+                    "Code": "PCS-302",
+                    "Name": "Data Structures Lab"
+                },
+                {
+                    "Code": "PCS-307",
+                    "Name": "OOPS with C++ Lab"
+                },
+                {
+                    "Code": "CSP-301",
+                    "Name": "Mini Project"
+                },
+                {
+                    "Code": "GP-301",
+                    "Name": "General Proficiency"
+                }
+            ]
+        },
+        {
+            "SEMESTER: IV": [
+                {
+                    "Code": "CODE",
+                    "Name": "TITLE"
+                },
+                {
+                    "Code": "TCS-408",
+                    "Name": "Programming in Java"
+                },
+                {
+                    "Code": "TCS-402",
+                    "Name": "Finite Automata and Formal Languages"
+                },
+                {
+                    "Code": "TCS-403 ",
+                    "Name": "Microprocessors"
+                },
+                {
+                    "Code": "TCS-409",
+                    "Name": "Design and Analysis of Algorithms"
+                },
+                {
+                    "Code": "XCS-401",
+                    "Name": "Career Skills"
+                },
+                {
+                    "Code": "PCS-408",
+                    "Name": "Java Programming Lab"
+                },
+                {
+                    "Code": "PCS-403",
+                    "Name": "Microprocessors Lab"
+                },
+                {
+                    "Code": "PCS-409",
+                    "Name": "DAA Lab"
+                },
+                {
+                    "Code": "CSP-401",
+                    "Name": "Mini Project"
+                },
+                {
+                    "Code": "GP- 401",
+                    "Name": "General Proficiency"
+                }
+            ]
+        },
+        {
+            "SEMESTER: V": [
+                {
+                    "Code": "CODE",
+                    "Name": "TITLE"
+                },
+                {
+                    "Code": "TCS-556",
+                    "Name": "Blockchain for IoT systems "
+                },
+                {
+                    "Code": "TCS-502 ",
+                    "Name": "Operating Systems"
+                },
+                {
+                    "Code": "TCS-503 ",
+                    "Name": "Data Base Management Systems"
+                },
+                {
+                    "Code": "TCS-511",
+                    "Name": "Computer Networks"
+                },
+                {
+                    "Code": "XCS-501",
+                    "Name": "Career Skills"
+                },
+                {
+                    "Code": "PCS-556",
+                    "Name": "Blockchain for IoT systems Lab "
+                },
+                {
+                    "Code": "PCS-503",
+                    "Name": "DBMS Lab"
+                },
+                {
+                    "Code": "PMA-511",
+                    "Name": "Computer Networks Lab "
+                },
+                {
+                    "Code": "CSP-501",
+                    "Name": "Mini Project"
+                },
+                {
+                    "Code": "GP-501",
+                    "Name": "General Proficiency"
+                }
+            ]
+        },
+        {
+            "SEMESTER: VI": [
+                {
+                    "Code": "CODE",
+                    "Name": "TITLE"
+                },
+                {
+                    "Code": "TCS-601",
+                    "Name": "Compiler Design"
+                },
+                {
+                    "Code": "TCS-611",
+                    "Name": "Software Engineering"
+                },
+                {
+                    "Code": "TCS-679",
+                    "Name": "Network and System Security "
+                },
+                {
+                    "Code": "TCS 693",
+                    "Name": "Full Stack Web Development"
+                },
+                {
+                    "Code": "PCS-601",
+                    "Name": "Compiler Design Lab"
+                },
+                {
+                    "Code": "PCS-679",
+                    "Name": "Network and System Security Lab "
+                },
+                {
+                    "Code": "PCS 693",
+                    "Name": "Web Development Lab"
+                },
+                {
+                    "Code": "XCS-601",
+                    "Name": "Career Skills"
+                },
+                {
+                    "Code": "CSP-601",
+                    "Name": "Mini Project"
+                },
+                {
+                    "Code": "GP-601",
+                    "Name": "General Proficiency"
+                }
+            ]
+        },
+        {
+            "SEMESTER: VII": [
+                {
+                    "Code": "CODE",
+                    "Name": "TITLE"
+                },
+                {
+                    "Code": "TCS-791",
+                    "Name": "Internet Security"
+                },
+                {
+                    "Code": "TCS-704",
+                    "Name": "Advanced Computer Architecture"
+                },
+                {
+                    "Code": "TRM-701",
+                    "Name": "Research Methodology "
+                },
+                {
+                    "Code": "SCS-701",
+                    "Name": "Seminar on Industrial Interaction"
+                },
+                {
+                    "Code": "CSP-701",
+                    "Name": "Major Project Phase I"
+                },
+                {
+                    "Code": "GP-701",
+                    "Name": "General Proficiency"
+                }
+            ]
+        },
+        {
+            "SEMESTER: VIII": [
+                {
+                    "Code": "CODE",
+                    "Name": "TITLE"
+                },
+                {
+                    "Code": "TDM-881",
+                    "Name": "Disaster Management"
+                },
+                {
+                    "Code": "CSC-801",
+                    "Name": "Comprehensive Viva-Voce"
+                },
+                {
+                    "Code": "CSP-801",
+                    "Name": "Major Project Phase II"
+                },
+                {
+                    "Code": "GP-801",
+                    "Name": "General Proficiency"
+                }
+            ]
+        }]
+    },
+    {
+        "Course": "B.Tech Computer Science and Engineering (Cyber Security) CURRICULUM STRUCTURE",
+        "data": [{
+            "SEMESTER: I": [
+                {
+                    "Code": "CODE",
+                    "Name": "TITLE"
+                },
+                {
+                    "Code": "TMA101",
+                    "Name": "Engineering Mathematics-I"
+                },
+                {
+                    "Code": "TCS101",
+                    "Name": "Fundamental of Computer & Introduction to Programming"
+                },
+                {
+                    "Code": "TPH101/201",
+                    "Name": "Engineering Physics"
+                },
+                {
+                    "Code": "TEE101/201",
+                    "Name": "Basic Electrical Engineering"
+                },
+                {
+                    "Code": "TCE101/201",
+                    "Name": "Basic Civil Engineering"
+                },
+                {
+                    "Code": "THU101",
+                    "Name": "Professional Communication"
+                },
+                {
+                    "Code": "THF101/201 ",
+                    "Name": "Healthy Living & Fitness"
+                },
+                {
+                    "Code": "PCS151 ",
+                    "Name": "Computer Lab- I "
+                },
+                {
+                    "Code": "PPH151/251 ",
+                    "Name": "Physics Lab"
+                },
+                {
+                    "Code": "PEE151/251",
+                    "Name": "Basic Electrical Engineering Lab. "
+                },
+                {
+                    "Code": "PME151/251",
+                    "Name": "Workshop and Manufacturing Practices"
+                },
+                {
+                    "Code": "GP101",
+                    "Name": "General Proficiency-I /NCC/Yoga/ Sports /Cultural"
+                }
+            ]
+        },
+        {
+            "SEMESTER: II": [
+                {
+                    "Code": "CODE",
+                    "Name": "TITLE"
+                },
+                {
+                    "Code": "TMA201 ",
+                    "Name": "Engineering Mathematics-II"
+                },
+                {
+                    "Code": "TCS201 ",
+                    "Name": "Programming for Problem Solving"
+                },
+                {
+                    "Code": "TCH101/201",
+                    "Name": "Engineering Chemistry "
+                },
+                {
+                    "Code": "TEC101/201",
+                    "Name": "Basic Electronics Engineering"
+                },
+                {
+                    "Code": "THU201",
+                    "Name": "Advanced Professional Communication"
+                },
+                {
+                    "Code": "TEV101/201",
+                    "Name": "Environmental Science"
+                },
+                {
+                    "Code": "PCS151/251",
+                    "Name": "Computer Lab \u2013II"
+                },
+                {
+                    "Code": "PCH151/251",
+                    "Name": "Chemistry Lab"
+                },
+                {
+                    "Code": "PEC151/251",
+                    "Name": "Basic Electronics Engineering Lab."
+                },
+                {
+                    "Code": "PME153/253",
+                    "Name": "Engg. Graphics and Design Lab."
+                },
+                {
+                    "Code": "GP201",
+                    "Name": "General Proficiency-II /NCC/Yoga/ Sports /Cultural "
+                }
+            ]
+        },
+        {
+            "SEMESTER: III": [
+                {
+                    "Code": "CODE",
+                    "Name": "TITLE"
+                },
+                {
+                    "Code": "TCS-308 ",
+                    "Name": "Logic Design and Computer Organization"
+                },
+                {
+                    "Code": "TCS-302",
+                    "Name": "Data Structures with C"
+                },
+                {
+                    "Code": "TCS-307",
+                    "Name": "Object Oriented Programming with C++"
+                },
+                {
+                    "Code": "TMA-316",
+                    "Name": "Discrete Structures and Combinatorics "
+                },
+                {
+                    "Code": "XCS-301 ",
+                    "Name": "Career Skills"
+                },
+                {
+                    "Code": "PCS-308",
+                    "Name": "Logic Design and Computer Organization Lab"
+                },
+                {
+                    "Code": "PCS-302",
+                    "Name": "Data Structures Lab"
+                },
+                {
+                    "Code": "PCS-307",
+                    "Name": "OOPS with C++ Lab"
+                },
+                {
+                    "Code": "CSP-301",
+                    "Name": "Mini Project"
+                },
+                {
+                    "Code": "GP-301",
+                    "Name": "General Proficiency"
+                }
+            ]
+        },
+        {
+            "SEMESTER: IV": [
+                {
+                    "Code": "CODE",
+                    "Name": "TITLE"
+                },
+                {
+                    "Code": "TCS-408",
+                    "Name": "Programming in Java"
+                },
+                {
+                    "Code": "TCS-402",
+                    "Name": "Finite Automata and Formal Languages"
+                },
+                {
+                    "Code": "TCS-403 ",
+                    "Name": "Microprocessors"
+                },
+                {
+                    "Code": "TCS-409",
+                    "Name": "Design and Analysis of Algorithms"
+                },
+                {
+                    "Code": "XCS-401",
+                    "Name": "Career Skills"
+                },
+                {
+                    "Code": "PCS-408",
+                    "Name": "Java Programming Lab"
+                },
+                {
+                    "Code": "PCS-403",
+                    "Name": "Microprocessors Lab"
+                },
+                {
+                    "Code": "PCS-409",
+                    "Name": "DAA Lab"
+                },
+                {
+                    "Code": "CSP-401",
+                    "Name": "Mini Project"
+                },
+                {
+                    "Code": "GP- 401",
+                    "Name": "General Proficiency"
+                }
+            ]
+        },
+        {
+            "SEMESTER: V": [
+                {
+                    "Code": "CODE",
+                    "Name": "TITLE"
+                },
+                {
+                    "Code": "TCS-597",
+                    "Name": "Computer System Security"
+                },
+                {
+                    "Code": "TCS-502 ",
+                    "Name": "Operating Systems"
+                },
+                {
+                    "Code": "TCS-503 ",
+                    "Name": "Data Base Management Systems"
+                },
+                {
+                    "Code": "TCS-511",
+                    "Name": "Computer Networks"
+                },
+                {
+                    "Code": "XCS-501",
+                    "Name": "Career Skills"
+                },
+                {
+                    "Code": "PCS-597",
+                    "Name": "Computer System Security Lab "
+                },
+                {
+                    "Code": "PCS-503",
+                    "Name": "DBMS Lab"
+                },
+                {
+                    "Code": "PMA-511",
+                    "Name": "Computer Networks Lab "
+                },
+                {
+                    "Code": "CSP-501",
+                    "Name": "Mini Project"
+                },
+                {
+                    "Code": "GP-501",
+                    "Name": "General Proficiency"
+                }
+            ]
+        },
+        {
+            "SEMESTER: VI": [
+                {
+                    "Code": "CODE",
+                    "Name": "TITLE"
+                },
+                {
+                    "Code": "TCS-601",
+                    "Name": "Compiler Design"
+                },
+                {
+                    "Code": "TCS-611",
+                    "Name": "Software Engineering"
+                },
+                {
+                    "Code": "TCS-679",
+                    "Name": "Network and System Security "
+                },
+                {
+                    "Code": "TCS 693",
+                    "Name": "Full Stack Web Development"
+                },
+                {
+                    "Code": "PCS-601",
+                    "Name": "Compiler Design Lab"
+                },
+                {
+                    "Code": "PCS-679",
+                    "Name": "Network and System Security Lab "
+                },
+                {
+                    "Code": "PCS 693",
+                    "Name": "Web Development Lab"
+                },
+                {
+                    "Code": "XCS-601",
+                    "Name": "Career Skills"
+                },
+                {
+                    "Code": "CSP-601",
+                    "Name": "Mini Project"
+                },
+                {
+                    "Code": "GP-601",
+                    "Name": "General Proficiency"
+                }
+            ]
+        },
+        {
+            "SEMESTER: VII": [
+                {
+                    "Code": "CODE",
+                    "Name": "TITLE"
+                },
+                {
+                    "Code": "TCS-791",
+                    "Name": "Internet Security"
+                },
+                {
+                    "Code": "TCS-704",
+                    "Name": "Advanced Computer Architecture"
+                },
+                {
+                    "Code": "TRM-701",
+                    "Name": "Research Methodology and IPR"
+                },
+                {
+                    "Code": "SCS-701",
+                    "Name": "Seminar on Industrial Interaction"
+                },
+                {
+                    "Code": "CSP-701",
+                    "Name": "Major Project Phase I"
+                },
+                {
+                    "Code": "GP-701",
+                    "Name": "General Proficiency"
+                }
+            ]
+        },
+        {
+            "SEMESTER: VIII": [
+                {
+                    "Code": "CODE",
+                    "Name": "TITLE"
+                },
+                {
+                    "Code": "TDM-881",
+                    "Name": "Disaster Management"
+                },
+                {
+                    "Code": "CSC-801",
+                    "Name": "Comprehensive Viva-Voce"
+                },
+                {
+                    "Code": "CSP-801",
+                    "Name": "Major Project Phase II"
+                },
+                {
+                    "Code": "GP-801",
+                    "Name": "General Proficiency"
+                }
+            ]
+        }]
+    },
+    {
+        "Course": "M.Tech (Computer Science and Engineering) CURRICULUM STRUCTURE",
+        "data": [
+            {
+                "SEMESTER: I": [
+                    {
+                        "Code": "CODE",
+                        "Name": "TITLE"
+                    },
+                    {
+                        "Code": "MCS-102",
+                        "Name": "Mobile Computing"
+                    },
+                    {
+                        "Code": "MCS-103",
+                        "Name": "Advanced Operating Systems"
+                    },
+                    {
+                        "Code": "MCS-104",
+                        "Name": "Networking Protocols"
+                    },
+                    {
+                        "Code": "MCS-153",
+                        "Name": "Networking Protocols and Mobile Computing Lab "
+                    },
+                    {
+                        "Code": "MCS-164",
+                        "Name": "Computing Lab I"
+                    },
+                    {
+                        "Code": "MCS-114",
+                        "Name": "Research Methodology and IPR"
+                    },
+                    {
+                        "Code": "GP-101",
+                        "Name": "General Proficiency"
+                    }
+                ]
+            },
+            {
+                "SEMESTER: II": [
+                    {
+                        "Code": "CODE",
+                        "Name": "TITLE"
+                    },
+                    {
+                        "Code": "MCS-241 ",
+                        "Name": "Computer Vision and its Applications"
+                    },
+                    {
+                        "Code": "MCS-202",
+                        "Name": "Distributed Computing"
+                    },
+                    {
+                        "Code": "MCS-203",
+                        "Name": "Artificial Intelligence & Expert Systems"
+                    },
+                    {
+                        "Code": "MCS-254",
+                        "Name": "Computing Lab II"
+                    },
+                    {
+                        "Code": "MCS-252",
+                        "Name": "Distributed Computing & AI Lab"
+                    },
+                    {
+                        "Code": "MCS-211",
+                        "Name": "Seminar"
+                    },
+                    {
+                        "Code": "GP-201",
+                        "Name": "General Proficiency"
+                    }
+                ]
+            },
+            {
+                "SEMESTER: III": [
+                    {
+                        "Code": "CODE",
+                        "Name": "TITLE"
+                    },
+                    {
+                        "Code": "MCS-301",
+                        "Name": "Soft Computing"
+                    },
+                    {
+                        "Code": "MCS-300 ",
+                        "Name": "Dissertation-Phase I"
+                    },
+                    {
+                        "Code": "MCS-311",
+                        "Name": "Seminar"
+                    },
+                    {
+                        "Code": "GP-301",
+                        "Name": "General Proficiency"
+                    }
+                ]
+            },
+            {
+                "SEMESTER: IV": [
+                    {
+                        "Code": "CODE",
+                        "Name": "TITLE"
+                    },
+                    {
+                        "Code": "MCS-400",
+                        "Name": "Dissertation Phase-II"
+                    },
+                    {
+                        "Code": "MCS-411",
+                        "Name": "Seminar"
+                    },
+                    {
+                        "Code": "MCS-462",
+                        "Name": "Comprehensive Viva\u0002Voce"
+                    }
+                ]
+            }
+        ]
+    }
+]
