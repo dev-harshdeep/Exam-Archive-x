@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Subject Selection</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        max-width: 100vw;
+      }
+
+      h1 {
+        color: white;
+        font-family: sans-serif;
+        text-align: center;
+      }
+      .container {
+        width: 150px;
+        height: 100px;
+        margin: 40px auto;
+        position: relative;
+        flex: 1;
+      }
+
+      .one {
+        width: 29%;
+        height: 12px;
+        float: left;
+
+        border-bottom: 12px solid #00c89e;
+        border-left: 1px solid transparent;
+        border-top-right-radius: 20px;
+      }
+
+      .two {
+        width: 100%;
+        height: 100px;
+        margin-top: 12px;
+        position: absolute;
+        border: 4px solid #00c89e;
+        border-bottom-right-radius: 8px;
+        border-bottom-left-radius: 8px;
+        border-top-right-radius: 8px;
+      }
+
+      .folder {
+        flex-direction: column;
+        justify-content: flex-end;
+        text-align: center;
+        flex: 1;
+      }
+
+      #mainDiv {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 10px;
+        justify-items: center;
+      }
+
+      .empty-container {
+        display: flex;
+        flex-direction: column;
+        width: 400px;
+        height: 210px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Subject Selection</h1>
+    <div id="mainDiv">
+      <!-- Subjects will be displayed here -->
+    </div>
+
+    <script>
+      // Function to extract the course ID (cid) and semester (sem) from the URL
+      function getCourseIdAndSemesterFromUrl() {
+        const url = window.location.href;
+        const match = url.match(/\/subSelect\/(\d+)\/(.+)/); // Adapt the regex to match your URL format
+        if (match) {
+          return { cid: match[1], sem: match[2] };
+        }
+        return null;
+      }
+
+      // Replace this URL with your API endpoint that returns subjects
+      const baseEndpoint = '/getSub/';
+      const mainDiv = document.getElementById('mainDiv');
+
+      // Function to fetch subjects and display them
+      function displaySubjects(cid, sem) {
+        const subjectsEndpoint = `${baseEndpoint}${cid}/${sem}`;
+
+        fetch(subjectsEndpoint)
+          .then((response) => response.json())
+          .then((subjects) => {
+            subjects.forEach((subject) => {
+              const subjectDiv = document.createElement('div');
+              const container = document.createElement('div');
+              const containerOne = document.createElement('div');
+              const containerTwo = document.createElement('div');
+              containerOne.classList.add('one');
+              containerTwo.classList.add('two');
+              const emptyContainer = document.createElement('div');
+              const pdfIcon = document.createElement('div');
+              pdfIcon.classList.add('pdf-icon');
+              emptyContainer.classList.add('empty-container');
+              container.classList.add('container');
+              emptyContainer.appendChild(container);
+              mainDiv.appendChild(emptyContainer);
+              subjectDiv.innerHTML = `Code: ${subject.Code}<br>Name: ${subject.Name}`;
+              subjectDiv.classList.add('subject');
+              container.appendChild(containerOne);
+              container.appendChild(containerTwo);
+              mainDiv.appendChild(emptyContainer);
+              emptyContainer.appendChild(subjectDiv);
+
+              emptyContainer.addEventListener('click', () => {
+                window.location.href = `/showPapers/${
+                  subject.Code.slice(0, 3) + '-' + subject.Code.slice(3, 6)
+                }`;
+              });
+            });
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+      }
+
+      // Get the course ID (cid) and semester (sem) from the URL
+      const courseInfo = getCourseIdAndSemesterFromUrl();
+
+      if (courseInfo) {
+        const { cid, sem } = courseInfo;
+        // Call the function to display subjects with the extracted cid and sem
+        displaySubjects(cid, sem);
+      }
+    </script>
+  </body>
+</html>
