@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify ,send_file
 import json
 from collections import OrderedDict
 
@@ -39,7 +39,6 @@ def searchFile(filter):
             arr.append(file)
     return arr
 
-print(searchFile('TCS-101'))
 
 app = Flask(__name__)
 cources = []
@@ -114,6 +113,12 @@ def showPapers(code):
     return render_template('showPaper.html',code=code)
     
 
+@app.route('/download/<pdf_filename>')
+def download_pdf(pdf_filename):
+    # Replace 'pdf_directory' with the path to the directory containing your PDF files
+    pdf_path = f'pdfs/{pdf_filename}'
+    return send_file(pdf_path, as_attachment=True)
 
 if __name__ == "__main__":
+    # app.run(host='172.16.15.201', port=5000)
     app.run(debug=True)
