@@ -46,7 +46,7 @@ flow = Flow.from_client_secrets_file(
 
 # ---------------> MAKING  THE LIST OF AUTHORISEZED EMAILS OF ADMINS <----------------------
 
-Authorised = ['shivanshsharma8899','abc@gmail.com','pqr@gmail.com']
+Authorised = ['shivanshsharma8899@gmail.com','abc@gmail.com','pqr@gmail.com']
 
 
 
@@ -94,9 +94,16 @@ def callback():
         audience=GOOGLE_CLIENT_ID
     )
 
+    # session["google_id"] = id_info.get("sub")
+    # session["name"] = id_info.get("name")
+    # return redirect("/protected_area")
+
+    session["email"] = id_info.get("email")
     session["google_id"] = id_info.get("sub")
     session["name"] = id_info.get("name")
-    return redirect("/protected_area")
+    if session["email"] in Authorised:
+        return redirect("/protected_area")
+    return redirect("/logout")
 
 
 
