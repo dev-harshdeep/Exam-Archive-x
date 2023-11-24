@@ -94,10 +94,6 @@ def callback():
         audience=GOOGLE_CLIENT_ID
     )
 
-    # session["google_id"] = id_info.get("sub")
-    # session["name"] = id_info.get("name")
-    # return redirect("/protected_area")
-
     session["email"] = id_info.get("email")
     session["google_id"] = id_info.get("sub")
     session["name"] = id_info.get("name")
