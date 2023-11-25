@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify ,send_file
+from flask import Flask, render_template, jsonify ,send_file,url_for
 import json
 from collections import OrderedDict
 
@@ -11,6 +11,12 @@ from google.oauth2 import id_token
 from google_auth_oauthlib.flow import Flow
 from pip._vendor import cachecontrol
 import google.auth.transport.requests
+import io
+import fitz  # PyMuPDF
+from PIL import Image
+import base64
+
+
 
 data = []
 with open('output.json', 'r') as file:
@@ -55,12 +61,7 @@ app.secret_key = "ExamArchive.com"
 cources = []
 
 
-# ////////////////////////////////////////////////// GOOGLE LOGIN CODE /////////////////////////////////////////////////////////
-
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
-
-# ------------> Google Client Id generated from Google Oauth for our end <---------------------
-
 GOOGLE_CLIENT_ID = "1021957323011-mhbqnueds5ju8mvk1pala345f43arai8.apps.googleusercontent.com"
 client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret.json")
 
@@ -76,11 +77,10 @@ Authorised = ['shivanshsharma8899@gmail.com','abc@gmail.com','pqr@gmail.com']
 
 def login_is_required(function):
     def wrapper(*args, **kwargs):
-        if "google_id" not in session:
-            return abort(401)  # Authorization required
-        else:
-            return function()
-
+        if "google_id" in session:
+            if session["email"] in Authorised:            
+                return function()
+        return abort(401) 
     return wrapper
 
 @app.route("/login")
@@ -114,17 +114,23 @@ def callback():
         return redirect("/protected_area")
     return redirect("/logout")
 
+
+
+
+
 @app.route("/logout")
 def logout():
     session.clear()
     return redirect("/")
 
+
+
+
+
 @app.route("/protected_area")
 @login_is_required
 def protected_area():
     return f"Hello {session['name']}! <br/> <a href='/logout'><button>Logout</button></a>"
-
-# /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 @app.route("/")
 def home():
@@ -192,13 +198,100 @@ def getPapers(code):
 @app.route("/showPapers/<code>")
 def showPapers(code):
     return render_template('showPaper.html',code=code)
+
+@app.route("/admin/select-questions")
+def selectQuestions():
+    return render_template('selectQuestions.html')
     
 
 @app.route('/download/<pdf_filename>')
 def download_pdf(pdf_filename):
-    # Replace 'pdf_directory' with the path to the directory containing your PDF files
     pdf_path = f'pdfs/{pdf_filename}'
     return send_file(pdf_path, as_attachment=True)
+
+
+
+
+
+
+
+# //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+def pdf_to_images(pdf_data):
+    pdf_document = fitz.open(stream=pdf_data, filetype="pdf")
+    images = []
+
+    for page_num in range(pdf_document.page_count):
+        page = pdf_document[page_num]
+        image_list = page.get_pixmap()
+        img = Image.frombytes("RGB", [image_list.width, image_list.height], image_list.samples)
+        images.append(img)
+
+    pdf_document.close()
+    return images
+
+def stitch_images_vertically(images):
+    widths, heights = zip(*(i.size for i in images))
+    max_width = max(widths)
+    total_height = sum(heights)
+
+    new_image = Image.new('RGB', (max_width, total_height))
+
+    y_offset = 0
+    for img in images:
+        new_image.paste(img, (0, y_offset))
+        y_offset += img.size[1]
+
+    return new_image
+
+
+@app.route('/pdfUpload', methods=['GET', 'POST'])
+def pdf_upload():
+    if request.method == 'POST':
+        pdf_file = request.files.get('pdf_file')
+
+        if not pdf_file:
+            return "No PDF file provided", 400
+
+        try:
+            pdf_data = pdf_file.read()
+            pdf_images = pdf_to_images(pdf_data)
+            long_image = stitch_images_vertically(pdf_images)
+
+            image_stream = io.BytesIO()
+            long_image.save(image_stream, format='PNG')
+            image_stream.seek(0)
+
+            # Encode the image data to base64 for the URL parameter
+            encoded_image_data = base64.b64encode(image_stream.read()).decode('utf-8')
+
+            # Trigger the result message in the template
+            return render_template('selectQuestions.html', image_data=encoded_image_data)
+
+        except Exception as e:
+            return f"Error processing the PDF file: {str(e)}", 500
+
+    return render_template('pdfUpload.html')
+
+
+@app.route('/resultPage')
+def result_page():
+    image_data = request.args.get('image_data')
+
+    if not image_data:
+        return "No image data provided", 400
+
+    # Decode the image data from base64
+    decoded_image_data = base64.b64decode(image_data)
+
+    # Pass the decoded image data to the template
+    return render_template('resultPage.html', image_data=decoded_image_data)
+
+# //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 
 if __name__ == "__main__":
     # app.run(host='172.16.15.201', port=5000)

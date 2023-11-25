@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Result Page</title>
+  </head>
+  <body>
+    <h1>Result Page</h1>
+
+    {% if image_data %}
+    <!-- Display the resultant image -->
+    <img src="data:image/png;base64,{{ image_data }}" alt="Resultant Image" />
+    {% else %}
+    <p>No image data available.</p>
+    {% endif %}
+
+    <!-- Add any additional content or controls as needed -->
+
+    <br />
+    <a href="/pdfUpload">Back to Upload Page</a>
+  </body>
+</html>

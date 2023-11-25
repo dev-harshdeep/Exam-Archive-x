@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PDF to Long Image Converter</title>
+    <style>
+      #loading-message {
+        display: none;
+      }
+
+      #result-message {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>PDF to Long Image Converter</h1>
+    <form
+      id="pdf-upload-form"
+      action="/pdfUpload"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      <label for="pdfFile">Select a PDF file:</label>
+      <input type="file" name="pdf_file" id="pdfFile" accept=".pdf" required />
+      <br />
+      <button type="submit" onclick="showLoadingMessage()">
+        Convert to Long Image
+      </button>
+    </form>
+
+    <div id="loading-message">Processing your PDF. Please wait...</div>
+
+    <div id="result-message">
+      <p>
+        Conversion complete!
+        <a id="result-link" href="#">View Result</a>
+      </p>
+    </div>
+
+    <script>
+      function showLoadingMessage() {
+        document.getElementById('loading-message').style.display = 'block';
+        document.getElementById('result-message').style.display = 'none';
+      }
+
+      function showResultMessage(imageData) {
+        document.getElementById('loading-message').style.display = 'none';
+        document.getElementById('result-message').style.display = 'block';
+        document.getElementById('result-link').href =
+          '/resultPage?image_data=' + imageData;
+      }
+    </script>
+  </body>
+</html>

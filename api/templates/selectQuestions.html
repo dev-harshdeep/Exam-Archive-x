@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Select Image Range</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #333;
+        color: #fff;
+      }
+
+      #container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      h2 {
+        margin-bottom: 20px;
+      }
+
+      #canvasContainer {
+        position: relative;
+        height: 400px;
+        width: 600px;
+        overflow-x: scroll;
+        border: 1px solid #ccc;
+        margin-bottom: 20px;
+      }
+
+      #imageCanvas {
+        display: block;
+        margin: auto;
+      }
+
+      #optionsContainer {
+        display: flex;
+        gap: 10px;
+      }
+
+      button {
+        padding: 10px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:disabled {
+        background-color: #555;
+        cursor: not-allowed;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <h2>Select Image Range</h2>
+
+      <div id="canvasContainer">
+        <canvas id="imageCanvas"></canvas>
+      </div>
+
+      <div id="optionsContainer">
+        <button id="startSelectionButton">Start Selection</button>
+        <button id="endSelectionButton" disabled>End Selection</button>
+        <button id="clearSelectionButton" disabled>Clear Selection</button>
+        <button id="saveSelectionButton" disabled>Save Selection</button>
+      </div>
+    </div>
+
+    <script>
+      var canvas = document.getElementById('imageCanvas');
+      var context = canvas.getContext('2d');
+
+      var image = new Image();
+      image.src = 'data:image/png;base64,{{ image_data }}';
+
+      var startSelectionButton = document.getElementById(
+        'startSelectionButton'
+      );
+      var endSelectionButton = document.getElementById('endSelectionButton');
+      var clearSelectionButton = document.getElementById(
+        'clearSelectionButton'
+      );
+      var saveSelectionButton = document.getElementById('saveSelectionButton');
+      var selectionStart = 0;
+      var selectionEnd = 0;
+      var isStartSelectionPhase = true;
+
+      image.onload = function () {
+        canvas.width = image.width;
+        canvas.height = image.height;
+        drawImageWithSelection();
+      };
+
+      startSelectionButton.addEventListener('click', function () {
+        isStartSelectionPhase = true;
+        startSelectionButton.disabled = true;
+        endSelectionButton.disabled = false;
+        clearSelectionButton.disabled = false;
+        saveSelectionButton.disabled = true;
+        alert('Select the starting point on the image.');
+      });
+
+      endSelectionButton.addEventListener('click', function () {
+        isStartSelectionPhase = false;
+        startSelectionButton.disabled = true;
+        endSelectionButton.disabled = true;
+        clearSelectionButton.disabled = false;
+        saveSelectionButton.disabled = false;
+        alert('Select the ending point on the image.');
+      });
+
+      clearSelectionButton.addEventListener('click', function () {
+        clearSelection();
+        drawImageWithSelection();
+        startSelectionButton.disabled = false;
+        endSelectionButton.disabled = true;
+        clearSelectionButton.disabled = true;
+        saveSelectionButton.disabled = true;
+      });
+
+      saveSelectionButton.addEventListener('click', function () {
+        saveSelectedImage();
+      });
+
+      canvas.addEventListener('mousedown', function (e) {
+        if (isStartSelectionPhase) {
+          selectionStart = e.clientY - canvas.getBoundingClientRect().top;
+        } else {
+          selectionEnd = e.clientY - canvas.getBoundingClientRect().top;
+        }
+        drawImageWithSelection();
+        updateSelectionInputs();
+      });
+
+      canvas.addEventListener('mousemove', function (e) {
+        if (!isStartSelectionPhase) return;
+
+        var rect = canvas.getBoundingClientRect();
+        selectionEnd = e.clientY - rect.top;
+        drawImageWithSelection();
+        updateSelectionInputs();
+      });
+
+      function drawImageWithSelection() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+        context.lineWidth = 2;
+
+        // Draw selection lines
+        context.beginPath();
+
+        // Solid green line for selection start
+        context.strokeStyle = 'green';
+        context.moveTo(0, selectionStart);
+        context.lineTo(canvas.width, selectionStart);
+
+        if (!isStartSelectionPhase) {
+          // Dashed blue line for selection end
+          context.setLineDash([5, 5]);
+          context.strokeStyle = 'blue';
+          context.moveTo(0, selectionEnd);
+          context.lineTo(canvas.width, selectionEnd);
+        }
+
+        context.stroke();
+        context.setLineDash([]);
+      }
+
+      function updateSelectionInputs() {
+        // Omitted for simplicity as text inputs are removed
+      }
+
+      function clearSelection() {
+        selectionStart = 0;
+        selectionEnd = 0;
+      }
+
+      function saveSelectedImage() {
+        var startX = 0;
+        var endX = canvas.width;
+        var startY = Math.min(selectionStart, selectionEnd);
+        var height = Math.abs(selectionEnd - selectionStart);
+
+        var selectedImageData = context.getImageData(
+          startX,
+          startY,
+          endX,
+          height
+        );
+
+        // Convert to base64
+        var selectedImageBase64 = encodeBase64(selectedImageData);
+
+        // Send the base64 data to the server for saving
+        sendToServer(selectedImageBase64);
+      }
+
+      function encodeBase64(imageData) {
+        var canvasTemp = document.createElement('canvas');
+        var contextTemp = canvasTemp.getContext('2d');
+        canvasTemp.width = imageData.width;
+        canvasTemp.height = imageData.height;
+        contextTemp.putImageData(imageData, 0, 0);
+        return canvasTemp.toDataURL('image/png').split(',')[1];
+      }
+
+      function sendToServer(base64Data) {
+        // Replace 'your-server-endpoint' with the actual server endpoint to handle saving the image
+        var serverEndpoint = 'your-server-endpoint';
+        fetch(serverEndpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ image: base64Data }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log('Image saved:', data);
+          })
+          .catch((error) => {
+            console.error('Error saving image:', error);
+          });
+      }
+    </script>
+  </body>
+</html>
