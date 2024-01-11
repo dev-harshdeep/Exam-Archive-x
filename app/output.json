@@ -4,10 +4,7 @@
         "data": [
             {   
                 "SEMESTER: I": [
-                    {
-                        "Code": "CODE",
-                        "Name": "TITLE"
-                    },
+                     
                     {
                         "Code": "TMA101",
                         "Name": "Engineering Mathematics-I"
@@ -60,10 +57,7 @@
             },
             {
                 "SEMESTER: II": [
-                    {
-                        "Code": "CODE",
-                        "Name": "TITLE"
-                    },
+                     
                     {
                         "Code": "TMA201 ",
                         "Name": "Engineering Mathematics-II"
@@ -112,10 +106,7 @@
             },
             {
                 "SEMESTER: III": [
-                    {
-                        "Code": "CODE",
-                        "Name": "TITLE"
-                    },
+                     
                     {
                         "Code": "TCS-308 ",
                         "Name": "Logic Design and Computer Organization"
@@ -160,10 +151,7 @@
             },
             {
                 "SEMESTER: IV": [
-                    {
-                        "Code": "CODE",
-                        "Name": "TITLE"
-                    },
+                     
                     {
                         "Code": "TCS-408",
                         "Name": "Programming in Java"
@@ -208,10 +196,7 @@
             },
             {
                 "SEMESTER: V": [
-                    {
-                        "Code": "CODE",
-                        "Name": "TITLE"
-                    },
+                     
                     {
                         "Code": "TCS-501",
                         "Name": "System Software"
@@ -256,10 +241,7 @@
             },
             {
                 "SEMESTER: VI": [
-                    {
-                        "Code": "CODE",
-                        "Name": "TITLE"
-                    },
+                     
                     {
                         "Code": "TCS-601",
                         "Name": "Compiler Design"
@@ -304,10 +286,7 @@
             },
             {
                 "SEMESTER: VII": [
-                    {
-                        "Code": "CODE",
-                        "Name": "TITLE"
-                    },
+                     
                     {
                         "Code": "TCS-703 ",
                         "Name": "Computer Networks-II"
@@ -336,10 +315,7 @@
             },
             {
                 "SEMESTER: VIII": [
-                    {
-                        "Code": "CODE",
-                        "Name": "TITLE"
-                    },
+                     
                     {
                         "Code": "TDM-881",
                         "Name": "Disaster Management"
@@ -365,10 +341,7 @@
         "data": [
             {
                 "SEMESTER: I": [
-                    {
-                        "Code": "CODE",
-                        "Name": "TITLE"
-                    },
+
                     {
                         "Code": "TTC101",
                         "Name": "Discrete Mathematics"
@@ -425,10 +398,7 @@
             },
             {
                 "SEMESTER: II": [
-                    {
-                        "Code": "CODE",
-                        "Name": "TITLE"
-                    },
+                     
                     {
                         "Code": "TTC201",
                         "Name": "Linear Algebra"
@@ -481,10 +451,7 @@
             },
             {
                 "SEMESTER: III": [
-                    {
-                        "Code": "CODE",
-                        "Name": "TITLE"
-                    },
+                     
                     {
                         "Code": "TTC301",
                         "Name": "Formal Language and Automata Theory"
@@ -545,10 +512,7 @@
             },
             {
                 "SEMESTER: IV": [
-                    {
-                        "Code": "CODE",
-                        "Name": "TITLE"
-                    },
+                     
                     {
                         "Code": "TTC401",
                         "Name": "Operating Systems"
@@ -609,10 +573,7 @@
             },
             {
                 "SEMESTER: V": [
-                    {
-                        "Code": "CODE",
-                        "Name": "TITLE"
-                    },
+                     
                     {
                         "Code": "TTC501",
                         "Name": "Software Design with UML"
@@ -657,10 +618,7 @@
             },
             {
                 "SEMESTER: VI": [
-                    {
-                        "Code": "CODE",
-                        "Name": "TITLE"
-                    },
+                     
                     {
                         "Code": "TTC601",
                         "Name": "Computer Networks"
@@ -709,10 +667,7 @@
             },
             {
                 "SEMESTER: VII": [
-                    {
-                        "Code": "CODE",
-                        "Name": "TITLE"
-                    },
+                     
                     {
                         "Code": "TTC701",
                         "Name": "Usability Design of Software Applications"
@@ -753,10 +708,7 @@
             },
             {
                 "SEMESTER: VIII": [
-                    {
-                        "Code": "CODE",
-                        "Name": "TITLE"
-                    },
+                     
                     {
                         "Code": "TTC801 ",
                         "Name": "Services Science & Service Operational Management"
@@ -793,10 +745,7 @@
         "data": [
             {
                 "SEMESTER: I": [
-                    {
-                        "Code": "CODE",
-                        "Name": "TITLE"
-                    },
+                     
                     {
                         "Code": "TMA101",
                         "Name": "Engineering Mathematics-I"
@@ -849,10 +798,7 @@
             },
             {
                 "SEMESTER: II": [
-                    {
-                        "Code": "CODE",
-                        "Name": "TITLE"
-                    },
+                     
                     {
                         "Code": "TMA201 ",
                         "Name": "Engineering Mathematics-II"
@@ -901,10 +847,7 @@
             },
             {
                 "SEMESTER: III": [
-                    {
-                        "Code": "CODE",
-                        "Name": "TITLE"
-                    },
+                     
                     {
                         "Code": "TCS-308 ",
                         "Name": "Logic Design and Computer Organization"
@@ -949,10 +892,7 @@
             },
             {
                 "SEMESTER: IV": [
-                    {
-                        "Code": "CODE",
-                        "Name": "TITLE"
-                    },
+                     
                     {
                         "Code": "TCS-408",
                         "Name": "Programming in Java"
@@ -997,10 +937,7 @@
             },
             {
                 "SEMESTER: V": [
-                    {
-                        "Code": "CODE",
-                        "Name": "TITLE"
-                    },
+                     
                     {
                         "Code": "TCS-582",
                         "Name": "Introduction to Artificial Intelligence and Machine Learning "
@@ -1045,10 +982,7 @@
             },
             {
                 "SEMESTER: VI": [
-                    {
-                        "Code": "CODE",
-                        "Name": "TITLE"
-                    },
+                     
                     {
                         "Code": "TCS-601",
                         "Name": "Compiler Design"
@@ -1093,10 +1027,7 @@
             },
             {
                 "SEMESTER: VII": [
-                    {
-                        "Code": "CODE",
-                        "Name": "TITLE"
-                    },
+                     
                     {
                         "Code": "TCS-797",
                         "Name": "Deep Learning "
@@ -1125,10 +1056,7 @@
             },
             {
                 "SEMESTER: VIII": [
-                    {
-                        "Code": "CODE",
-                        "Name": "TITLE"
-                    },
+                     
                     {
                         "Code": "TDM-881",
                         "Name": "Disaster Management"
@@ -2590,10 +2518,7 @@
         "data": [
             {
                 "SEMESTER: I": [
-                    {
-                        "Code": "CODE",
-                        "Name": "TITLE"
-                    },
+                     
                     {
                         "Code": "MCS-102",
                         "Name": "Mobile Computing"
@@ -2626,10 +2551,7 @@
             },
             {
                 "SEMESTER: II": [
-                    {
-                        "Code": "CODE",
-                        "Name": "TITLE"
-                    },
+                     
                     {
                         "Code": "MCS-241 ",
                         "Name": "Computer Vision and its Applications"
@@ -2662,10 +2584,7 @@
             },
             {
                 "SEMESTER: III": [
-                    {
-                        "Code": "CODE",
-                        "Name": "TITLE"
-                    },
+                     
                     {
                         "Code": "MCS-301",
                         "Name": "Soft Computing"
@@ -2686,10 +2605,7 @@
             },
             {
                 "SEMESTER: IV": [
-                    {
-                        "Code": "CODE",
-                        "Name": "TITLE"
-                    },
+                     
                     {
                         "Code": "MCS-400",
                         "Name": "Dissertation Phase-II"
