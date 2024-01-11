@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Select Image Range</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #333;
+        color: #fff;
+      }
+
+      #container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      h2 {
+        margin-bottom: 20px;
+      }
+
+      #canvasContainer {
+        position: relative;
+        height: 600px;
+        width: 800px;
+        overflow-x: scroll;
+        border: 1px solid #ccc;
+        margin-bottom: 20px;
+      }
+
+      #imageCanvas {
+        display: block;
+        margin: auto;
+      }
+
+      #optionsContainer {
+        display: flex;
+        gap: 10px;
+      }
+
+      button {
+        padding: 10px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:disabled {
+        background-color: #555;
+        cursor: not-allowed;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <h2>Select Image Range</h2>
+
+      <div id="canvasContainer">
+        <canvas id="imageCanvas"></canvas>
+      </div>
+
+      <div id="optionsContainer">
+        <button id="startSelectionButton">Start Selection</button>
+        <button id="undoSelectionButton" disabled>Undo</button>
+        <button id="clearSelectionButton" disabled>Clear Selection</button>
+        <button id="saveSelectionButton" disabled>Save Selection</button>
+      </div>
+    </div>
+
+    <script>
+      var canvas = document.getElementById('imageCanvas');
+      var context = canvas.getContext('2d');
+
+      var image = new Image();
+      image.src = 'data:image/png;base64,{{ image_data }}';
+
+      var startSelectionButton = document.getElementById(
+        'startSelectionButton'
+      );
+      var undoSelectionButton = document.getElementById('undoSelectionButton');
+      var clearSelectionButton = document.getElementById(
+        'clearSelectionButton'
+      );
+      var saveSelectionButton = document.getElementById('saveSelectionButton');
+      var selections = [];
+      var isStartSelectionPhase = true;
+
+      image.onload = function () {
+        canvas.width = image.width;
+        canvas.height = image.height;
+        drawImageWithSelection();
+      };
+
+      startSelectionButton.addEventListener('click', function () {
+        isStartSelectionPhase = true;
+        startSelectionButton.disabled = true;
+        undoSelectionButton.disabled = false;
+        clearSelectionButton.disabled = false;
+        saveSelectionButton.disabled = true;
+        alert('Select the starting point on the image.');
+      });
+
+      undoSelectionButton.addEventListener('click', function () {
+        undoSelection();
+      });
+
+      clearSelectionButton.addEventListener('click', function () {
+        clearSelection();
+        drawImageWithSelection();
+        startSelectionButton.disabled = false;
+        undoSelectionButton.disabled = true;
+        clearSelectionButton.disabled = true;
+        saveSelectionButton.disabled = true;
+      });
+
+      saveSelectionButton.addEventListener('click', function () {
+        saveSelectedImage();
+      });
+      const updateSelectionInputs = () => {};
+      canvas.addEventListener('mousedown', function (e) {
+        if (isStartSelectionPhase) {
+          selections.push({
+            start: e.clientY - canvas.getBoundingClientRect().top,
+            end: 0,
+          });
+        } else {
+          selections[selections.length - 1].end =
+            e.clientY - canvas.getBoundingClientRect().top;
+        }
+        drawImageWithSelection();
+        updateSelectionInputs();
+      });
+
+      canvas.addEventListener('mousemove', function (e) {
+        if (!isStartSelectionPhase) return;
+        selections[selections.length - 1].end =
+          e.clientY - canvas.getBoundingClientRect().top;
+        drawImageWithSelection();
+        updateSelectionInputs();
+      });
+
+      function drawImageWithSelection() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+        context.lineWidth = 2;
+
+        for (var i = 0; i < selections.length; i++) {
+          var selection = selections[i];
+          context.beginPath();
+          context.strokeStyle = 'green';
+          context.moveTo(0, selection.start);
+          context.lineTo(canvas.width, selection.start);
+
+          context.setLineDash([5, 5]);
+          context.strokeStyle = 'blue';
+          context.moveTo(0, selection.end);
+          context.lineTo(canvas.width, selection.end);
+
+          context.stroke();
+          context.setLineDash([]);
+        }
+        undoSelectionButton.disabled = selections.length === 0;
+        saveSelectionButton.disabled = selections.length === 0;
+      }
+
+      undoSelectionButton.addEventListener('click', undoSelection);
+
+      function undoSelection() {
+        if (selections.length > 0) {
+          selections.pop();
+          drawImageWithSelection();
+          updateSelectionInputs();
+        }
+        undoSelectionButton.disabled = selections.length === 0;
+      }
+
+      function clearSelection() {
+        selections = [];
+      }
+
+      function saveSelectedImage() {
+        // Implement save logic based on selections
+        console.log('Saving selections:', selections);
+      }
+    </script>
+  </body>
+</html>

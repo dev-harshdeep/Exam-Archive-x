@@ -1,0 +1,35 @@
+CREATE TABLE Courses (
+    CourseID SERIAL PRIMARY KEY,
+    CourseName VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE Semesters (
+    SemesterID SERIAL PRIMARY KEY,
+    CourseID INT REFERENCES Courses(CourseID),
+    SemesterName VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE Subjects (
+    SubjectID SERIAL PRIMARY KEY,
+    SemesterID INT REFERENCES Semesters(SemesterID),
+    Code VARCHAR(10) NOT NULL,
+    SubjectName VARCHAR(255) NOT NULL,
+    UNIQUE (SemesterID, Code)
+);
+
+CREATE TABLE QuestionPapers (
+    PaperID SERIAL PRIMARY KEY,
+    SubjectID INT REFERENCES Subjects(SubjectID),
+    Year INT NOT NULL,
+    ExamType VARCHAR(20) NOT NULL,
+    FilePath VARCHAR(255)
+);
+
+CREATE TABLE Questions (
+    QuestionID SERIAL PRIMARY KEY,
+    PaperID INT REFERENCES QuestionPapers(PaperID),
+    QuestionNumber INT NOT NULL,
+    Coordinates VARCHAR(50),
+    MetaText TEXT,
+    UNIQUE (PaperID, QuestionNumber)
+);
