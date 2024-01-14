@@ -10,6 +10,7 @@ import pathlib
 from functools import wraps
 
 load_dotenv() 
+os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 
 auth_bp = Blueprint('auth', __name__)
 GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID")
