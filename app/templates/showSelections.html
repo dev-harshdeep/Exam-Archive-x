@@ -1,0 +1,179 @@
+<!-- showSelections.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Show Selections</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #333;
+      color: #fff;
+    }
+
+    #container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    .selection-container {
+      margin-bottom: 20px;
+    }
+
+    .cropped-image {
+      border: 1px solid #ccc;
+      margin-top: 10px;
+      max-width: 100%;
+    }
+
+    .unit-input {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h2>Show Selections</h2>
+
+    <!-- Additional Details for the Entire Question Paper -->
+    <div class="additional-details">
+      <label for="subjectCode">Subject Code:</label>
+      <input type="text" id="subjectCode" value="{{ subject_code }}">
+      <label for="year">Year:</label>
+      <input type="text" id="year" value="{{ year }}">
+      <label for="paperType">Paper Type:</label>
+      <select id="paperType">
+        <option value="midsem" {% if paper_type == 'midsem' %}selected{% endif %}>Mid Sem</option>
+        <option value="endsem" {% if paper_type == 'endsem' %}selected{% endif %}>End Sem</option>
+      </select>
+    </div>
+
+    <!-- Loop through selections -->
+    {% for selection in selections %}
+    <div class="selection-container">
+      <p>Selection: {{ selection.start }} to {{ selection.end }}</p>
+      <img
+        src="data:image/png;base64,{{ selection.cropped_image }}"
+        class="cropped-image"
+        alt="Cropped Image"
+      />
+      <label for="unitInput_{{ loop.index }}">Units:</label>
+      <div class="unit-inputs">
+        {% for unit in selection.units %}
+        <div class="unit-input">
+          <select class="unit-selector" name="unitSelections[{{ loop.index0 }}]">
+            {% for unit_option in range(1, 6) %}
+              <option value="{{ unit_option }}" {% if unit == unit_option %}selected{% endif %}>Unit {{ unit_option }}</option>
+            {% endfor %}
+          </select>
+          <button class="remove-unit-button" onclick="removeUnit(this)">Remove Unit</button>
+        </div>
+        {% endfor %}
+        <button class="add-unit-button" onclick="addUnit(this)">Add Unit</button>
+      </div>
+      <!-- No need to duplicate additional details for each selection -->
+    </div>
+    {% endfor %}
+
+    <button id="submit-button" onclick="submitData()">Submit</button>
+  </div>
+
+  <script>
+    function addUnit(button) {
+      var selectionContainer = button.parentNode.parentNode;
+      var unitInputsContainer = selectionContainer.querySelector('.unit-inputs');
+
+      var newUnitSelector = document.createElement('select');
+      newUnitSelector.className = 'unit-selector';
+      newUnitSelector.innerHTML = `
+        {% for unit_option in range(1, 6) %}
+          <option value="{{ unit_option }}">Unit {{ unit_option }}</option>
+        {% endfor %}
+      `;
+
+      var newUnitInput = document.createElement('div');
+      newUnitInput.className = 'unit-input';
+      newUnitInput.appendChild(newUnitSelector);
+
+      var removeUnitButton = document.createElement('button');
+      removeUnitButton.className = 'remove-unit-button';
+      removeUnitButton.textContent = 'Remove Unit';
+      removeUnitButton.onclick = function () {
+        unitInputsContainer.removeChild(newUnitInput);
+      };
+
+      newUnitInput.appendChild(removeUnitButton);
+      unitInputsContainer.appendChild(newUnitInput);
+    }
+
+    function removeUnit(button) {
+      var unitInputsContainer = button.parentNode.parentNode;
+      unitInputsContainer.removeChild(button.parentNode);
+    }
+
+   
+    function submitData() {
+    var additionalDetails = {
+      subject_code: document.getElementById('subjectCode').value,
+      year: document.getElementById('year').value,
+      paper_type: document.getElementById('paperType').value,
+    };
+
+    var selectionsData = [];
+
+    var selectionContainers = document.querySelectorAll('.selection-container');
+    selectionContainers.forEach(function (selectionContainer, index) {
+      var selectionData = {
+        start: selectionContainer.querySelector('p').innerText.split(' to ')[0].split(': ')[1],
+        end: selectionContainer.querySelector('p').innerText.split(' to ')[1],
+        cropped_image: selectionContainer.querySelector('.cropped-image').src.split(',')[1],
+        units: [],
+      };
+
+      var unitSelectors = selectionContainer.querySelectorAll('.unit-selector');
+      unitSelectors.forEach(function (unitSelector) {
+        selectionData.units.push(unitSelector.value);
+      });
+
+      selectionsData.push(selectionData);
+    });
+
+    // Construct the data object to send to the backend
+    var data = {
+      additionalDetails: additionalDetails,
+      selectionsData: selectionsData
+    };
+
+    // Send an AJAX request to the backend
+    fetch('/submitSelections', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Response from backend:', data);
+      // Handle response from the backend as needed
+    })
+    .catch(error => {
+      console.error('Error sending data to backend:', error);
+    });
+  }
+
+
+</script>
+</body>
+</html>

@@ -130,12 +130,11 @@
       canvas.addEventListener('mousedown', function (e) {
         if (isStartSelectionPhase) {
           selections.push({
-            start: e.clientY - canvas.getBoundingClientRect().top,
+            start: e.offsetY, // Use offsetY to get the position relative to the canvas
             end: 0,
           });
         } else {
-          selections[selections.length - 1].end =
-            e.clientY - canvas.getBoundingClientRect().top;
+          selections[selections.length - 1].end = e.offsetY;
         }
         drawImageWithSelection();
         updateSelectionInputs();
@@ -143,8 +142,7 @@
 
       canvas.addEventListener('mousemove', function (e) {
         if (!isStartSelectionPhase) return;
-        selections[selections.length - 1].end =
-          e.clientY - canvas.getBoundingClientRect().top;
+        selections[selections.length - 1].end = e.offsetY;
         drawImageWithSelection();
         updateSelectionInputs();
       });
@@ -190,8 +188,25 @@
       }
 
       function saveSelectedImage() {
-        // Implement save logic based on selections
         console.log('Saving selections:', selections);
+
+        // Send selections data to the server
+        fetch('/saveSelections', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ selections: selections }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log('Server response:', data);
+            // Redirect to the next page or perform other actions
+            window.location.href = '/showSelections';
+          })
+          .catch((error) => {
+            console.error('Error saving selections:', error);
+          });
       }
     </script>
   </body>
