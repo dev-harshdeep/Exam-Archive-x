@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Not Found</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #2a2a2a;
+        color: #fff;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      .not-found-container {
+        background-color: #4d4d4d;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        text-align: center;
+        animation: fadeIn 1s ease-in-out;
+      }
+
+      h1 {
+        color: #f00;
+        margin-bottom: 20px;
+        font-size: 2em;
+      }
+
+      p {
+        margin-bottom: 20px;
+        font-size: 1.2em;
+      }
+
+      a {
+        display: inline-block;
+        background-color: #f00;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 1.2em;
+        transition: background-color 0.3s ease-in-out;
+      }
+
+      a:hover {
+        background-color: #3c3c3c;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="not-found-container">
+      <h1>User Not Found</h1>
+      <p>This functionality is exclusively accessible to adminstrators.</p>
+      <p>
+        If you are an administrator,please log in using a valid Gmail account.
+      </p>
+      <a href="/login">Login</a>
+      <a href="/">Home</a>
+    </div>
+  </body>
+</html>

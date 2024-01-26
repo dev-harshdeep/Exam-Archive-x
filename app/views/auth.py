@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, session, abort, request, current_app , url_for
+from flask import Blueprint, redirect, session, abort, request, current_app , url_for ,render_template
 from google_auth_oauthlib.flow import Flow
 from google.oauth2 import id_token
 from pip._vendor import cachecontrol
@@ -50,7 +50,7 @@ def login_is_required(function):
                 print("Auth check 1")
                 return function(*args, **kwargs)
         print("Logging you out here")
-        return redirect("/logout")
+        return redirect("/notAnAdmin")
     return wrapper
 
 @auth_bp.route("/callback")
@@ -89,7 +89,7 @@ def callback():
     session["name"] = id_info.get("name")
     if session["email"] in Authorised:
         return redirect("/admin/dashboard")
-    return redirect("/logout")
+    return redirect("/notAnAdmin")
 
 def authenticate_user(token):
     request_session = requests.session()
@@ -116,3 +116,9 @@ def clear_user_session():
 def logout():
     session.clear()
     return redirect("/")
+
+@auth_bp.route("/notAnAdmin")
+def notAnAdmin():
+    session.clear()
+    return render_template('user-not-found.html')
+
