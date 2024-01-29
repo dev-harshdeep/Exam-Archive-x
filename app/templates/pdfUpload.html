@@ -3,42 +3,176 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PDF to Long Image Converter</title>
+    <title>Advanced PDF Upload</title>
+
     <style>
-      #loading-message {
-        display: none;
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #3498db, #9b59b6);
+        margin: 0;
+        padding: 0;
+        color: #fff;
       }
 
-      #result-message {
-        display: none;
+      .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      .upload-container {
+        background: linear-gradient(180deg, #34495e, #2c3e50);
+        border-radius: 12px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        padding: 30px;
+        text-align: center;
+      }
+
+      .upload-area {
+        border: 3px dashed #1abc9c;
+        padding: 30px;
+        margin: 30px 0;
+        cursor: pointer;
+        border-radius: 12px;
+        background: linear-gradient(180deg, #2ecc71, #27ae60);
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .upload-area p {
+        margin: 0;
+        font-size: 18px;
+        color: #fff;
+      }
+
+      .buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+      }
+
+      #uploadButton {
+        background: linear-gradient(180deg, #27ae60, #1abc9c);
+        color: #fff;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      #uploadButton:hover {
+        background: linear-gradient(180deg, #219d54, #159977);
+      }
+
+      #cancelButton {
+        background: linear-gradient(180deg, #e74c3c, #c0392b);
+        color: #fff;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      #cancelButton:hover {
+        background: linear-gradient(180deg, #c0392b, #a8322e);
+      }
+
+      .feedback {
+        margin-top: 30px;
+        font-size: 16px;
       }
     </style>
   </head>
   <body>
-    <h1>PDF to Long Image Converter</h1>
-    <form
-      id="pdf-upload-form"
-      action="/pdfUpload"
-      method="post"
-      enctype="multipart/form-data"
-    >
-      <label for="pdfFile">Select a PDF file:</label>
-      <input type="file" name="pdf_file" id="pdfFile" accept=".pdf" required />
-      <br />
-      <button type="submit" onclick="showLoadingMessage()">
-        Convert to Long Image
-      </button>
-    </form>
-
-    <div id="loading-message">Processing your PDF. Please wait...</div>
-
-    <div id="result-message">
-      <p>
-        Conversion complete!
-        <a id="result-link" href="#">View Result</a>
-      </p>
+    <div class="container" id="container">
+      <form
+        id="pdf-upload-form"
+        action="/pdfUpload"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <div class="upload-container">
+          <h1>Upload PDF Files</h1>
+          <div class="upload-area" id="uploadArea">
+            <p>Drag and drop your PDF files here</p>
+            <!-- <input type="file" id="fileInput" multiple> -->
+            <input
+              type="file"
+              name="pdf_file"
+              id="pdfFile"
+              accept=".pdf"
+              required
+            />
+          </div>
+          <div class="buttons">
+            <button id="uploadButton" type="submit">Upload PDF</button>
+            <button id="cancelButton">Cancel</button>
+          </div>
+          <div class="feedback" id="feedbackArea"></div>
+        </div>
+      </form>
     </div>
 
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('pdfFile');
+        const uploadButton = document.getElementById('uploadButton');
+        const cancelButton = document.getElementById('cancelButton');
+        const feedbackArea = document.getElementById('feedbackArea');
+
+        uploadArea.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          uploadArea.classList.add('drag-over');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+          uploadArea.classList.remove('drag-over');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+          e.preventDefault();
+          uploadArea.classList.remove('drag-over');
+          const files = e.dataTransfer.files;
+          fileInput.files = files;
+          handleFiles(files);
+        });
+
+        fileInput.addEventListener('change', () => {
+          const files = fileInput.files;
+          handleFiles(files);
+        });
+
+        uploadButton.addEventListener('click', () => {
+          // Implement the logic to handle the upload button click
+          // You can use the File API or an AJAX request to handle file uploads
+          // Update the UI based on the upload status
+          feedbackArea.innerHTML = 'Files uploaded successfully!';
+        });
+
+        cancelButton.addEventListener('click', () => {
+          // Implement the logic to cancel the upload or clear the selected files
+          // Update the UI accordingly
+          fileInput.value = '';
+          feedbackArea.innerHTML = '';
+        });
+
+        function handleFiles(files) {
+          // Implement the logic to handle the uploaded files
+          // Display file information, validate file types, etc.
+          if (files.length > 0) {
+            const fileNames = Array.from(files)
+              .map((file) => file.name)
+              .join(', ');
+            feedbackArea.innerHTML = `Selected files: ${fileNames}`;
+          } else {
+            feedbackArea.innerHTML = '';
+          }
+        }
+      });
+    </script>
     <script>
       function showLoadingMessage() {
         document.getElementById('loading-message').style.display = 'block';
