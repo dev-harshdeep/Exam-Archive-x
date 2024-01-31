@@ -4,6 +4,8 @@ from views.auth import auth_bp
 from views.admin import admin_bp
 from views.data import data_bp
 from views.pdfUpload import pdf_upload_bp
+from views.archive import traversal_bp
+
 from dotenv import load_dotenv
 from models.database import db
 from models.course import Course
@@ -27,7 +29,9 @@ app.register_blueprint(auth_bp)
 app.register_blueprint(admin_bp, url_prefix='/admin')
 app.register_blueprint(data_bp, url_prefix='/data')
 app.register_blueprint(pdf_upload_bp)
-# Function to check if tables exist in the database
+app.register_blueprint(traversal_bp, url_prefix='/archive')
+
+# Function to check if tables exist in the 
 def tables_exist():
     with app.app_context():
         inspector = inspect(db.engine)

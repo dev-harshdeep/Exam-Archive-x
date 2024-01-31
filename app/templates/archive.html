@@ -1,0 +1,72 @@
+<!-- templates/archive.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Traverse Data</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <h1>Archive</h1>
+
+    <div id="courses"></div>
+    <div id="semesters"></div>
+    <div id="subjects"></div>
+
+    <script>
+      $(document).ready(function () {
+        // Function to fetch semesters for the selected course
+        function fetchSemesters(courseId) {
+          $('#semesters').empty();
+          $('#subjects').empty();
+
+          // Fetch semesters for the selected course
+          $.get(`/archive/semesters/${courseId}`, function (data) {
+            data.semesters.forEach(function (semester) {
+              $('#semesters').append(
+                `<button class="semester" data-id="${semester.id}">${semester.name}</button>`
+              );
+            });
+          });
+        }
+
+        // Function to fetch subjects for the selected semester
+        function fetchSubjects(semesterId) {
+          $('#subjects').empty();
+
+          // Fetch subjects for the selected semester
+          $.get(`/archive/subjects/${semesterId}`, function (data) {
+            data.subjects.forEach(function (subject) {
+              $('#subjects').append(
+                `<div>${subject.name} (${subject.code})</div>`
+              );
+            });
+          });
+        }
+
+        // Fetch courses when the page loads
+        $.get('/archive/courses', function (data) {
+          data.courses.forEach(function (course) {
+            $('#courses').append(
+              `<button class="course" data-id="${course.id}">${course.name}</button>`
+            );
+          });
+        });
+
+        // Handle click on course button
+        $('#courses').on('click', '.course', function () {
+          var courseId = $(this).data('id');
+          fetchSemesters(courseId);
+        });
+
+        // Handle click on semester button
+        $('#semesters').on('click', '.semester', function () {
+          var semesterId = $(this).data('id');
+          fetchSubjects(semesterId);
+        });
+      });
+    </script>
+  </body>
+</html>

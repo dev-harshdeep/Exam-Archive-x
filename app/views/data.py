@@ -1,39 +1,43 @@
-# views/data.py
-
 from flask import Blueprint, jsonify
 from models.course import Course
+from models.semester import Semester
 from models.subject import Subject
-from models.database import db
-from sqlalchemy import inspect
+from models.question_paper import QuestionPaper
+from models.question import Question
 
 data_bp = Blueprint('data', __name__)
 
-@data_bp.route('/tables-info')
-def get_tables_info():
-    with db.engine.connect() as connection:
-        inspector = inspect(connection)
+@data_bp.route('/structured_data', methods=['GET'])
+def get_structured_data():
+    structured_data = {}
 
-        tables_info = []
+    # Fetch courses and related data
+    courses = Course.query.all()
+    for course in courses:
+        structured_data[course.CourseName] = {}
 
-        for table_name in inspector.get_table_names():
-            columns = inspector.get_columns(table_name)
-            table_info = {
-                'table_name': table_name,
-                'columns': [{'name': column['name'], 'type': str(column['type'])} for column in columns]
-            }
-            tables_info.append(table_info)
+        # Fetch semesters for each course
+        semesters = Semester.query.filter_by(CourseID=course.CourseID).all()
+        for semester in semesters:
+            structured_data[course.CourseName][semester.SemesterName] = {}
 
-        return jsonify({'tables_info': tables_info})
+            # Fetch subjects for each semester
+            subjects = Subject.query.filter_by(SemesterID=semester.SemesterID).all()
+            for subject in subjects:
+                structured_data[course.CourseName][semester.SemesterName][subject.Code] = {}
 
-@data_bp.route('/courses-data')
-def get_courses_data():
-    courses_data = Course.query.all()
-    data = [{'CourseID': course.CourseID, 'CourseName': course.CourseName} for course in courses_data]
-    return jsonify({'courses': data})
+                # Fetch question papers for each subject
+                question_papers = QuestionPaper.query.filter_by(SubjectID=subject.SubjectID).all()
+                for paper in question_papers:
+                    structured_data[course.CourseName][semester.SemesterName][subject.Code][paper.ExamType] = []
 
-@data_bp.route('/subject-data')
-def get_subject_data():
-    subject_data = Subject.query.all()
-    data = [{'SubjectID': subject.SubjectID, 'Code': subject.Code, 'SubjectName': subject.SubjectName} for subject in subject_data]
-    return jsonify({'subjects': data})
+                    # Fetch questions for each paper
+                    questions = Question.query.filter_by(PaperID=paper.PaperID).all()
+                    for question in questions:
+                        structured_data[course.CourseName][semester.SemesterName][subject.Code][paper.ExamType].append({
+                            'question_number': question.QuestionNumber,
+                            'coordinates': question.Coordinates,
+                            'meta_text': question.MetaText
+                        })
 
+    return jsonify(structured_data)
