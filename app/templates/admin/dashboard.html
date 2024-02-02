@@ -5,30 +5,119 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Dashboard</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='dashboard.css') }}"
+    />
+    <script
+      type="text/javascript"
+      src="https://www.gstatic.com/charts/loader.js"
+    ></script>
+    <!-- chart 1: -->
+    <script type="text/javascript">
+      google.charts.load('current', { packages: ['corechart'] });
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['B.Tech', 3],
+          ['Nursing', 3],
+          ['Pharmacy', 3],
+          ['MBA', 3],
+          ['BCA', 3],
+          ['B.sc', 3],
+          ['MCA', 3],
+          ['M.Tech', 3],
+        ]);
+
+        var options = {
+          title: 'No. of Question Papers',
+        };
+
+        var chart = new google.visualization.PieChart(
+          document.getElementById('piechart')
+        );
+
+        chart.draw(data, options);
+      }
+    </script>
+    <!-- chart 2: -->
+    <script
+      type="text/javascript"
+      src="https://www.gstatic.com/charts/loader.js"
+    ></script>
+    <script type="text/javascript">
+      google.charts.load('current', { packages: ['bar'] });
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Views', 'Search', 'Downloads'],
+          ['2024', 1000, 400, 200],
+          ['2025', 1170, 460, 250],
+          ['2026', 660, 1120, 300],
+          ['2027', 1030, 540, 350],
+        ]);
+
+        var options = {
+          chart: {
+            title: 'Exam-archive performance',
+            subtitle: 'Search, Downloads, and Viewers: 2024-2030',
+          },
+        };
+
+        var chart = new google.charts.Bar(
+          document.getElementById('columnchart_material')
+        );
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+    </script>
   </head>
   <body>
-    <h1>Welcome to the Admin Dashboard, {{ session['name'] }}!</h1>
+    <div class="container">
+      <div class="chart-container">
+        <div id="piechart" class="chart1"></div>
+        <div id="columnchart_material" class="chart2"></div>
+      </div>
+      <div>
+        <h1>
+          Welcome to the Admin Dashboard . . . ! ! !<br />
+          Name: {{ session['name'] }}!
+        </h1>
 
-    <div>
-      <h2>Placeholder Stats</h2>
-      <p>Total Courses: 50</p>
-      <p>Total Question Papers: 100</p>
-    </div>
+        <div class="stats-box">
+          <h2>Total Courses</h2>
+          <p class="box-value">50</p>
+        </div>
 
-    <div>
-      <h2>Actions</h2>
-      <ul>
-        <li>
-          <a href="{{ url_for('admin.edit_course_info') }}">Edit Course Info</a>
-        </li>
-        <li>
-          <a href="{{ url_for('pdf_upload.pdf_upload') }}"
-            >Add Question Paper</a
+        <div class="stats-box">
+          <h2>Total Question Papers</h2>
+          <p class="box-value">100</p>
+        </div>
+
+        <div class="actions">
+          <h2 style="border-bottom: 0px">Actions:</h2>
+          <ul class="test">
+            <li>
+              <a href="{{ url_for('admin.edit_course_info') }}" class="button"
+                >Edit Course Info</a
+              >
+            </li>
+            <li>
+              <a href="{{ url_for('pdf_upload.pdf_upload') }}" class="button"
+                >Add Question Paper</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="ss">
+          <a href="{{ url_for('auth.logout') }}" class="logout-button"
+            >Logout</a
           >
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
-
-    <a href="{{ url_for('auth.logout') }}">Logout</a>
   </body>
 </html>
