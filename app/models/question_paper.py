@@ -1,8 +1,7 @@
 # app/models/question_paper.py
 
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Column, Integer, String, ForeignKey, UniqueConstraint, Text
-
+from sqlalchemy import Column, Integer, String, ForeignKey
 from .database import db
 
 class QuestionPaper(db.Model):

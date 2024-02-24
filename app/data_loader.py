@@ -3,6 +3,7 @@ import json
 from models.course import Course
 from models.semester import Semester
 from models.subject import Subject
+from models.subject_semester import SubjectSemester
 from models.question_paper import QuestionPaper
 from models.question import Question
 from models.database import db
@@ -39,9 +40,20 @@ def load_data(json_file_path):
                     code = subject_data['Code']
                     name = subject_data['Name']
 
-                    # Insert data into Subjects table
-                    subject = Subject(SemesterID=semester_id, Code=code, SubjectName=name)
-                    db.session.add(subject)
+                    # Check if the subject already exists
+                    existing_subject = Subject.query.filter_by(Code=code).first()
+                    if existing_subject:
+                        subject_id = existing_subject.SubjectID
+                    else:
+                        # Insert data into Subjects table
+                        new_subject = Subject(Code=code, SubjectName=name)
+                        db.session.add(new_subject)
+                        db.session.flush()
+                        subject_id = new_subject.SubjectID
+
+                    # Insert data into SubjectSemester table
+                    subject_semester = SubjectSemester(SubjectID=subject_id, SemesterID=semester_id)
+                    db.session.add(subject_semester)
 
                     # Similar logic for other tables
 

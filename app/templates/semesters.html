@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Semesters</title>
+  </head>
+  <body>
+    <h1>Semesters for {{ course.CourseName }}</h1>
+    <ul>
+      {% for semester in semesters %}
+      <li>
+        <a
+          href="{{ url_for('archive.get_subjects', course_id=course.CourseID, semester_id=semester.SemesterID) }}"
+          >{{ semester.SemesterName }}</a
+        >
+      </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

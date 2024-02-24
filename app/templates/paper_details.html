@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Paper Details</title>
+  </head>
+  <body>
+    <h1>Question Paper Details</h1>
+    <h2>Subject: {{ subject.SubjectName }}</h2>
+    <h3>Meta Texts:</h3>
+    <ul>
+      {% for question in questions %}
+      <li>{{ question.MetaText }}</li>
+      {% endfor %}
+    </ul>
+    <a
+      href="{{ url_for('archive.get_question_papers', course_id=course.CourseID, semester_id=semester.SemesterID, subject_id=subject.SubjectID) }}"
+      >Back to Question Papers</a
+    >
+  </body>
+</html>

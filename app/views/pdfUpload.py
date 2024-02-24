@@ -1,16 +1,23 @@
 # pdf_upload_bp.py
-from flask import Blueprint, render_template, request, jsonify, session , json
+from flask import Blueprint, render_template, request, jsonify, session , json , current_app
 import io
 from PIL import Image
 import base64
 import fitz  # PyMuPDF
+from models.subject import Subject
 import os
+import tempfile
 import uuid  # For generating unique filenames
+from models.ocr import ocr_image
+from models.subject import Subject
+from models.question import Question
+from models.question_paper import QuestionPaper
+from models.database import db
 
 pdf_upload_bp = Blueprint('pdf_upload', __name__)
 
 # Define a temporary directory to store images
-TEMP_IMAGE_DIR = 'temp_images'
+TEMP_IMAGE_DIR = 'temp_images/'
 
 # Ensure the temporary directory exists
 os.makedirs(TEMP_IMAGE_DIR, exist_ok=True)
@@ -42,6 +49,12 @@ def stitch_images_vertically(images):
 
     return new_image
 
+@pdf_upload_bp.route('/subjectCodeSuggestions')
+def subject_code_suggestions():
+    input_text = request.args.get('input', '')
+    suggestions = Subject.query.filter(Subject.Code.ilike(f'%{input_text}%')).distinct(Subject.Code).limit(10).all()
+    return jsonify([suggestion.Code for suggestion in suggestions])
+
 @pdf_upload_bp.route('/pdfUpload', methods=['GET', 'POST'])
 def pdf_upload():
     if request.method == 'POST':
@@ -56,14 +69,13 @@ def pdf_upload():
             long_image = stitch_images_vertically(pdf_images)
 
             # Generate a unique filename for the image
-            image_filename = str(uuid.uuid4()) + '.png'
+            image_filename = str(uuid.uuid4())[:8] + '.png'
             image_path = os.path.join(TEMP_IMAGE_DIR, image_filename)
-
             # Save the image temporarily on the server
             long_image.save(image_path, format='PNG')
 
             # Store the image path in the session
-            session['image_path'] = image_path
+            session['image_filename'] = image_filename
 
             # Trigger the result message in the template
             with open(image_path, 'rb') as image_file:
@@ -93,27 +105,62 @@ def save_selections():
     return jsonify({'message': 'Selections saved successfully'})
 
 
+def save_selection_as_json(selection):
+    # Create a directory to store JSON files if it doesn't exist
+    os.makedirs('selections', exist_ok=True)
 
+    # Generate a unique filename for the JSON file
+    json_filename = f"{selection['unit']}_selection.json"
+    json_filepath = os.path.join('selections', json_filename)
 
+    # Write selection data to JSON file
+    with open(json_filepath, 'w') as json_file:
+        json.dump(selection, json_file)
+
+# Inside the 'show_selections' route
 @pdf_upload_bp.route('/showSelections', methods=['GET'])
 def show_selections():
     # Retrieve selections and image data from the session
     selections_data = session.get('selections', [])
-    image_path = session.get('image_path', '')
+    image_filename = session.get('image_filename', '')
+    image_path = os.path.join(TEMP_IMAGE_DIR, image_filename)
 
-    # Process the selections to get cropped images
+    # Create a temporary directory to store encoded cropped images
+    temp_cropped_dir = tempfile.mkdtemp()
+    ocr_data = []
+
+    # Process the selections to get cropped images and perform OCR
     for selection in selections_data:
         start = selection['start']
         end = selection['end']
-        cropped_image = crop_image(image_path, start, end)
-        selection['cropped_image'] = cropped_image
+        encoded_cropped_image = crop_image(image_path, start, end)
+        selection['cropped_image'] = encoded_cropped_image
 
-    return render_template('showSelections.html', selections=selections_data)
+        # Decode the base64-encoded string back to bytes
+        decoded_image_data = base64.b64decode(encoded_cropped_image)
+
+        # Save the decoded image data as a PNG file
+        cropped_image_path = os.path.join(temp_cropped_dir, f'{selection["start"]}_{selection["end"]}.png')
+        with open(cropped_image_path, 'wb') as f:
+            f.write(decoded_image_data)
+
+        # Perform OCR on the saved image file
+        ocr_result = ocr_image(cropped_image_path)
+        ocr_data.append(ocr_result)
+        # Store the OCR data in the session
+
+        # Log the OCR result
+        current_app.logger.info(ocr_result)
+
+        # You may want to store or process the OCR result here
+
+    # Pass selections and OCR data to the template
+    return render_template('showSelections.html', selections=selections_data, ocr_data=ocr_data)
+
 
 def crop_image(image_path, start, end):
+    print(image_path)
     try:
-        # You need to use a proper image processing library to crop the image
-        # This is a simplified example using PIL
         original_image = Image.open(image_path)
 
         # Validate dimensions to prevent "tile cannot extend outside image" error
@@ -133,17 +180,44 @@ def crop_image(image_path, start, end):
     except Exception as e:
         return f"Error cropping the image: {str(e)}"
 
-
 @pdf_upload_bp.route('/submitSelections', methods=['POST'])
 def submit_selections():
     try:
         additional_details = request.json.get('additionalDetails')
         selections_data = request.json.get('selectionsData')
+        ocr_data = request.json.get('ocrData')
 
-        print("Additional Details:", additional_details)
-        print("Selections Data:", selections_data)
+        # Extract additional details
+        subject_code = additional_details.get('subject_code')
+        year = additional_details.get('year')
+        paper_type = additional_details.get('paper_type')
 
-        # Perform any additional processing or save data to a database
+        # Fetch SubjectID based on subject_code
+        subject = Subject.query.filter_by(Code=subject_code).first()
+        if subject is None:
+            raise ValueError(f"Subject with code {subject_code} not found")
+
+        subject_id = subject.SubjectID
+
+        # Create a new question paper instance
+        question_paper = QuestionPaper(SubjectID=subject_id, Year=year, ExamType=paper_type)
+        db.session.add(question_paper)
+        db.session.commit()
+
+        # Extract selection data and OCR data
+        for selection, ocr_text in zip(selections_data, ocr_data):
+            start = int(selection['start'])
+            end = int(selection['end'])
+            units = selection['units']
+
+            # Create a new question instance
+            question = Question(PaperID=question_paper.PaperID, QuestionNumber=len(selections_data), Coordinates=f"{start}-{end}", MetaText=ocr_text)
+            db.session.add(question)
+        image_path = session.get('image_path')
+
+        # Update file path for the question paper
+        question_paper.FilePath = image_path
+        db.session.commit()
 
         return jsonify({'message': 'Data submitted successfully'})
     except Exception as e:
