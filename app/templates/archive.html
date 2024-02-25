@@ -4,19 +4,144 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Archive Home</title>
+
+    <style>
+            
+
+            *{
+              padding: 0;
+              margin: 0;
+              box-sizing: border-box;
+              font-family: "Montserrat", sans-serif;
+  font-family: "Nunito", sans-serif;
+            }
+
+            .container ul
+             {
+
+              display: grid;
+              grid-template-columns: repeat(4, 1fr);  
+              grid-gap: 10px; 
+
+            }
+
+            .container ul li a
+            {
+              display: flex;
+              justify-content: center;
+              text-align: center;
+              align-items: center;
+              flex-direction: column;
+              padding: 20px;
+              text-align: center;
+              text-decoration: none;
+              list-style: none;
+
+            }
+
+            .container ul li a
+            {
+              color: black;
+              text-decoration: none;
+              list-style: none;
+            }
+
+
+            .main{
+              position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 80%;
+            }
+
+            .main h2
+            {
+              font-size: 50px;
+            }
+
+            .search-container {
+  margin-bottom: 20px;  
+}
+
+.search-container input[type=text] {
+  padding: 10px;
+  width: 200px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Style the button */
+.search-container button {
+  padding: 10px 15px;
+  background-color: #ddb06bd5;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* On hover, change background color */
+.search-container button:hover {
+  background-color: #ddb06bd5;
+}
+
+.nav{
+  display: flex;
+  height: 100%;
+  width: 80%;
+  margin-bottom: 50px;
+  justify-content: space-between;
+}
+
+.btn
+{
+  padding: 10px 30px;
+  background-color: #ddb06bd5;
+  color: white;
+   border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 40px;
+  margin-left: 40px;
+}
+    </style>
   </head>
   <body>
-    <h1>Welcome to the Archive</h1>
-    <h2>Courses:</h2>
+     
+ 
+  <div class="main"> 
+    <div class="nav"> 
+    
+    
+      <h2>Courses:</h2>
+    <div class="search-container">
+      <input type="text" placeholder="Search...">
+      <button type="submit">Search</button>
+    </div>
+    
+  </div>
+    
+    <div class="container">
     <ul>
       {% for course in courses %}
       <li>
-        <a
+        
+         <a
           href="{{ url_for('archive.get_semesters', course_id=course.CourseID) }}"
-          >{{ course.CourseName }}</a
+
+          > <img src="{{ url_for('static', filename='folder.svg') }}" alt="Your SVG Image" height="190" width="150">
+          {{ course.CourseName }}</a
         >
       </li>
       {% endfor %}
     </ul>
+    <button class="btn">Back</button>
+
+    </div>
+  </div>  
   </body>
 </html>
