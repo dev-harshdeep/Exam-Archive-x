@@ -4,18 +4,88 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Subjects</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: "Montserrat", sans-serif;
+        font-family: "Nunito", sans-serif;
+      }
+
+      .main {
+        display: flex;
+        align-items: center;
+        gap: 100px;
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .container ul {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 20px;
+      }
+
+      .container ul li {
+        padding: 20px;
+        text-align: center;
+        list-style: none;
+        text-decoration: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container ul li a {
+        text-decoration: none;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        flex-direction: column;
+        justify-content: center;
+        color: black;
+      }
+      .btn {
+        padding: 10px 30px;
+        background-color: #ddb06bd5;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 40px;
+        margin-left: 40px;
+      }
+    </style>
   </head>
   <body>
-    <h1>Subjects for {{ semester.SemesterName }} in {{ course.CourseName }}</h1>
-    <ul>
-      {% for subject in subjects %}
-      <li>
-        <a
-          href="{{ url_for('archive.get_question_papers', course_id=course.CourseID, semester_id=semester.SemesterID, subject_id=subject.SubjectID) }}"
-          >{{ subject.SubjectName }}</a
-        >
-      </li>
-      {% endfor %}
-    </ul>
+    <div class="main">
+      <h1>
+        Subjects for {{ semester.SemesterName }} in {{ course.CourseName }}
+      </h1>
+
+      <div class="container">
+        <ul>
+          {% for subject in subjects %}
+
+          <li>
+            <a
+              href="{{ url_for('archive.get_question_papers', course_id=course.CourseID, semester_id=semester.SemesterID, subject_id=subject.SubjectID) }}"
+            >
+              <img
+                src="{{ url_for('static', filename='book.jpg') }}"
+                height="100"
+                width="100"
+                alt=""
+              />{{ subject.SubjectName }}</a
+            >
+          </li>
+
+          {% endfor %}
+        </ul>
+      </div>
+      <button class="btn">Back</button>
+    </div>
   </body>
 </html>
