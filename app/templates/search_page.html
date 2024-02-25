@@ -1,0 +1,53 @@
+<!-- app/templates/search_page.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search</title>
+    <style>
+      /* Add your CSS styles here */
+    </style>
+  </head>
+  <body>
+    <input type="text" id="searchInput" placeholder="Enter your search query" />
+    <button onclick="search()">Search</button>
+    <div id="searchResults"></div>
+
+    <script>
+      function search() {
+        var query = document.getElementById('searchInput').value;
+        fetch(`/search?query=${query}`)
+          .then((response) => response.json())
+          .then((data) => {
+            displayResults(data.results);
+          })
+          .catch((error) => console.error('Error:', error));
+      }
+
+      function displayResults(results) {
+        var searchResultsDiv = document.getElementById('searchResults');
+        searchResultsDiv.innerHTML = '';
+
+        results.forEach((result) => {
+          var resultDiv = document.createElement('div');
+          resultDiv.innerHTML = `
+                    <p>Question ID: ${result.question_id}</p>
+                    <p>Question Number: ${result.question_number}</p>
+                    <p>Coordinates: ${result.coordinates}</p>
+                    <p>Meta Text: ${result.meta_text}</p>
+                    <p>Year: ${result.year}</p>
+                    <p>Exam Type: ${result.exam_type}</p>
+                    <p>File Path: ${result.file_path}</p>
+                    <p>Subject Code: ${result.subject_code}</p>
+                    <p>Subject Name: ${result.subject_name}</p>
+                    <!-- Add more details as needed -->
+                    <hr>
+                `;
+          searchResultsDiv.appendChild(resultDiv);
+        });
+      }
+    </script>
+  </body>
+</html>

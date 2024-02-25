@@ -5,6 +5,7 @@ from views.admin import admin_bp
 from views.data import data_bp
 from views.pdfUpload import pdf_upload_bp
 from views.archive import archive_bp
+from views.serch import search_bp
 
 from dotenv import load_dotenv
 from models.database import db
@@ -15,6 +16,7 @@ from models.semester import Semester
 from models.subject import Subject
 from models.question_paper import QuestionPaper
 from models.question import Question
+
 from config import Config
 from data_loader import load_data 
 
@@ -30,6 +32,7 @@ app.register_blueprint(admin_bp, url_prefix='/admin')
 app.register_blueprint(data_bp, url_prefix='/data')
 app.register_blueprint(pdf_upload_bp)
 app.register_blueprint(archive_bp, url_prefix='/archive')
+app.register_blueprint(search_bp)
 
 # Function to check if tables exist in the 
 def tables_exist():
