@@ -49,14 +49,14 @@
     <!-- Additional Details for the Entire Question Paper -->
     <div class="additional-details">
       <label for="subjectCode">Subject Code:</label>
-      <input type="text" id="subjectCode" value="{{ subject_code }}" oninput="getSubjectCodeSuggestions()">
+      <input type="text" id="subjectCode" value="{{ paperDetails.paperCode[0] }}" oninput="getSubjectCodeSuggestions()">
       <div id="subjectCodeSuggestions"></div> <!-- Suggestions will be displayed here -->
       <label for="year">Year:</label>
-      <input type="text" id="year" value="{{ year }}">
+      <input type="text" id="year" value="{{ paperDetails.paperYear }}">
       <label for="paperType">Paper Type:</label>
       <select id="paperType">
-        <option value="midsem" {% if paper_type == 'midsem' %}selected{% endif %}>Mid Sem</option>
-        <option value="endsem" {% if paper_type == 'endsem' %}selected{% endif %}>End Sem</option>
+        <option value="midsem" {% if paperDetails.paperType == 'mid semester' %}selected{% endif %}>Mid Sem</option>
+        <option value="endsem" {% if paperDetails.paperType == 'end semester' %}selected{% endif %}>End Sem</option>
       </select>
     </div>
 

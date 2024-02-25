@@ -13,6 +13,7 @@ from models.subject import Subject
 from models.question import Question
 from models.question_paper import QuestionPaper
 from models.database import db
+import re
 
 pdf_upload_bp = Blueprint('pdf_upload', __name__)
 
@@ -117,7 +118,48 @@ def save_selection_as_json(selection):
     with open(json_filepath, 'w') as json_file:
         json.dump(selection, json_file)
 
-# Inside the 'show_selections' route
+# Assuming db is your SQLAlchemy instance
+def extract_paper_details(text):
+    # Extract year from the text
+    year_pattern = r'(?:Jan\.|Feb\.|Mar\.|Apr\.|May|Jun\.|Jul\.|Aug\.|Sep\.|Oct\.|Nov\.|Dec\.)?,?\s*(\d{4})'
+    year_match = re.search(year_pattern, text)
+    year = year_match.group(1) if year_match else None
+
+    # Get all paper codes from the database
+    all_paper_codes = [subject.Code for subject in Subject.query.all()]
+
+    # Variations to check for each paper code
+    variations = []
+    for code in all_paper_codes:
+        if len(code) == 6:
+            variations.extend([code, f"{code[:3]}-{code[3:]}"])
+        elif len(code) == 7:
+            variations.extend([code, code.replace("-", "")])
+
+    # Search for each paper code variation in the text
+    found_paper_codes = []
+    for variation in variations:
+        if variation.lower() in text.lower():
+            found_paper_codes.append(variation)
+
+    # Determine paper type based on found paper codes
+    if "mid semester" in text.lower():
+        paper_type = "mid semester"
+    elif "end semester" in text.lower():
+        paper_type = "end semester"
+    else:
+        paper_type = None
+
+    current_app.logger.info("Paper Type:")
+    current_app.logger.info(paper_type)
+    current_app.logger.info("Year:")
+    current_app.logger.info(year)
+    current_app.logger.info("Paper Code:")
+    current_app.logger.info(found_paper_codes)
+    return paper_type, year, found_paper_codes
+
+
+
 @pdf_upload_bp.route('/showSelections', methods=['GET'])
 def show_selections():
     # Retrieve selections and image data from the session
@@ -128,9 +170,10 @@ def show_selections():
     # Create a temporary directory to store encoded cropped images
     temp_cropped_dir = tempfile.mkdtemp()
     ocr_data = []
-
+    estimated_details = {'paperType':None,'paperYear':None , 'paperCode':None}
+    
     # Process the selections to get cropped images and perform OCR
-    for selection in selections_data:
+    for idx, selection in enumerate(selections_data):
         start = selection['start']
         end = selection['end']
         encoded_cropped_image = crop_image(image_path, start, end)
@@ -147,15 +190,35 @@ def show_selections():
         # Perform OCR on the saved image file
         ocr_result = ocr_image(cropped_image_path)
         ocr_data.append(ocr_result)
-        # Store the OCR data in the session
-
+        
         # Log the OCR result
-        current_app.logger.info(ocr_result)
+        # current_app.logger.info(ocr_result)
 
         # You may want to store or process the OCR result here
+        
+        # For the first selection, extract OCR result from the start coordinate
+        if idx == 0:
+
+            start = 0
+            end = selection['start']
+            encoded_cropped_image = crop_image(image_path, start, end)
+          
+            decoded_image_data = base64.b64decode(encoded_cropped_image)
+
+            cropped_image_path = os.path.join(temp_cropped_dir, f'{start}_{end}.png')
+            with open(cropped_image_path, 'wb') as f:
+                f.write(decoded_image_data)
+
+            ocr_result = ocr_image(cropped_image_path)
+            
+            # Log the OCR result
+            current_app.logger.info(ocr_result)
+            estimated_details['paperType'] , estimated_details['paperYear'],estimated_details['paperCode']  =extract_paper_details(ocr_result)
+
+            # session['estimated_details'] = estimated_details
 
     # Pass selections and OCR data to the template
-    return render_template('showSelections.html', selections=selections_data, ocr_data=ocr_data)
+    return render_template('showSelections.html', selections=selections_data, ocr_data=ocr_data ,  paperDetails = estimated_details)
 
 
 def crop_image(image_path, start, end):
