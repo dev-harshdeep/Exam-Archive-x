@@ -135,12 +135,17 @@ def extract_paper_details(text):
             variations.extend([code, f"{code[:3]}-{code[3:]}"])
         elif len(code) == 7:
             variations.extend([code, code.replace("-", "")])
-
+        
     # Search for each paper code variation in the text
     found_paper_codes = []
+    for variation in all_paper_codes:
+        if variation.lower() in text.lower():
+            found_paper_codes.append(variation)
+ 
     for variation in variations:
         if variation.lower() in text.lower():
             found_paper_codes.append(variation)
+
 
     # Determine paper type based on found paper codes
     if "mid semester" in text.lower():
