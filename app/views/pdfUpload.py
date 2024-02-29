@@ -14,6 +14,7 @@ from models.question import Question
 from models.question_paper import QuestionPaper
 from models.database import db
 import re
+import shutil
 
 pdf_upload_bp = Blueprint('pdf_upload', __name__)
 
@@ -281,10 +282,17 @@ def submit_selections():
             # Create a new question instance
             question = Question(PaperID=question_paper.PaperID, QuestionNumber=len(selections_data), Coordinates=f"{start}-{end}", MetaText=ocr_text)
             db.session.add(question)
-        image_path = session.get('image_path')
 
         # Update file path for the question paper
-        question_paper.FilePath = image_path
+        image_filename = session.get('image_filename')
+        renamed_filename = f"{subject_code}-{year}-{paper_type}.png"
+        renamed_filename = renamed_filename.replace('/', '_') 
+        source_path = os.path.join(TEMP_IMAGE_DIR, image_filename)
+        destination_path = os.path.join('/app/paperFiles', renamed_filename)  # Update the destination path
+        shutil.move(source_path, destination_path)
+
+        question_paper.FilePath = destination_path
+
         db.session.commit()
 
         return jsonify({'message': 'Data submitted successfully'})

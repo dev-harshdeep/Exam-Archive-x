@@ -4,19 +4,66 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Paper Details</title>
+    <style>
+      .canvas-container {
+        position: relative;
+      }
+      .canvas-container {
+        display: flex;
+        flex-direction: column; /* Display canvases in a column */
+        align-items: center; /* Center canvases horizontally */
+      }
+
+      .canvas-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0); /* Completely transparent */
+        z-index: 10; /* Ensure overlay is above canvas */
+      }
+
+      .canvas-overlay p {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    </style>
   </head>
   <body>
-    <h1>Question Paper Details</h1>
-    <h2>Subject: {{ subject.SubjectName }}</h2>
-    <h3>Meta Texts:</h3>
-    <ul>
-      {% for question in questions %}
-      <li>{{ question.MetaText }}</li>
+    <div class="canvas-container">
+      {% for strip in strip_data %}
+      <canvas id="canvas{{ loop.index }}" width="800" height="100"></canvas>
       {% endfor %}
-    </ul>
-    <a
-      href="{{ url_for('archive.get_question_papers', course_id=course.CourseID, semester_id=semester.SemesterID, subject_id=subject.SubjectID) }}"
-      >Back to Question Papers</a
-    >
+      <div class="canvas-overlay">
+        <p>Image data is protected</p>
+      </div>
+    </div>
+
+    <script>
+      window.onload = function () {
+          var stripData = {{ strip_data | tojson }};
+
+          stripData.forEach(function (base64Data, index) {
+              var canvas = document.getElementById('canvas' + (index + 1));
+              var ctx = canvas.getContext('2d');
+              var image = new Image();
+              image.src = 'data:image/jpeg;base64,' + base64Data;
+
+              image.onload = function () {
+                  var aspectRatio = image.width / image.height;
+                  var canvasWidth = 800; // Set your desired canvas width here
+                  var canvasHeight = canvasWidth / aspectRatio;
+
+                  canvas.width = canvasWidth;
+                  canvas.height = canvasHeight;
+
+                  ctx.drawImage(image, 0, 0, canvasWidth, canvasHeight);
+              };
+          });
+      };
+    </script>
   </body>
 </html>

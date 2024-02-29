@@ -10,6 +10,8 @@ services:
       - db
     environment:
       DATABASE_URL: "mysql://user:password@db:3306/courseInfo"
+    volumes:
+      - paper_files:/app/paperFiles
   db:
     image: mysql
     environment:
@@ -19,3 +21,5 @@ services:
       MYSQL_PASSWORD: "password"
     ports:
       - "3306:3306"
+volumes:
+  paper_files:
