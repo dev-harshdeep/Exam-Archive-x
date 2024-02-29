@@ -7,7 +7,7 @@
 
     <style>
       body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         background: linear-gradient(135deg, #3498db, #9b59b6);
         margin: 0;
         padding: 0;
@@ -83,6 +83,22 @@
         margin-top: 30px;
         font-size: 16px;
       }
+
+      #file-upload-button {
+        padding: 12px 19px;
+        background-color: #5a7dc9c2;
+        border: none;
+        border-radius: 10px;
+        color: white;
+
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      #file-upload-button:hover {
+        border: 2px solid #5a7dc9c2;
+        background-color: transparent;
+        color: #5a7dc9c2;
+      }
     </style>
   </head>
   <body>
@@ -116,47 +132,47 @@
     </div>
 
     <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const uploadArea = document.getElementById('uploadArea');
-        const fileInput = document.getElementById('pdfFile');
-        const uploadButton = document.getElementById('uploadButton');
-        const cancelButton = document.getElementById('cancelButton');
-        const feedbackArea = document.getElementById('feedbackArea');
+      document.addEventListener("DOMContentLoaded", () => {
+        const uploadArea = document.getElementById("uploadArea");
+        const fileInput = document.getElementById("pdfFile");
+        const uploadButton = document.getElementById("uploadButton");
+        const cancelButton = document.getElementById("cancelButton");
+        const feedbackArea = document.getElementById("feedbackArea");
 
-        uploadArea.addEventListener('dragover', (e) => {
+        uploadArea.addEventListener("dragover", (e) => {
           e.preventDefault();
-          uploadArea.classList.add('drag-over');
+          uploadArea.classList.add("drag-over");
         });
 
-        uploadArea.addEventListener('dragleave', () => {
-          uploadArea.classList.remove('drag-over');
+        uploadArea.addEventListener("dragleave", () => {
+          uploadArea.classList.remove("drag-over");
         });
 
-        uploadArea.addEventListener('drop', (e) => {
+        uploadArea.addEventListener("drop", (e) => {
           e.preventDefault();
-          uploadArea.classList.remove('drag-over');
+          uploadArea.classList.remove("drag-over");
           const files = e.dataTransfer.files;
           fileInput.files = files;
           handleFiles(files);
         });
 
-        fileInput.addEventListener('change', () => {
+        fileInput.addEventListener("change", () => {
           const files = fileInput.files;
           handleFiles(files);
         });
 
-        uploadButton.addEventListener('click', () => {
+        uploadButton.addEventListener("click", () => {
           // Implement the logic to handle the upload button click
           // You can use the File API or an AJAX request to handle file uploads
           // Update the UI based on the upload status
-          feedbackArea.innerHTML = 'Files uploaded successfully!';
+          feedbackArea.innerHTML = "Files uploaded successfully!";
         });
 
-        cancelButton.addEventListener('click', () => {
+        cancelButton.addEventListener("click", () => {
           // Implement the logic to cancel the upload or clear the selected files
           // Update the UI accordingly
-          fileInput.value = '';
-          feedbackArea.innerHTML = '';
+          fileInput.value = "";
+          feedbackArea.innerHTML = "";
         });
 
         function handleFiles(files) {
@@ -165,25 +181,25 @@
           if (files.length > 0) {
             const fileNames = Array.from(files)
               .map((file) => file.name)
-              .join(', ');
+              .join(", ");
             feedbackArea.innerHTML = `Selected files: ${fileNames}`;
           } else {
-            feedbackArea.innerHTML = '';
+            feedbackArea.innerHTML = "";
           }
         }
       });
     </script>
     <script>
       function showLoadingMessage() {
-        document.getElementById('loading-message').style.display = 'block';
-        document.getElementById('result-message').style.display = 'none';
+        document.getElementById("loading-message").style.display = "block";
+        document.getElementById("result-message").style.display = "none";
       }
 
       function showResultMessage(imageData) {
-        document.getElementById('loading-message').style.display = 'none';
-        document.getElementById('result-message').style.display = 'block';
-        document.getElementById('result-link').href =
-          '/resultPage?image_data=' + imageData;
+        document.getElementById("loading-message").style.display = "none";
+        document.getElementById("result-message").style.display = "block";
+        document.getElementById("result-link").href =
+          "/resultPage?image_data=" + imageData;
       }
     </script>
   </body>
