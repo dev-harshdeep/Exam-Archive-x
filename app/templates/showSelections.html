@@ -40,24 +40,173 @@
     .unit-input {
       margin-top: 10px;
     }
+    .container1{
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .container1 input{
+      background: rgba(255,255,255,0.1);
+  border: none;
+  font-size: 10px;
+  height: auto;
+  margin: 0;
+  outline: 0;
+  padding: 8px;
+  width: 70%;
+  background-color: #e8eeef;
+  color: black;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+  margin-bottom: 30px;
+  border-radius: 10px;
+    }
+
+    .container1 label{
+      font-size: 18px;
+    }
+
+    #subjectCodeSuggestions{
+      background: #ccc;
+      color: black;
+    border-radius: 10px;
+    padding: 10px;
+    }
+
+    #paperType{
+      background: rgba(255,255,255,0.1);
+  border: none;
+  font-size: 10px;
+  height: auto;
+  margin: 0;
+  outline: 0;
+  padding: 9px 18px ;
+  width: 80%;
+  background-color: #e8eeef;
+  color: black;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+  margin-bottom: 30px;
+  border-radius: 10px;
+    }
+
+
+    .container2{
+      min-width: 50%;
+  margin: 10px auto;
+  padding: 10px 20px;
+  border:2px solid #f4f7f8;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+    }
+
+
+    .add-unit-button{
+      padding: 12px 19px;
+    background-color: #4caf50;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    transition: background-color 0.3s, color 0.3s;
+
+    }
+
+    .add-unit-button:hover{
+      border: 2px solid #4caf50;
+    background-color: transparent;
+    color: #4caf50;
+
+    }
+
+    .remove-unit-button{
+      padding: 12px 19px;
+    background-color: rgba(219, 14, 14, 0.526);
+    border: none;
+    color: white;
+
+    border-radius: 10px;
+    transition: background-color 0.3s, color 0.3s;
+    }
+
+    .remove-unit-button:hover{
+      border: 2px solid rgba(219, 14, 14, 0.526);
+    background-color: transparent;
+    color: white;
+    }
+
+    .unit-input select{
+      background: rgba(255,255,255,0.1);
+  border: none;
+  font-size: 13px;
+  height: auto;
+  margin: 2px;
+  outline: 0;
+  padding: 9px 18px ;
+  width: 15%;
+  background-color: #e8eeef;
+  color: black;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+  margin-bottom: 30px;
+  border-radius: 10px;
+    }
+
+    .unit-input option{
+      background: #ccc;
+      color: black;
+    border-radius: 10px;
+    padding: 10px;
+    }
+
+    #submit-button{
+      padding: 12px 19px;
+    background-color: #4caf50;
+    border: none;
+    border-radius: 10px;
+    color: white;
+
+    transition: background-color 0.3s, color 0.3s;
+    }
+
+    #submit-button:hover{
+      border: 2px solid #4caf50;
+    background-color: transparent;
+    color: #4caf50;
+    }
+    
+
   </style>
 </head>
 <body>
   <div id="container">
+
+    <div class="container2">
     <h2>Show Selections</h2>
 
     <!-- Additional Details for the Entire Question Paper -->
     <div class="additional-details">
+      
+      <div class="container1">
       <label for="subjectCode">Subject Code:</label>
       <input type="text" id="subjectCode" value="{{ paperDetails.paperCode[0] }}" oninput="getSubjectCodeSuggestions()">
+      </div>
+
       <div id="subjectCodeSuggestions"></div> <!-- Suggestions will be displayed here -->
+      
+      <div class="container1">
       <label for="year">Year:</label>
       <input type="text" id="year" value="{{ paperDetails.paperYear }}">
+      </div>
+
+      <div class="container1">
       <label for="paperType">Paper Type:</label>
       <select id="paperType">
         <option value="midsem" {% if paperDetails.paperType == 'mid semester' %}selected{% endif %}>Mid Sem</option>
         <option value="endsem" {% if paperDetails.paperType == 'end semester' %}selected{% endif %}>End Sem</option>
       </select>
+      </div>
+    </div> 
+    
     </div>
 
     <!-- Loop through selections -->
@@ -75,7 +224,7 @@
         <div class="unit-input">
           <select class="unit-selector" name="unitSelections[{{ loop.index0 }}]">
             {% for unit_option in range(1, 6) %}
-              <option value="{{ unit_option }}" {% if unit == unit_option %}selected{% endif %}>Unit {{ unit_option }}</option>
+              <option value="{{ unit_option }}" {% if unit == unit_option %}selected{% endif %}>{{ unit_option }}</option>
             {% endfor %}
           </select>
           <button class="remove-unit-button" onclick="removeUnit(this)">Remove Unit</button>
@@ -166,20 +315,33 @@
 
     // Send an AJAX request to the backend
     fetch('/submitSelections', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Response from backend:', data);
-      // Handle response from the backend as needed
-    })
-    .catch(error => {
-      console.error('Error sending data to backend:', error);
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(data)
+})
+.then(response => {
+  if (response.ok) {
+    // If response is successful, redirect to a different URL
+    // Get the response data
+    response.json().then(data => {
+      // Redirect to the result page with the data as a URL parameter
+      window.location.href = '/result_page?data=' + encodeURIComponent(JSON.stringify(data));
     });
+  } else {
+    // Handle error response
+    console.error('Error:', response.statusText);
+    // You can handle the error response here, for example, display an error message to the user
+  }
+})
+.catch(error => {
+  console.error('Error:', error);
+  // Handle network errors or other errors
+  // For example, display an error message to the user
+});
+
+
   }
 
   function getSubjectCodeSuggestions() {
@@ -200,9 +362,7 @@
           suggestionsDiv.appendChild(suggestionElement);
         });
       })
-      .catch(error => {
-        console.error('Error fetching subject code suggestions:', error);
-      });
+      
   }
 </script>
 </body>

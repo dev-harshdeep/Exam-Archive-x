@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .container {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+      .inner-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 50px;
+        text-align: center;
+        align-items: center;
+        border: 2px solid black;
+        padding: 10px 10px;
+      }
+
+      .btn {
+        padding: 10px 30px;
+        background-color: #ddb06bd5;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 40px;
+        margin-left: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="inner-container">
+        <h1>
+          Question papers are currently unavailable for this subject.<br />
+          Please check back later or <br />
+          contact administrators for assistance.
+        </h1>
+        <img
+          src="{{ url_for('static', filename='9276436.jpg') }}"
+          alt="Your SVG Image"
+          height="400"
+          width="400"
+        />
+      </div>
+      <button class="btn">Back</button>
+    </div>
+  </body>
+</html>
