@@ -6,7 +6,7 @@
     <title>Select Image Range</title>
     <style>
       body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         margin: 0;
         padding: 0;
         display: flex;
@@ -60,6 +60,28 @@
         cursor: not-allowed;
       }
     </style>
+
+    <style>
+      #canvasContainer {
+        overflow: auto; /* Ensure scrollbars appear when content overflows */
+        scrollbar-width: thin; /* For Firefox */
+        scrollbar-color: darkgray lightgray; /* For Firefox */
+      }
+
+      #canvasContainer::-webkit-scrollbar {
+        width: 8px; /* Width of the scrollbar */
+        border-radius: 10px;
+      }
+
+      #canvasContainer::-webkit-scrollbar-track {
+        background: lightgray; /* Color of the track */
+      }
+
+      #canvasContainer::-webkit-scrollbar-thumb {
+        background-color: darkgray; /* Color of the thumb */
+        border-radius: 10px; /* Rounded corners */
+      }
+    </style>
   </head>
   <body>
     <div id="container">
@@ -78,20 +100,20 @@
     </div>
 
     <script>
-      var canvas = document.getElementById('imageCanvas');
-      var context = canvas.getContext('2d');
+      var canvas = document.getElementById("imageCanvas");
+      var context = canvas.getContext("2d");
 
       var image = new Image();
-      image.src = 'data:image/png;base64,{{ image_data }}';
+      image.src = "data:image/png;base64,{{ image_data }}";
 
       var startSelectionButton = document.getElementById(
-        'startSelectionButton'
+        "startSelectionButton"
       );
-      var undoSelectionButton = document.getElementById('undoSelectionButton');
+      var undoSelectionButton = document.getElementById("undoSelectionButton");
       var clearSelectionButton = document.getElementById(
-        'clearSelectionButton'
+        "clearSelectionButton"
       );
-      var saveSelectionButton = document.getElementById('saveSelectionButton');
+      var saveSelectionButton = document.getElementById("saveSelectionButton");
       var selections = [];
       var isStartSelectionPhase = true;
 
@@ -101,20 +123,20 @@
         drawImageWithSelection();
       };
 
-      startSelectionButton.addEventListener('click', function () {
+      startSelectionButton.addEventListener("click", function () {
         isStartSelectionPhase = true;
         startSelectionButton.disabled = true;
         undoSelectionButton.disabled = false;
         clearSelectionButton.disabled = false;
         saveSelectionButton.disabled = true;
-        alert('Select the starting point on the image.');
+        alert("Select the starting point on the image.");
       });
 
-      undoSelectionButton.addEventListener('click', function () {
+      undoSelectionButton.addEventListener("click", function () {
         undoSelection();
       });
 
-      clearSelectionButton.addEventListener('click', function () {
+      clearSelectionButton.addEventListener("click", function () {
         clearSelection();
         drawImageWithSelection();
         startSelectionButton.disabled = false;
@@ -123,11 +145,11 @@
         saveSelectionButton.disabled = true;
       });
 
-      saveSelectionButton.addEventListener('click', function () {
+      saveSelectionButton.addEventListener("click", function () {
         saveSelectedImage();
       });
       const updateSelectionInputs = () => {};
-      canvas.addEventListener('mousedown', function (e) {
+      canvas.addEventListener("mousedown", function (e) {
         if (isStartSelectionPhase) {
           selections.push({
             start: e.offsetY, // Use offsetY to get the position relative to the canvas
@@ -140,7 +162,7 @@
         updateSelectionInputs();
       });
 
-      canvas.addEventListener('mousemove', function (e) {
+      canvas.addEventListener("mousemove", function (e) {
         if (!isStartSelectionPhase) return;
         selections[selections.length - 1].end = e.offsetY;
         drawImageWithSelection();
@@ -156,12 +178,12 @@
         for (var i = 0; i < selections.length; i++) {
           var selection = selections[i];
           context.beginPath();
-          context.strokeStyle = 'green';
+          context.strokeStyle = "green";
           context.moveTo(0, selection.start);
           context.lineTo(canvas.width, selection.start);
 
           context.setLineDash([5, 5]);
-          context.strokeStyle = 'blue';
+          context.strokeStyle = "blue";
           context.moveTo(0, selection.end);
           context.lineTo(canvas.width, selection.end);
 
@@ -172,7 +194,7 @@
         saveSelectionButton.disabled = selections.length === 0;
       }
 
-      undoSelectionButton.addEventListener('click', undoSelection);
+      undoSelectionButton.addEventListener("click", undoSelection);
 
       function undoSelection() {
         if (selections.length > 0) {
@@ -188,24 +210,24 @@
       }
 
       function saveSelectedImage() {
-        console.log('Saving selections:', selections);
+        console.log("Saving selections:", selections);
 
         // Send selections data to the server
-        fetch('/saveSelections', {
-          method: 'POST',
+        fetch("/saveSelections", {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({ selections: selections }),
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log('Server response:', data);
+            console.log("Server response:", data);
             // Redirect to the next page or perform other actions
-            window.location.href = '/showSelections';
+            window.location.href = "/showSelections";
           })
           .catch((error) => {
-            console.error('Error saving selections:', error);
+            console.error("Error saving selections:", error);
           });
       }
     </script>
