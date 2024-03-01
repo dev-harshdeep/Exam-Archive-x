@@ -6,74 +6,156 @@
     <title>Search</title>
     <style>
       /* Add your CSS styles here */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+      }
+
+      #searchResults {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+      }
+
+      .main-div {
+        line-height: 28px;
+        border: 1px solid rgba(34, 33, 33, 0.681);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .canvas-container {
+        overflow: hidden; /* Hide any overflow */
+      }
+
+      canvas {
+        max-width: 100%; /* Ensure canvas doesn't exceed its container's dimensions */
+        max-height: 100%; /* Ensure canvas doesn't exceed its container's dimensions */
+      }
+      .search-bar {
+        display: flex;
+        align-items: center;
+        width: 300px; /* Set the desired width */
+        height: 40px; /* Set the desired height */
+        border: 2px solid #ccc; /* Border color */
+        border-radius: 20px; /* Border radius to create rounded corners */
+        padding: 0 10px; /* Add padding to the input field */
+        margin-top: 50px;
+        margin-bottom: 50px;
+      }
+
+      .search-bar input[type="text"] {
+        flex: 1; /* Allow the input field to grow */
+        border: none; /* Remove the default input border */
+        outline: none; /* Remove the default input focus outline */
+        font-size: 16px; /* Set the font size */
+      }
+
+      .search-bar button {
+        background-color: #4caf50; /* Button background color */
+        color: white; /* Button text color */
+        border: none; /* Remove the default button border */
+        border-radius: 20px; /* Border radius to create rounded corners */
+        padding: 5px 15px; /* Add padding to the button */
+        margin-left: 10px; /* Add some space between the input field and button */
+        cursor: pointer; /* Change cursor to pointer on hover */
+        transition: background-color 0.3s; /* Smooth transition for background color change */
+      }
+
+      .search-bar button:hover {
+        background-color: #45a049; /* Darker background color on hover */
+      }
     </style>
   </head>
   <body>
-    <input type="text" id="searchInput" placeholder="Enter your search query" />
-    <button onclick="search()">Search</button>
-    <div id="searchResults"></div>
-    <div id="pagination"></div>
+    <div class="container">
+      <div class="search-bar">
+        <input
+          type="text"
+          id="searchInput"
+          class="search-input"
+          placeholder=" search topic"
+        />
+        <button onclick="search()" class="search-button">Search</button>
+      </div>
+      <div id="searchResults"></div>
+      <div id="pagination"></div>
+    </div>
 
     <script>
       function search() {
-        var query = document.getElementById('searchInput').value;
+        var query = document.getElementById("searchInput").value;
         fetch(`/search?query=${query}`)
           .then((response) => response.json())
           .then((data) => {
             displayResults(data.results);
             displayPagination(data.total_pages);
           })
-          .catch((error) => console.error('Error:', error));
+          .catch((error) => console.error("Error:", error));
       }
 
       function displayResults(results) {
-        var searchResultsDiv = document.getElementById('searchResults');
-        searchResultsDiv.innerHTML = '';
+        var searchResultsDiv = document.getElementById("searchResults");
+        searchResultsDiv.innerHTML = "";
 
         results.forEach((result) => {
-          var resultDiv = document.createElement('div');
+          var resultDiv = document.createElement("div");
+          resultDiv.classList.add("main-div");
           resultDiv.innerHTML = `
-                    <p>Question Number: ${result.question_number}</p>
-                    <p>Year: ${result.year}</p>
-                    <p>Exam Type: ${result.exam_type}</p>
-                    <p>Subject Code: ${result.subject_code}</p>
+                <div class="head-container">
+                    <p> ${result.subject_code},${result.exam_type}, ${result.year},Qn.: ${result.question_number}</p>
+                     
                     <p>Subject Name: ${result.subject_name}</p>
                     <!-- Add more details as needed -->
                     <hr>
+                 <div class="canvas-container">   
+                    <canvas id="canvas-${result.question_id}"></canvas>
+                 </div>
                 `;
-          var canvas = document.createElement('canvas');
-          var ctx = canvas.getContext('2d');
+          searchResultsDiv.appendChild(resultDiv);
+
+          var canvas = document.getElementById(`canvas-${result.question_id}`);
+          var ctx = canvas.getContext("2d");
           var img = new Image();
           img.onload = function () {
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0, img.width, img.height);
           };
           img.src = `data:image/png;base64,${result.image_data}`;
-          resultDiv.appendChild(canvas);
-          searchResultsDiv.appendChild(resultDiv);
         });
       }
 
       function displayPagination(totalPages) {
-        var paginationDiv = document.getElementById('pagination');
-        paginationDiv.innerHTML = '';
+        var paginationDiv = document.getElementById("pagination");
+        paginationDiv.innerHTML = "";
 
         for (var i = 1; i <= totalPages; i++) {
-          var pageLink = document.createElement('a');
+          var pageLink = document.createElement("a");
           pageLink.href = `javascript:gotoPage(${i})`;
           pageLink.textContent = i;
           paginationDiv.appendChild(pageLink);
-          paginationDiv.appendChild(document.createTextNode(' '));
+          paginationDiv.appendChild(document.createTextNode(" "));
         }
       }
 
       function gotoPage(pageNumber) {
-        var query = document.getElementById('searchInput').value;
+        var query = document.getElementById("searchInput").value;
         fetch(`/search?query=${query}&page=${pageNumber}`)
           .then((response) => response.json())
           .then((data) => {
             displayResults(data.results);
           })
-          .catch((error) => console.error('Error:', error));
+          .catch((error) => console.error("Error:", error));
       }
     </script>
   </body>

@@ -82,6 +82,13 @@
         text-align: center;
       }
 
+      .error input {
+        border-color: red; /* Change the border color to red for input fields */
+      }
+      .error {
+        background-color: #ffebee; /* Change the background color of the div to light red */
+      }
+
       .subject-form button {
         margin-top: 10px;
         padding: 8px 16px;
@@ -392,32 +399,36 @@
         console.log("Semester Data:", allSemestersData);
       });
 
-      document.getElementById("saveBtn").addEventListener("click", function () {
-        // Retrieve course name and number of semesters
+      // Your addTemplate and deleteSubjectForm functions
+
+      document.querySelector("#saveBtn").addEventListener("click", function () {
         const courseName = document.getElementById("course").value;
         const numSemesters = parseInt(
           document.getElementById("semesters").value
         );
-
-        // Initialize an array to store all semester data
         const allSemestersData = [];
+        const validationErrors = [];
 
-        // Select all semester divs
         const semesterDivs = document.querySelectorAll(".semesters");
 
-        // Iterate over each semester div
-        semesterDivs.forEach((semesterDiv) => {
+        semesterDivs.forEach((semesterDiv, index) => {
+          // Remove existing error styles
+          semesterDiv.classList.remove("error");
           const semesterData = {
             name: semesterDiv.querySelector("span").textContent,
             subjects: [],
           };
 
-          // Select all forms within the current semester div
           const subjectForms = semesterDiv.querySelectorAll(".myDiv");
 
-          // Iterate over each form
-          subjectForms.forEach((subjectForm) => {
-            // Extract subject name and code from the form
+          if (subjectForms.length === 0) {
+            validationErrors.push(
+              `Semester ${index + 1} does not have any subjects.`
+            );
+            semesterDiv.classList.add("error");
+          }
+
+          subjectForms.forEach((subjectForm, subIndex) => {
             const subjectName = subjectForm.querySelector(
               'input[placeholder="Subject Name"]'
             ).value;
@@ -425,28 +436,37 @@
               'input[placeholder="Subject Code"]'
             ).value;
 
-            // Create an object to store subject data
+            if (subjectName.trim() === "" || subjectCode.trim() === "") {
+              validationErrors.push(
+                `Semester ${index + 1}, Subject ${
+                  subIndex + 1
+                }: Please provide both subject name and subject code.`
+              );
+              subjectForm.classList.add("error");
+            }
+
             const subjectData = {
               name: subjectName,
               code: subjectCode,
             };
 
-            // Push the subject data to the subjects array in semesterData
             semesterData.subjects.push(subjectData);
           });
 
-          // Push the semester data to the allSemestersData array
           allSemestersData.push(semesterData);
         });
 
-        // Prepare the data to send to the backend
+        if (validationErrors.length > 0) {
+          alert(validationErrors.join("\n"));
+          return;
+        }
+
         const requestData = {
           courseName: courseName,
           numSemesters: numSemesters,
           allSemestersData: allSemestersData,
         };
 
-        // Make an AJAX request to the backend endpoint
         fetch("/editCourse/backend_endpoint", {
           method: "POST",
           headers: {
@@ -457,7 +477,14 @@
           .then((response) => {
             if (response.ok) {
               console.log("Data sent successfully");
-              // You can do further actions here if needed
+              // Clear error styles when form is submitted successfully
+              semesterDivs.forEach((semesterDiv) => {
+                semesterDiv.classList.remove("error");
+                const subjectForms = semesterDiv.querySelectorAll(".myDiv");
+                subjectForms.forEach((subjectForm) => {
+                  subjectForm.classList.remove("error");
+                });
+              });
             } else {
               console.error("Failed to send data to the backend");
             }
