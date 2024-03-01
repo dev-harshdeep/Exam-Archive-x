@@ -1,5 +1,3 @@
-<!-- app/templates/search_page.html -->
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,6 +12,7 @@
     <input type="text" id="searchInput" placeholder="Enter your search query" />
     <button onclick="search()">Search</button>
     <div id="searchResults"></div>
+    <div id="pagination"></div>
 
     <script>
       function search() {
@@ -22,6 +21,7 @@
           .then((response) => response.json())
           .then((data) => {
             displayResults(data.results);
+            displayPagination(data.total_pages);
           })
           .catch((error) => console.error('Error:', error));
       }
@@ -33,20 +33,47 @@
         results.forEach((result) => {
           var resultDiv = document.createElement('div');
           resultDiv.innerHTML = `
-                    <p>Question ID: ${result.question_id}</p>
                     <p>Question Number: ${result.question_number}</p>
-                    <p>Coordinates: ${result.coordinates}</p>
-                    <p>Meta Text: ${result.meta_text}</p>
                     <p>Year: ${result.year}</p>
                     <p>Exam Type: ${result.exam_type}</p>
-                    <p>File Path: ${result.file_path}</p>
                     <p>Subject Code: ${result.subject_code}</p>
                     <p>Subject Name: ${result.subject_name}</p>
                     <!-- Add more details as needed -->
                     <hr>
                 `;
+          var canvas = document.createElement('canvas');
+          var ctx = canvas.getContext('2d');
+          var img = new Image();
+          img.onload = function () {
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          };
+          img.src = `data:image/png;base64,${result.image_data}`;
+          resultDiv.appendChild(canvas);
           searchResultsDiv.appendChild(resultDiv);
         });
+      }
+
+      function displayPagination(totalPages) {
+        var paginationDiv = document.getElementById('pagination');
+        paginationDiv.innerHTML = '';
+
+        for (var i = 1; i <= totalPages; i++) {
+          var pageLink = document.createElement('a');
+          pageLink.href = `javascript:gotoPage(${i})`;
+          pageLink.textContent = i;
+          paginationDiv.appendChild(pageLink);
+          paginationDiv.appendChild(document.createTextNode(' '));
+        }
+      }
+
+      function gotoPage(pageNumber) {
+        var query = document.getElementById('searchInput').value;
+        fetch(`/search?query=${query}&page=${pageNumber}`)
+          .then((response) => response.json())
+          .then((data) => {
+            displayResults(data.results);
+          })
+          .catch((error) => console.error('Error:', error));
       }
     </script>
   </body>

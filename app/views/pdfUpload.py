@@ -274,14 +274,19 @@ def submit_selections():
         db.session.commit()
 
         # Extract selection data and OCR data
-        for selection, ocr_text in zip(selections_data, ocr_data):
-            start = int(selection['start'])
-            end = int(selection['end'])
-            units = selection['units']
+        for index, (selection, ocr_text) in enumerate(zip(selections_data, ocr_data), start=1):
+                start = int(selection['start'])
+                end = int(selection['end'])
+                units = selection['units']
 
-            # Create a new question instance
-            question = Question(PaperID=question_paper.PaperID, QuestionNumber=len(selections_data), Coordinates=f"{start}-{end}", MetaText=ocr_text)
-            db.session.add(question)
+                # Create a new question instance
+                question = Question( 
+                    PaperID=question_paper.PaperID,
+                    QuestionNumber=index,
+                    Coordinates=f"{start}-{end}",
+                    MetaText=ocr_text
+                )
+                db.session.add(question)
 
         # Update file path for the question paper
         image_filename = session.get('image_filename')
