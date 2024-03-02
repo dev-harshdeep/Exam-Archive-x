@@ -5,127 +5,125 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Semesters</title>
     <style>
-       *{
-              padding: 0;
-              margin: 0;
-              box-sizing: border-box;
-              font-family: "Montserrat", sans-serif;
-              font-family: "Nunito", sans-serif;
-            }
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: "Montserrat", sans-serif;
+        font-family: "Nunito", sans-serif;
+      }
 
-            .main
-            {
-               
-              display: flex;
-              align-items: center;
-              gap: 100px;
-              flex-direction: column;
-              width: 100%;
-            }
-         
-            .sem ul li a
-            {
+      .main {
+        display: flex;
+        align-items: center;
+        gap: 100px;
+        flex-direction: column;
+        width: 100%;
+      }
 
-              width: 60%;
-              text-decoration: none;
-              list-style: none;
-              outline: none;
-              text-decoration: none;
-              color: black;
-            }
- 
-            .sem ul li
-            {
-              display: flex;
-              flex-direction: column;
-              justify-content: center;
-              align-items: center;
-              text-align: center;
-              width: 100%;
-              text-decoration: none;
-              list-style: none;
-              outline: none;
-            }
-             
-            .sem ul{
-              width: 100%;
-              display: flex;
-              flex-direction: column;
-              justify-content: center;
-              align-items: center;
-              list-style: none;
-              text-decoration: none;
-              list-style-type: none;
-              outline: none;
+      .sem ul li a {
+        width: 60%;
+        text-decoration: none;
+        list-style: none;
+        outline: none;
+        text-decoration: none;
+        color: black;
+      }
 
-            }
+      .sem ul li {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+        text-decoration: none;
+        list-style: none;
+        outline: none;
+      }
 
-            .sem
-            {
-              /* border: 2px solid red; */
-              background-color: hsl(0, 14%, 98%);
-              border: 1px solid black;
-              border-radius: 7px;
-              height: 70vh;
-              width: 30%;
-              display: flex;
-              flex-direction: column;
-              justify-content: center;
-              align-items: center;
+      .sem ul {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        list-style: none;
+        text-decoration: none;
+        list-style-type: none;
+        outline: none;
+      }
 
+      .sem {
+        /* border: 2px solid red; */
+        background-color: hsl(0, 14%, 98%);
+        border: 1px solid black;
+        border-radius: 7px;
+        height: 70vh;
+        width: 30%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
 
-              
-            }
-       
-            .semdiv
-            {
-              margin-top: 10px;
-              background-color: #fff;
-              border: 1px solid black;
+      .semdiv {
+        margin-top: 10px;
+        background-color: #fff;
+        border: 1px solid black;
 
-              border-radius: 10px;
-              height: 6vh;
-              width: 100%;
-              display: flex;
-              flex-direction: column;
-              justify-content: center;
-              align-items: center;
-              
-            }
+        border-radius: 10px;
+        height: 6vh;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
 
-            .btn
-{
-  padding: 10px 30px;
-  background-color: #ddb06bd5;
-  color: white;
-   border: none;
-  border-radius: 5px;
-  cursor: pointer;
-   margin-left: 40px;
-}
-
-
+      .btn {
+        padding: 10px 30px;
+        background-color: #ddb06bd5;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 40px;
+      }
     </style>
   </head>
   <body>
-
     <div class="main">
-    <h1>{{ course.CourseName }}</h1>
-    <div class="sem">
-    <ul>
-      {% for semester in semesters %}
-      
-      <li>
-        <a
-          href="{{ url_for('archive.get_subjects', course_id=course.CourseID, semester_id=semester.SemesterID) }}"
-          ><div class="semdiv">{{ semester.SemesterName }}</div></a
-        >
-      </li>
-      {% endfor %}
-    </ul>
-    </div>
-    <button class="btn">Back</button>
+      <h1>{{ course.CourseName }}</h1>
+      <div class="sem">
+        <ul>
+          {% for semester in semesters %}
 
+          <li>
+            <a
+              href="{{ url_for('archive.get_subjects', course_id=course.CourseID, semester_id=semester.SemesterID) }}"
+              ><div class="semdiv">{{ semester.SemesterName }}</div></a
+            >
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <button id="btn" class="btn">Back</button>
     </div>
+
+    <script>
+      const backBtn = document.getElementById("btn");
+
+      function redirectToSearch() {
+        // Construct the URL for the search
+        const searchUrl = `/archive/`;
+
+        // Redirect to the search URL
+        console.log("clicked");
+        window.location.href = searchUrl;
+      }
+
+      backBtn.addEventListener("click", redirectToSearch);
+    </script>
   </body>
 </html>

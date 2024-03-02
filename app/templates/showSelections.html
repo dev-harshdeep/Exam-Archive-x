@@ -322,18 +322,18 @@
   body: JSON.stringify(data)
 })
 .then(response => {
-  if (response.ok) {
-    // If response is successful, redirect to a different URL
-    // Get the response data
-    response.json().then(data => {
-      // Redirect to the result page with the data as a URL parameter
-      window.location.href = '/result_page?data=' + encodeURIComponent(JSON.stringify(data));
-    });
-  } else {
-    // Handle error response
-    console.error('Error:', response.statusText);
-    // You can handle the error response here, for example, display an error message to the user
-  }
+    if (response.ok) {
+        // If response is successful, redirect to the status page with success status and message
+        response.text().then(message => {
+            window.location.href = '/status?status=success&message=' + encodeURIComponent(message);
+        });
+    } else {
+        // If response is not successful, redirect to the status page with failure status and message
+        response.text().then(message => {
+            window.location.href = '/status?status=failure&message=' + encodeURIComponent(message);
+        });
+    }
+
 })
 .catch(error => {
   console.error('Error:', error);

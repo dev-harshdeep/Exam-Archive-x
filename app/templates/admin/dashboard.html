@@ -294,17 +294,17 @@
         </div>
 
         <ul class="sidebar-list">
-          <li class="sidebar-list-item">
-            <a href="{{ url_for('edit_course.index') }}"
-              ><span class="material-icons-outlined">dashboard</span>Edit Course
-              Info</a
-            >
+          <li class="sidebar-list-item" id="edit-course-li">
+            <a href="{{ url_for('edit_course.index') }}">
+              <span class="material-icons-outlined">dashboard</span>Edit Course
+              Info
+            </a>
           </li>
-          <li class="sidebar-list-item">
-            <a href="{{ url_for('pdf_upload.pdf_upload') }}"
-              ><span class="material-icons-outlined">fact_check</span>Add
-              Question Paper</a
-            >
+          <li class="sidebar-list-item" id="add-paper-li">
+            <a href="{{ url_for('pdf_upload.pdf_upload') }}">
+              <span class="material-icons-outlined">fact_check</span>Add
+              Question Paper
+            </a>
           </li>
         </ul>
       </aside>
@@ -366,6 +366,32 @@
       </main>
       <!-- End Main -->
     </div>
+
+    <script>
+      // Get the <li> element
+      const editCourseLi = document.getElementById("edit-course-li");
+
+      // Add click event listener to the <li>
+      editCourseLi.addEventListener("click", function () {
+        // Get the URL from the <a> element inside the <li>
+        const href = this.querySelector("a").getAttribute("href");
+
+        // Redirect to the specified URL
+        window.location.href = href;
+      });
+
+      // Get the <li> element
+      const addPaperLi = document.getElementById("add-paper-li");
+
+      // Add click event listener to the <li>
+      addPaperLi.addEventListener("click", function () {
+        // Get the URL from the <a> element inside the <li>
+        const href = this.querySelector("a").getAttribute("href");
+
+        // Redirect to the specified URL
+        window.location.href = href;
+      });
+    </script>
 
     <script>
       // SIDEBAR TOGGLE

@@ -82,7 +82,50 @@
           {% endfor %}
         </ul>
       </div>
-      <button class="btn">Back</button>
+      <!-- Image to display when no data -->
+      <img
+        id="noDataImage"
+        src="{{ url_for('static', filename='nodata.jpg') }}"
+        alt="No data available"
+        height="500"
+        width="500"
+        style="display: none;"
+      />
+      <button id="btn" class="btn">Back</button>
     </div>
+    <script>
+      // JavaScript code
+      const backBtn = document.getElementById("btn");
+      const noDataImage = document.getElementById("noDataImage");
+
+      function redirectToSearch() {
+        // Get the current URL
+        const currentUrl = window.location.href;
+
+        // Split the URL by "/"
+        const urlParts = currentUrl.split("/");
+
+        // Remove the last element from the array
+        urlParts.pop();
+        urlParts.pop();
+        urlParts.pop();
+
+        // Construct the new URL
+        const newUrl = urlParts.join("/");
+
+        // Redirect to the new URL
+        console.log("clicked");
+        window.location.href = newUrl;
+      }
+
+      backBtn.addEventListener("click", redirectToSearch);
+
+      // Check if there are any question papers
+      if (document.querySelectorAll('.container ul li').length === 0) {
+        // If no question papers, show the "nodata.jpg" image
+        noDataImage.style.display = "block";
+      }
+    </script>
+  </body>
   </body>
 </html>

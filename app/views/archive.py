@@ -97,7 +97,8 @@ def get_paper_details(course_id, semester_id, subject_id, paper_id):
         start_position=1
         # Check if question number is present in the URL
         question_number = request.args.get('question_number')
-        if int(question_number) in range(1,6):
+        
+        if (question_number and int(question_number) in range(1,6)):
             # Get the start position of the question
             start_position = get_question_start_position(question_number)
             if start_position:

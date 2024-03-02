@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Status</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .container {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+        flex-direction: column;
+        height: 50vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>{{ status }}</h1>
+      <img src="{{ gif_url }}" alt="Status GIF" />
+      <p>{{ message }}</p>
+    </div>
+  </body>
+</html>

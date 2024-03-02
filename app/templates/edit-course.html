@@ -10,6 +10,10 @@
         background-color: #f4f4f4;
         margin: 0;
         padding: 0;
+
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
       }
       .container {
         width: 400px;
@@ -114,7 +118,7 @@
       }
 
       .semesters-container {
-        display: flex;
+        display: none;
         flex-direction: column;
         justify-content: center;
         align-items: center;
@@ -177,6 +181,10 @@
       .btn:hover {
         background-color: #45a049;
       }
+
+      #saveBtn {
+        display: none;
+      }
     </style>
   </head>
   <body>
@@ -206,8 +214,8 @@
         </form>
       </div>
 
-      <div class="semesters-container">
-        <h2>Number of Semesters</h2>
+      <div class="semesters-container" id="semsme">
+        <h2>Semester List</h2>
         <div id="semesterList"></div>
         <!-- Container for dynamically created semester divs -->
       </div>
@@ -219,6 +227,11 @@
       document
         .getElementById("courseForm")
         .addEventListener("submit", function (event) {
+          const semsem = document.getElementById("semsme");
+          semsem.style.display = "flex";
+
+          const semsve = document.getElementById("saveBtn");
+          semsve.style.display = "block";
           event.preventDefault(); // Prevent the form from submitting
 
           const numSemesters = parseInt(
@@ -278,21 +291,21 @@
               semesterDiv.appendChild(parent_div_form);
               semesterDiv.appendChild(parent_div_actions); // Add actions div inside the form
               parent_div_form.innerHTML += `
-          <div class="myDiv">
+              <div class="myDiv">
 
-            <div class="parent-text-input">
-              <input type="text" placeholder="Subject Name">
-              <input type="text" placeholder="Subject Code">
-             </div> 
-              <div class="container101">
-                <button class="container101-button">Delete</button>
-              </div>
+                <div class="parent-text-input">
+                  <input type="text" placeholder="Subject Name">
+                  <input type="text" placeholder="Subject Code">
+                 </div>
+                  <div class="container101">
+                    <button class="container101-button">Delete</button>
+                  </div>
 
-          </div>`;
+              </div>`;
               parent_div_actions.innerHTML += `
-          <button class="myButton11">Add</button>
-          <button class="myButton12">Cancel</button>
-          `;
+              <button class="myButton11">Add</button>
+              <button class="myButton12">Cancel</button>
+              `;
 
               function addTemplate() {
                 // Store previous input values
@@ -337,15 +350,15 @@
       });
 
       const template_subject = `
-  <div class="myDiv">
-    <div class="parent-text-input">
-              <input type="text" placeholder="Subject Name">
-              <input type="text" placeholder="Subject Code">
-             </div> 
-      <div class="container101">
-          <button class="container101-button">Delete</button>
-      </div>
-  </div>`;
+      <div class="myDiv">
+        <div class="parent-text-input">
+                  <input type="text" placeholder="Subject Name">
+                  <input type="text" placeholder="Subject Code">
+                 </div>
+          <div class="container101">
+              <button class="container101-button">Delete</button>
+          </div>
+      </div>`;
       document.querySelector(".btn").addEventListener("click", function () {
         // Retrieve course name and number of semesters
         const courseName = document.getElementById("course").value;
@@ -485,8 +498,18 @@
                   subjectForm.classList.remove("error");
                 });
               });
+              response.text().then((message) => {
+                window.location.href =
+                  "/status?status=success&message=" +
+                  encodeURIComponent(message);
+              });
             } else {
               console.error("Failed to send data to the backend");
+              response.text().then((message) => {
+                window.location.href =
+                  "/status?status=failure&message=" +
+                  encodeURIComponent(message);
+              });
             }
           })
           .catch((error) => {

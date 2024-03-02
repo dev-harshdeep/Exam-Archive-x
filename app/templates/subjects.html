@@ -85,7 +85,31 @@
           {% endfor %}
         </ul>
       </div>
-      <button class="btn">Back</button>
+      <button id="btn" class="btn">Back</button>
     </div>
   </body>
+  <script>
+    const backBtn = document.getElementById("btn");
+
+    function redirectToSearch() {
+      // Get the current URL
+      const currentUrl = window.location.href;
+
+      // Split the URL by "/"
+      const urlParts = currentUrl.split("/");
+
+      // Remove the last element from the array
+      urlParts.pop();
+      urlParts.pop();
+
+      // Construct the new URL
+      const newUrl = urlParts.join("/");
+
+      // Redirect to the new URL
+      console.log("clicked");
+      window.location.href = newUrl;
+    }
+
+    backBtn.addEventListener("click", redirectToSearch);
+  </script>
 </html>
