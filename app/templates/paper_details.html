@@ -41,10 +41,11 @@
         <p>Image data is protected</p>
       </div>
     </div>
-
     <script>
       window.onload = function () {
           var stripData = {{ strip_data | tojson }};
+          var totalCanvases = stripData.length;
+          var loadedCanvases = 0; // Counter for loaded canvases
 
           stripData.forEach(function (base64Data, index) {
               var canvas = document.getElementById('canvas' + (index + 1));
@@ -61,6 +62,16 @@
                   canvas.height = canvasHeight;
 
                   ctx.drawImage(image, 0, 0, canvasWidth, canvasHeight);
+
+                  // Increment the counter for loaded canvases
+                  loadedCanvases++;
+
+                  // If all canvases are loaded, scroll to the desired height
+                  if (loadedCanvases === totalCanvases) {
+                      var scrollHeight = {{ (800 / aspect_ratio) / scrollV }};
+                      console.log(scrollHeight);
+                      window.scrollTo(0, scrollHeight);
+                  }
               };
           });
       };

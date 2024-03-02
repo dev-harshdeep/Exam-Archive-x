@@ -89,4 +89,6 @@ def suggestions():
 
 @search_bp.route('/search_page')
 def search_page():
-    return render_template('search_page.html')
+    query = request.args.get('query')  # Get the query parameter from the URL
+    return render_template('search_page.html', query=query)
+

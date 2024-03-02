@@ -14,15 +14,15 @@
                         "Name": "Fundamental of Computer & Introduction to Programming"
                     },
                     {
-                        "Code": "TPH101/201",
+                        "Code": "TPH101-201",
                         "Name": "Engineering Physics"
                     },
                     {
-                        "Code": "TEE101/201",
+                        "Code": "TEE101-201",
                         "Name": "Basic Electrical Engineering"
                     },
                     {
-                        "Code": "TCE101/201",
+                        "Code": "TCE101-201",
                         "Name": "Basic Civil Engineering"
                     },
                     {
@@ -30,7 +30,7 @@
                         "Name": "Professional Communication"
                     },
                     {
-                        "Code": "THF101/201 ",
+                        "Code": "THF101-201 ",
                         "Name": "Healthy Living & Fitness"
                     },
                     {
@@ -38,15 +38,15 @@
                         "Name": "Computer Lab- I "
                     },
                     {
-                        "Code": "PPH151/251 ",
+                        "Code": "PPH151-251 ",
                         "Name": "Physics Lab"
                     },
                     {
-                        "Code": "PEE151/251",
+                        "Code": "PEE151-251",
                         "Name": "Basic Electrical Engineering Lab. "
                     },
                     {
-                        "Code": "PME151/251",
+                        "Code": "PME151-251",
                         "Name": "Workshop and Manufacturing Practices"
                     },
                     {
@@ -67,11 +67,11 @@
                         "Name": "Programming for Problem Solving"
                     },
                     {
-                        "Code": "TCH101/201",
+                        "Code": "TCH101-201",
                         "Name": "Engineering Chemistry "
                     },
                     {
-                        "Code": "TEC101/201",
+                        "Code": "TEC101-201",
                         "Name": "Basic Electronics Engineering"
                     },
                     {
@@ -79,23 +79,23 @@
                         "Name": "Advanced Professional Communication"
                     },
                     {
-                        "Code": "TEV101/201",
+                        "Code": "TEV101-201",
                         "Name": "Environmental Science"
                     },
                     {
-                        "Code": "PCS151/251",
+                        "Code": "PCS151-251",
                         "Name": "Computer Lab \u2013II"
                     },
                     {
-                        "Code": "PCH151/251",
+                        "Code": "PCH151-251",
                         "Name": "Chemistry Lab"
                     },
                     {
-                        "Code": "PEC151/251",
+                        "Code": "PEC151-251",
                         "Name": "Basic Electronics Engineering Lab."
                     },
                     {
-                        "Code": "PME153/253",
+                        "Code": "PME153-253",
                         "Name": "Engg. Graphics and Design Lab."
                     },
                     {
@@ -755,15 +755,15 @@
                         "Name": "Fundamental of Computer & Introduction to Programming"
                     },
                     {
-                        "Code": "TPH101/201",
+                        "Code": "TPH101-201",
                         "Name": "Engineering Physics"
                     },
                     {
-                        "Code": "TEE101/201",
+                        "Code": "TEE101-201",
                         "Name": "Basic Electrical Engineering"
                     },
                     {
-                        "Code": "TCE101/201",
+                        "Code": "TCE101-201",
                         "Name": "Basic Civil Engineering"
                     },
                     {
@@ -771,7 +771,7 @@
                         "Name": "Professional Communication"
                     },
                     {
-                        "Code": "THF101/201 ",
+                        "Code": "THF101-201 ",
                         "Name": "Healthy Living & Fitness"
                     },
                     {
@@ -779,15 +779,15 @@
                         "Name": "Computer Lab- I "
                     },
                     {
-                        "Code": "PPH151/251 ",
+                        "Code": "PPH151-251 ",
                         "Name": "Physics Lab"
                     },
                     {
-                        "Code": "PEE151/251",
+                        "Code": "PEE151-251",
                         "Name": "Basic Electrical Engineering Lab. "
                     },
                     {
-                        "Code": "PME151/251",
+                        "Code": "PME151-251",
                         "Name": "Workshop and Manufacturing Practices"
                     },
                     {
@@ -808,11 +808,11 @@
                         "Name": "Programming for Problem Solving"
                     },
                     {
-                        "Code": "TCH101/201",
+                        "Code": "TCH101-201",
                         "Name": "Engineering Chemistry "
                     },
                     {
-                        "Code": "TEC101/201",
+                        "Code": "TEC101-201",
                         "Name": "Basic Electronics Engineering"
                     },
                     {
@@ -820,23 +820,23 @@
                         "Name": "Advanced Professional Communication"
                     },
                     {
-                        "Code": "TEV101/201",
+                        "Code": "TEV101-201",
                         "Name": "Environmental Science"
                     },
                     {
-                        "Code": "PCS151/251",
+                        "Code": "PCS151-251",
                         "Name": "Computer Lab \u2013II"
                     },
                     {
-                        "Code": "PCH151/251",
+                        "Code": "PCH151-251",
                         "Name": "Chemistry Lab"
                     },
                     {
-                        "Code": "PEC151/251",
+                        "Code": "PEC151-251",
                         "Name": "Basic Electronics Engineering Lab."
                     },
                     {
-                        "Code": "PME153/253",
+                        "Code": "PME153-253",
                         "Name": "Engg. Graphics and Design Lab."
                     },
                     {
@@ -1094,15 +1094,15 @@
                     "Name": "Fundamental of Computer & Introduction to Programming"
                 },
                 {
-                    "Code": "TPH101/201",
+                    "Code": "TPH101-201",
                     "Name": "Engineering Physics"
                 },
                 {
-                    "Code": "TEE101/201",
+                    "Code": "TEE101-201",
                     "Name": "Basic Electrical Engineering"
                 },
                 {
-                    "Code": "TCE101/201",
+                    "Code": "TCE101-201",
                     "Name": "Basic Civil Engineering"
                 },
                 {
@@ -1110,7 +1110,7 @@
                     "Name": "Professional Communication"
                 },
                 {
-                    "Code": "THF101/201 ",
+                    "Code": "THF101-201 ",
                     "Name": "Healthy Living & Fitness"
                 },
                 {
@@ -1118,15 +1118,15 @@
                     "Name": "Computer Lab- I "
                 },
                 {
-                    "Code": "PPH151/251 ",
+                    "Code": "PPH151-251 ",
                     "Name": "Physics Lab"
                 },
                 {
-                    "Code": "PEE151/251",
+                    "Code": "PEE151-251",
                     "Name": "Basic Electrical Engineering Lab. "
                 },
                 {
-                    "Code": "PME151/251",
+                    "Code": "PME151-251",
                     "Name": "Workshop and Manufacturing Practices"
                 },
                 {
@@ -1150,11 +1150,11 @@
                     "Name": "Programming for Problem Solving"
                 },
                 {
-                    "Code": "TCH101/201",
+                    "Code": "TCH101-201",
                     "Name": "Engineering Chemistry "
                 },
                 {
-                    "Code": "TEC101/201",
+                    "Code": "TEC101-201",
                     "Name": "Basic Electronics Engineering"
                 },
                 {
@@ -1162,23 +1162,23 @@
                     "Name": "Advanced Professional Communication"
                 },
                 {
-                    "Code": "TEV101/201",
+                    "Code": "TEV101-201",
                     "Name": "Environmental Science"
                 },
                 {
-                    "Code": "PCS151/251",
+                    "Code": "PCS151-251",
                     "Name": "Computer Lab \u2013II"
                 },
                 {
-                    "Code": "PCH151/251",
+                    "Code": "PCH151-251",
                     "Name": "Chemistry Lab"
                 },
                 {
-                    "Code": "PEC151/251",
+                    "Code": "PEC151-251",
                     "Name": "Basic Electronics Engineering Lab."
                 },
                 {
-                    "Code": "PME153/253",
+                    "Code": "PME153-253",
                     "Name": "Engg. Graphics and Design Lab."
                 },
                 {
@@ -1453,15 +1453,15 @@
                     "Name": "Fundamental of Computer & Introduction to Programming"
                 },
                 {
-                    "Code": "TPH101/201",
+                    "Code": "TPH101-201",
                     "Name": "Engineering Physics"
                 },
                 {
-                    "Code": "TEE101/201",
+                    "Code": "TEE101-201",
                     "Name": "Basic Electrical Engineering"
                 },
                 {
-                    "Code": "TCE101/201",
+                    "Code": "TCE101-201",
                     "Name": "Basic Civil Engineering"
                 },
                 {
@@ -1469,7 +1469,7 @@
                     "Name": "Professional Communication"
                 },
                 {
-                    "Code": "THF101/201 ",
+                    "Code": "THF101-201 ",
                     "Name": "Healthy Living & Fitness"
                 },
                 {
@@ -1477,15 +1477,15 @@
                     "Name": "Computer Lab- I "
                 },
                 {
-                    "Code": "PPH151/251 ",
+                    "Code": "PPH151-251 ",
                     "Name": "Physics Lab"
                 },
                 {
-                    "Code": "PEE151/251",
+                    "Code": "PEE151-251",
                     "Name": "Basic Electrical Engineering Lab. "
                 },
                 {
-                    "Code": "PME151/251",
+                    "Code": "PME151-251",
                     "Name": "Workshop and Manufacturing Practices"
                 },
                 {
@@ -1509,11 +1509,11 @@
                     "Name": "Programming for Problem Solving"
                 },
                 {
-                    "Code": "TCH101/201",
+                    "Code": "TCH101-201",
                     "Name": "Engineering Chemistry "
                 },
                 {
-                    "Code": "TEC101/201",
+                    "Code": "TEC101-201",
                     "Name": "Basic Electronics Engineering"
                 },
                 {
@@ -1521,23 +1521,23 @@
                     "Name": "Advanced Professional Communication"
                 },
                 {
-                    "Code": "TEV101/201",
+                    "Code": "TEV101-201",
                     "Name": "Environmental Science"
                 },
                 {
-                    "Code": "PCS151/251",
+                    "Code": "PCS151-251",
                     "Name": "Computer Lab \u2013II"
                 },
                 {
-                    "Code": "PCH151/251",
+                    "Code": "PCH151-251",
                     "Name": "Chemistry Lab"
                 },
                 {
-                    "Code": "PEC151/251",
+                    "Code": "PEC151-251",
                     "Name": "Basic Electronics Engineering Lab."
                 },
                 {
-                    "Code": "PME153/253",
+                    "Code": "PME153-253",
                     "Name": "Engg. Graphics and Design Lab."
                 },
                 {
@@ -1812,15 +1812,15 @@
                     "Name": "Fundamental of Computer & Introduction to Programming"
                 },
                 {
-                    "Code": "TPH101/201",
+                    "Code": "TPH101-201",
                     "Name": "Engineering Physics"
                 },
                 {
-                    "Code": "TEE101/201",
+                    "Code": "TEE101-201",
                     "Name": "Basic Electrical Engineering"
                 },
                 {
-                    "Code": "TCE101/201",
+                    "Code": "TCE101-201",
                     "Name": "Basic Civil Engineering"
                 },
                 {
@@ -1828,7 +1828,7 @@
                     "Name": "Professional Communication"
                 },
                 {
-                    "Code": "THF101/201 ",
+                    "Code": "THF101-201 ",
                     "Name": "Healthy Living & Fitness"
                 },
                 {
@@ -1836,15 +1836,15 @@
                     "Name": "Computer Lab- I "
                 },
                 {
-                    "Code": "PPH151/251 ",
+                    "Code": "PPH151-251 ",
                     "Name": "Physics Lab"
                 },
                 {
-                    "Code": "PEE151/251",
+                    "Code": "PEE151-251",
                     "Name": "Basic Electrical Engineering Lab. "
                 },
                 {
-                    "Code": "PME151/251",
+                    "Code": "PME151-251",
                     "Name": "Workshop and Manufacturing Practices"
                 },
                 {
@@ -1868,11 +1868,11 @@
                     "Name": "Programming for Problem Solving"
                 },
                 {
-                    "Code": "TCH101/201",
+                    "Code": "TCH101-201",
                     "Name": "Engineering Chemistry "
                 },
                 {
-                    "Code": "TEC101/201",
+                    "Code": "TEC101-201",
                     "Name": "Basic Electronics Engineering"
                 },
                 {
@@ -1880,23 +1880,23 @@
                     "Name": "Advanced Professional Communication"
                 },
                 {
-                    "Code": "TEV101/201",
+                    "Code": "TEV101-201",
                     "Name": "Environmental Science"
                 },
                 {
-                    "Code": "PCS151/251",
+                    "Code": "PCS151-251",
                     "Name": "Computer Lab \u2013II"
                 },
                 {
-                    "Code": "PCH151/251",
+                    "Code": "PCH151-251",
                     "Name": "Chemistry Lab"
                 },
                 {
-                    "Code": "PEC151/251",
+                    "Code": "PEC151-251",
                     "Name": "Basic Electronics Engineering Lab."
                 },
                 {
-                    "Code": "PME153/253",
+                    "Code": "PME153-253",
                     "Name": "Engg. Graphics and Design Lab."
                 },
                 {
@@ -2171,15 +2171,15 @@
                     "Name": "Fundamental of Computer & Introduction to Programming"
                 },
                 {
-                    "Code": "TPH101/201",
+                    "Code": "TPH101-201",
                     "Name": "Engineering Physics"
                 },
                 {
-                    "Code": "TEE101/201",
+                    "Code": "TEE101-201",
                     "Name": "Basic Electrical Engineering"
                 },
                 {
-                    "Code": "TCE101/201",
+                    "Code": "TCE101-201",
                     "Name": "Basic Civil Engineering"
                 },
                 {
@@ -2187,7 +2187,7 @@
                     "Name": "Professional Communication"
                 },
                 {
-                    "Code": "THF101/201 ",
+                    "Code": "THF101-201 ",
                     "Name": "Healthy Living & Fitness"
                 },
                 {
@@ -2195,15 +2195,15 @@
                     "Name": "Computer Lab- I "
                 },
                 {
-                    "Code": "PPH151/251 ",
+                    "Code": "PPH151-251 ",
                     "Name": "Physics Lab"
                 },
                 {
-                    "Code": "PEE151/251",
+                    "Code": "PEE151-251",
                     "Name": "Basic Electrical Engineering Lab. "
                 },
                 {
-                    "Code": "PME151/251",
+                    "Code": "PME151-251",
                     "Name": "Workshop and Manufacturing Practices"
                 },
                 {
@@ -2227,11 +2227,11 @@
                     "Name": "Programming for Problem Solving"
                 },
                 {
-                    "Code": "TCH101/201",
+                    "Code": "TCH101-201",
                     "Name": "Engineering Chemistry "
                 },
                 {
-                    "Code": "TEC101/201",
+                    "Code": "TEC101-201",
                     "Name": "Basic Electronics Engineering"
                 },
                 {
@@ -2239,23 +2239,23 @@
                     "Name": "Advanced Professional Communication"
                 },
                 {
-                    "Code": "TEV101/201",
+                    "Code": "TEV101-201",
                     "Name": "Environmental Science"
                 },
                 {
-                    "Code": "PCS151/251",
+                    "Code": "PCS151-251",
                     "Name": "Computer Lab \u2013II"
                 },
                 {
-                    "Code": "PCH151/251",
+                    "Code": "PCH151-251",
                     "Name": "Chemistry Lab"
                 },
                 {
-                    "Code": "PEC151/251",
+                    "Code": "PEC151-251",
                     "Name": "Basic Electronics Engineering Lab."
                 },
                 {
-                    "Code": "PME153/253",
+                    "Code": "PME153-253",
                     "Name": "Engg. Graphics and Design Lab."
                 },
                 {

@@ -101,6 +101,25 @@
         width="400"
       />
     </div>
+
+    <script>
+      // Function to handle search redirection
+      function redirectToSearch() {
+        // Get the search query from the input field
+        var searchQuery = document.querySelector('.search-input1').value.trim();
+
+        if (searchQuery !== '') {
+          // Redirect to the search page with the query in the URL
+          window.location.href =
+            '/search_page?query=' + encodeURIComponent(searchQuery);
+        }
+      }
+
+      // Event listener for the search icon click
+      document
+        .querySelector('.bx-search')
+        .addEventListener('click', redirectToSearch);
+    </script>
     <script src="{{ url_for('static', filename='index.js') }}"></script>
   </body>
 </html>
