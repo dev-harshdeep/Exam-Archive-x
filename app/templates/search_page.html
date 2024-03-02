@@ -53,7 +53,7 @@
         margin-bottom: 50px;
       }
 
-      .search-bar input[type='text'] {
+      .search-bar input[type="text"] {
         flex: 1; /* Allow the input field to grow */
         border: none; /* Remove the default input border */
         outline: none; /* Remove the default input focus outline */
@@ -74,6 +74,39 @@
       .search-bar button:hover {
         background-color: #45a049; /* Darker background color on hover */
       }
+
+      .loading {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.5);
+        z-index: 9999;
+      }
+
+      .loading::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 60px;
+        height: 60px;
+        border: 6px solid #3498db;
+        border-radius: 50%;
+        border-top-color: transparent;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: translate(-50%, -50%) rotate(0deg);
+        }
+        100% {
+          transform: translate(-50%, -50%) rotate(360deg);
+        }
+      }
     </style>
   </head>
   <body>
@@ -91,8 +124,12 @@
       <div id="pagination"></div>
     </div>
 
+    <div class="loading" id="loading"></div>
+
     <script>
       // Function to get the query parameter from the URL
+      const loader = document.getElementById("loading");
+
       function getQueryParameter(param) {
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get(param);
@@ -100,9 +137,10 @@
 
       // Function to populate the search input with the query parameter
       function populateSearchInput() {
-        const query = getQueryParameter('query');
+        loader.style.display = "block";
+        const query = getQueryParameter("query");
         if (query) {
-          document.getElementById('searchInput').value = query;
+          document.getElementById("searchInput").value = query;
           search(); // Trigger search automatically after populating the input field
         }
       }
@@ -112,24 +150,28 @@
 
       // Function to perform search
       function search() {
-        var query = document.getElementById('searchInput').value;
+        var query = document.getElementById("searchInput").value;
         fetch(`/search?query=${query}`)
           .then((response) => response.json())
           .then((data) => {
             displayResults(data.results);
             displayPagination(data.total_pages);
+            loader.style.display = "none";
           })
-          .catch((error) => console.error('Error:', error));
+          .catch((error) => {
+            console.error("Error:", error);
+            loader.style.display = "none";
+          });
       }
 
       // Function to display search results
       function displayResults(results) {
-        var searchResultsDiv = document.getElementById('searchResults');
-        searchResultsDiv.innerHTML = '';
+        var searchResultsDiv = document.getElementById("searchResults");
+        searchResultsDiv.innerHTML = "";
 
         results.forEach((result) => {
-          var resultDiv = document.createElement('div');
-          resultDiv.classList.add('main-div');
+          var resultDiv = document.createElement("div");
+          resultDiv.classList.add("main-div");
           resultDiv.innerHTML = `
                   <div class="head-container">
                       <p> ${result.subject_code},${result.exam_type}, ${result.year},Qn.: ${result.question_number}</p>
@@ -143,7 +185,7 @@
           searchResultsDiv.appendChild(resultDiv);
 
           var canvas = document.getElementById(`canvas-${result.question_id}`);
-          var ctx = canvas.getContext('2d');
+          var ctx = canvas.getContext("2d");
           var img = new Image();
           img.onload = function () {
             canvas.width = img.width;
@@ -153,7 +195,7 @@
           img.src = `data:image/png;base64,${result.image_data}`;
 
           // Add event listener to redirect to the paper details page when clicked
-          resultDiv.addEventListener('click', function () {
+          resultDiv.addEventListener("click", function () {
             redirectToPaper(result);
           });
         });
@@ -161,27 +203,27 @@
 
       // Function to display pagination
       function displayPagination(totalPages) {
-        var paginationDiv = document.getElementById('pagination');
-        paginationDiv.innerHTML = '';
+        var paginationDiv = document.getElementById("pagination");
+        paginationDiv.innerHTML = "";
 
         for (var i = 1; i <= totalPages; i++) {
-          var pageLink = document.createElement('a');
+          var pageLink = document.createElement("a");
           pageLink.href = `javascript:gotoPage(${i})`;
           pageLink.textContent = i;
           paginationDiv.appendChild(pageLink);
-          paginationDiv.appendChild(document.createTextNode(' '));
+          paginationDiv.appendChild(document.createTextNode(" "));
         }
       }
 
       // Function to navigate to a specific page
       function gotoPage(pageNumber) {
-        var query = document.getElementById('searchInput').value;
+        var query = document.getElementById("searchInput").value;
         fetch(`/search?query=${query}&page=${pageNumber}`)
           .then((response) => response.json())
           .then((data) => {
             displayResults(data.results);
           })
-          .catch((error) => console.error('Error:', error));
+          .catch((error) => console.error("Error:", error));
       }
 
       // Function to redirect to the paper details page
@@ -195,7 +237,7 @@
           !result.year ||
           !result.question_number
         ) {
-          console.error('Incomplete or missing data in the result object.');
+          console.error("Incomplete or missing data in the result object.");
           return;
         }
 
