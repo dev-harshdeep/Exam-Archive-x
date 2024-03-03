@@ -1,16 +1,65 @@
 import math
 import os
-from flask import Blueprint, render_template, session, redirect
+from flask import Blueprint, render_template, session, redirect,current_app,jsonify
 from models.question_paper import QuestionPaper
 from views.auth import login_is_required
 from datetime import datetime
-
+from models.restore import restore_backup
+from models.backup import backup_database_and_files
 admin_bp = Blueprint('admin', __name__)
 
+    
 def get_last_backup_date():
-    # Suppose you retrieve the last backup date from a database
-    return datetime(2023, 5, 20, 15, 30, 0)  # Example date and time
+    backup_files = os.listdir('/app/backupFiles')
+    backup_dates = []
+    for filename in backup_files:
+        try:
+            # Split the filename and extract the date and time part
+            date_str = (filename.split('_')[1]+'_'+filename.split('_')[2]).replace('.tar.gz', '')
+            date = datetime.strptime(date_str, "%Y-%m-%d_%H-%M-%S")
+            current_app.logger.info(date)
+            backup_dates.append(date)
+        except IndexError:
+            pass  # Skip filenames that do not match the expected format
+    if not backup_dates:
+        return datetime(2023, 5, 20, 15, 30, 0)  # Example date and time
+    return max(backup_dates)
 
+    # Suppose you retrieve the last backup date from a database
+@admin_bp.route('/backup-manager')
+def backupManager():
+    return render_template('backupDashboard.html')
+
+@admin_bp.route('/trigger-backup', methods=['GET'])
+def trigger_backup():
+    current_app.logger.info("request recieved for backup")
+    try:
+        backup_database_and_files()
+        return 'Backup triggered successfully', 200
+    except Exception as e:
+        return f'Error triggering backup: {e}', 500
+    
+@admin_bp.route('/backups', methods=['GET'])
+def list_backups():
+    backup_dir = '/app/backupFiles'  # Path to the backup directory
+    backups = []
+    if os.path.exists(backup_dir):
+        backups = os.listdir(backup_dir)
+    return render_template('backups.html', backups=backups)
+
+@admin_bp.route('/restore_backup/<backup_name>', methods=['POST'])
+def restore_backup_endpoint(backup_name):
+    # Construct the full path to the backup file
+    backup_dir = '/app/backupFiles/' # Assuming you set up a configuration for the backup directory
+    backup_path =backup_dir+ backup_name
+
+    # Check if the backup file exists
+    if os.path.exists(backup_path):
+        restore_backup(backup_path)
+        return jsonify({'status': 'success', 'message': f'Backup {backup_name} restored successfully'})
+    else:
+        # Return response indicating failure if the backup file does not exist
+        return jsonify({'status': 'error', 'message': f'Backup {backup_name} does not exist'})
 @admin_bp.route('/dashboard')
 @login_is_required
 def dashboard():
