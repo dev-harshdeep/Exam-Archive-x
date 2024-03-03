@@ -127,8 +127,23 @@
           </li>
           {% endfor %}
         </ul>
-        <button class="btn">Back</button>
+        <button id="btn" class="btn">Back</button>
       </div>
     </div>
+
+    <script>
+      const backBtn = document.getElementById("btn");
+
+      function redirectToSearch() {
+        // Construct the URL for the search
+        const searchUrl = `/`;
+
+        // Redirect to the search URL
+        console.log("clicked");
+        window.location.href = searchUrl;
+      }
+
+      backBtn.addEventListener("click", redirectToSearch);
+    </script>
   </body>
 </html>

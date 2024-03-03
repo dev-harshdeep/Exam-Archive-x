@@ -86,8 +86,8 @@
       }
 
       // Replace this URL with your API endpoint that returns subjects
-      const baseEndpoint = '/getSub/';
-      const mainDiv = document.getElementById('mainDiv');
+      const baseEndpoint = "/getSub/";
+      const mainDiv = document.getElementById("mainDiv");
 
       // Function to fetch subjects and display them
       function displaySubjects(cid, sem) {
@@ -97,35 +97,35 @@
           .then((response) => response.json())
           .then((subjects) => {
             subjects.forEach((subject) => {
-              const subjectDiv = document.createElement('div');
-              const container = document.createElement('div');
-              const containerOne = document.createElement('div');
-              const containerTwo = document.createElement('div');
-              containerOne.classList.add('one');
-              containerTwo.classList.add('two');
-              const emptyContainer = document.createElement('div');
-              const pdfIcon = document.createElement('div');
-              pdfIcon.classList.add('pdf-icon');
-              emptyContainer.classList.add('empty-container');
-              container.classList.add('container');
+              const subjectDiv = document.createElement("div");
+              const container = document.createElement("div");
+              const containerOne = document.createElement("div");
+              const containerTwo = document.createElement("div");
+              containerOne.classList.add("one");
+              containerTwo.classList.add("two");
+              const emptyContainer = document.createElement("div");
+              const pdfIcon = document.createElement("div");
+              pdfIcon.classList.add("pdf-icon");
+              emptyContainer.classList.add("empty-container");
+              container.classList.add("container");
               emptyContainer.appendChild(container);
               mainDiv.appendChild(emptyContainer);
               subjectDiv.innerHTML = `Code: ${subject.Code}<br>Name: ${subject.Name}`;
-              subjectDiv.classList.add('subject');
+              subjectDiv.classList.add("subject");
               container.appendChild(containerOne);
               container.appendChild(containerTwo);
               mainDiv.appendChild(emptyContainer);
               emptyContainer.appendChild(subjectDiv);
 
-              emptyContainer.addEventListener('click', () => {
+              emptyContainer.addEventListener("click", () => {
                 window.location.href = `/showPapers/${
-                  subject.Code.slice(0, 3) + '-' + subject.Code.slice(3, 6)
+                  subject.Code.slice(0, 3) + "-" + subject.Code.slice(3, 6)
                 }`;
               });
             });
           })
           .catch((error) => {
-            console.error('Error:', error);
+            console.error("Error:", error);
           });
       }
 

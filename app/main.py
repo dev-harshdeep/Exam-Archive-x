@@ -7,6 +7,7 @@ from views.pdfUpload import pdf_upload_bp
 from views.archive import archive_bp
 from views.search import search_bp
 from views.editCourse import edit_course_bp
+from views.status import status_bp
 from dotenv import load_dotenv
 from models.database import db
 from models.course import Course
@@ -18,6 +19,8 @@ from models.question_paper import QuestionPaper
 from models.question import Question
 from config import Config
 from data_loader import load_data 
+
+
 
 load_dotenv()
 
@@ -34,6 +37,9 @@ app.register_blueprint(archive_bp, url_prefix='/archive')
 
 app.register_blueprint(edit_course_bp, url_prefix='/editCourse')
 app.register_blueprint(search_bp)
+
+app.register_blueprint(status_bp)
+
 
 # Function to check if tables exist in the 
 def tables_exist():
