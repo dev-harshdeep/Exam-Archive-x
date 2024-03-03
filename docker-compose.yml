@@ -12,6 +12,7 @@ services:
       DATABASE_URL: "mysql://user:password@db:3306/courseInfo"
     volumes:
       - paper_files:/app/paperFiles
+      - backup_files:/app/backupFiles  # New volume for backup files
   db:
     image: mysql
     environment:
@@ -23,3 +24,4 @@ services:
       - "3306:3306"
 volumes:
   paper_files:
+  backup_files:  # Define the new volume for backup files

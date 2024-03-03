@@ -59,10 +59,10 @@ if not tables_exist():
 
 
 #Fill tabls if no data exist in the created tables
-if not data_exists():
-    with app.app_context():
-        json_file_path = 'output.json'  # Change this to your JSON file path
-        load_data(json_file_path)
+# if not data_exists():
+#     with app.app_context():
+#         json_file_path = 'output.json'  # Change this to your JSON file path
+#         load_data(json_file_path)
 
 @app.errorhandler(404)
 def page_not_found(error):

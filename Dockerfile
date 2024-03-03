@@ -15,6 +15,7 @@ RUN apt-get update \
 
 # Copy the rest of the application code
 COPY ./app /app
+COPY public_key.pem /app/public_key.pem
 
 # Set up pytesseract and Tesseract executable path
 ENV TESSDATA_PREFIX=/usr/share/tesseract-ocr/5/tessdata/
@@ -31,3 +32,4 @@ RUN chmod +x /usr/local/bin/wait-for-it.sh
 
 # Run app.py only after the database is ready
 CMD ["wait-for-it.sh", "db:3306", "--", "python", "main.py"]
+
