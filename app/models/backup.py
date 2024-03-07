@@ -3,7 +3,7 @@ import json
 import tarfile
 from datetime import datetime
 import shutil
-from flask import current_app
+from flask import current_app , app
 from datetime import datetime
 from models.course import Course
 from models.question_paper import QuestionPaper
@@ -18,6 +18,7 @@ def serialize_object(obj):
     return {c.name: getattr(obj, c.name) for c in obj.__table__.columns}
 
 def backup_database_and_files():
+
     current_app.logger.info("Starting backup")
     try:
         # Create backup directory

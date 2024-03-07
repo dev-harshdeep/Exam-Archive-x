@@ -10,22 +10,25 @@ from urllib.parse import unquote
 import io
 import base64
 from PIL import Image, ImageDraw
-
+from models.cache import cache
 
 archive_bp = Blueprint('archive', __name__, template_folder='templates')
 
 @archive_bp.route('/')
+@cache.memoize(timeout=120) 
 def index():
     courses = Course.query.all()
     return render_template('archive.html', courses=courses)
 
 @archive_bp.route('/courses/<int:course_id>')
+@cache.memoize(timeout=120) 
 def get_semesters(course_id):
     course = Course.query.get(course_id)
     semesters = Semester.query.filter_by(CourseID=course_id).all()
     return render_template('semesters.html', course=course, semesters=semesters)
 
 @archive_bp.route('/courses/<int:course_id>/semesters/<int:semester_id>')
+@cache.memoize(timeout=120) 
 def get_subjects(course_id, semester_id):
     course = Course.query.get(course_id)
     semester = Semester.query.get(semester_id)
@@ -37,6 +40,7 @@ def get_subjects(course_id, semester_id):
 
 
 @archive_bp.route('/courses/<int:course_id>/semesters/<int:semester_id>/subjects/<int:subject_id>/papers')
+@cache.memoize(timeout=10)
 def get_question_papers(course_id, semester_id, subject_id):
     course = Course.query.get(course_id)
     semester = Semester.query.get(semester_id)
@@ -58,9 +62,21 @@ def get_question_start_position(question_number):
 
 # In your backend route handler
 
+
 @archive_bp.route('/courses/<int:course_id>/semesters/<int:semester_id>/subjects/<int:subject_id>/papers/<int:paper_id>')
+@cache.memoize(timeout=60)  # Cache the result for 60 seconds
 def get_paper_details(course_id, semester_id, subject_id, paper_id):
-    # Fetch paper details (including the file path)
+
+    if cache.get(request.path):
+        # Log cache hit
+        current_app.logger.info("Cache hit")
+        return cache.get(request.path)
+
+    # Log cache miss
+    current_app.logger.info("Cache miss")
+
+
+     # Fetch paper details (including the file path)
     paper = QuestionPaper.query.get(paper_id)
     
     # Read the image file
@@ -114,10 +130,10 @@ def get_paper_details(course_id, semester_id, subject_id, paper_id):
 
 
 @archive_bp.route('/papers/<string:paper_code>/<string:exam_type>/<int:exam_year>/<int:question_number>')
+@cache.memoize(timeout=60)  # Cache the result for 60 seconds
 def redirect_to_paper_by_code(paper_code, exam_type, exam_year, question_number):
     # Decode the paper code
     decoded_paper_code = unquote(paper_code)
-
     # Query the Subject table to get the SubjectID based on the provided subject code
     subject = Subject.query.filter_by(Code=decoded_paper_code).first()
     if subject:

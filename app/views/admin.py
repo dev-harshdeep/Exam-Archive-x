@@ -6,6 +6,9 @@ from views.auth import login_is_required
 from datetime import datetime
 from models.restore import restore_backup
 from models.backup import backup_database_and_files
+from datetime import datetime
+
+
 admin_bp = Blueprint('admin', __name__)
 
     
@@ -26,17 +29,48 @@ def get_last_backup_date():
     return max(backup_dates)
 
     # Suppose you retrieve the last backup date from a database
-@admin_bp.route('/backup-manager')
+@admin_bp.route('/backup-manager', methods=['GET'])
 def backupManager():
-    return render_template('backupDashboard.html')
+    backup_dir = '/app/backupFiles'  # Path to the backup directory
+    backups = []
+    if os.path.exists(backup_dir):
+        backups_info = os.listdir(backup_dir)
+        for backup in backups_info:
+            name, ext = os.path.splitext(backup)
+            # Splitting filename to get date and time
+            parts = name.split('_')
+            date = parts[1]
+            # time = parts[2]
+            time = parts[2].split('.')[0]  # Remove milliseconds
+            # Convert time to 12-hour format
+            time_obj = datetime.strptime(time, "%H-%M-%S")
+            time_12h_format = time_obj.strftime("%I:%M:%S %p")
+            # Extracting compression ratio if available
+            compression_ratio = "N/A"
+            # Extracting encryption status if available
+            encryption_status = "Not encrypted"
+            # Constructing backup dictionary
+            backup_info = {
+                "name": backup,
+                "date": date,
+                "time": time_12h_format,
+                "size": str(round(int (os.path.getsize(os.path.join(backup_dir, backup)) )/(1024 * 1024),3))+" MB",
+                "compression_ratio": compression_ratio,
+                "encryption_status": encryption_status
+            }
+            backups.append(backup_info)
+    return render_template('backupDashboard.html', backups=backups)
+
 
 @admin_bp.route('/trigger-backup', methods=['GET'])
 def trigger_backup():
     current_app.logger.info("request recieved for backup")
     try:
         backup_database_and_files()
+        current_app.logger.info("backup successfull")
         return 'Backup triggered successfully', 200
     except Exception as e:
+        current_app.logger.info(e)
         return f'Error triggering backup: {e}', 500
     
 @admin_bp.route('/backups', methods=['GET'])

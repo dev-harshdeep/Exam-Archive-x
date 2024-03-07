@@ -122,7 +122,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 50px;
+        gap: 19px;
         margin-top: 38px;
       }
 
@@ -137,7 +137,7 @@
         flex-direction: column;
       }
 
-      .backup {
+      .backup-btn {
         display: inline-block;
         padding: 15px 45px;
         background-color: #89cff0; /* Green */
@@ -173,7 +173,7 @@
         box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5),
           0px 1px 0px rgba(255, 255, 255, 0.2);
         &:after {
-          content: "OFF";
+          content: 'OFF';
           color: #000;
           position: absolute;
           right: 10px;
@@ -183,7 +183,7 @@
           text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.15);
         }
         &:before {
-          content: "ON";
+          content: 'ON';
           color: white;
           position: absolute;
           left: 10px;
@@ -211,7 +211,7 @@
           transition: all 0.4s ease;
           box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
         }
-        input[type="checkbox"] {
+        input[type='checkbox'] {
           visibility: hidden;
           &:checked + label {
             left: 43px;
@@ -293,6 +293,7 @@
         display: flex;
         justify-content: center;
         text-align: center;
+        gap: 40px;
       }
       .left-drop {
         /* border: 2px solid black; */
@@ -395,8 +396,8 @@
         }
       }
 
-      input[type="text"],
-      input[type="number"] {
+      input[type='text'],
+      input[type='number'] {
         width: 100%;
         padding: 10px;
         margin-bottom: 20px;
@@ -404,7 +405,7 @@
         border-radius: 4px;
         box-sizing: border-box;
       }
-      input[type="submit"] {
+      input[type='submit'] {
         background-color: #4caf50;
         color: #fff;
         padding: 5px 10px;
@@ -413,7 +414,7 @@
         cursor: pointer;
         font-size: 16px;
       }
-      input[type="submit"]:hover {
+      input[type='submit']:hover {
         background-color: #45a049;
       }
       label {
@@ -435,7 +436,10 @@
   <body>
     <div class="main-container">
       <div class="container">
-        <div class="item">page</div>
+        <div class="item">
+          <h3>Next Backup</h3>
+          <p id="nextBackupTime">Unavalable</p>
+        </div>
         <div class="item">page</div>
         <div class="item">page</div>
         <div class="item">page</div>
@@ -443,7 +447,7 @@
 
       <div class="charts">
         <div class="charts-card">
-          <h2 class="chart-title">User Statistics</h2>
+          <h2 class="chart-title">Backup Statistics</h2>
           <div id="area-chart"></div>
         </div>
 
@@ -452,8 +456,11 @@
           <div class="inner-chart">
             <div class="left">
               <div class="left-btn">
-                <button class="backup">Backup Now</button>
+                <button class="backup-btn">Backup Now</button>
               </div>
+
+              <label style="margin-bottom: 0">Occupied storage</label>
+
               <div class="storage">
                 <div class="skill">
                   <div class="outer">
@@ -505,26 +512,34 @@
                 </div>
                 <div class="drop">
                   <div class="left-drop">
+                    <label for="">Time Frame</label>
                     <div class="dropd">
-                      <div class="dabba">Yearly</div>
-                      <div class="dabba">Monthly</div>
-                      <div class="dabba">Weekly</div>
-                      <div class="dabba">Daily</div>
+                      <select id="timeFrameSelect" name="timeFrameSelect">
+                        <option value="Yearly" class="dabba">Yearly</option>
+                        <option value="Monthly" class="dabba">Monthly</option>
+                        <option value="Weekly" class="dabba">Weekly</option>
+                        <option value="Daily" class="dabba">Daily</option>
+                      </select>
                     </div>
                   </div>
 
                   <div class="right-drop">
-                    <div class="freq">
-                      <label for="">Frequencies</label>
-                      <input
-                        type="number"
-                        id="semesters"
-                        name="semesters"
-                        placeholder="Enter number "
-                        required
-                      />
-
-                      <input type="submit" value="Submit" />
+                    <div>
+                      <div class="freq">
+                        <label for="">Frequency</label>
+                        <input
+                          type="number"
+                          id="semesters"
+                          name="semesters"
+                          placeholder="Enter number"
+                          required
+                        />
+                        <input
+                          type="submit"
+                          id="saveAutoBackupSettings"
+                          value="Save Settings"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -533,100 +548,36 @@
           </div>
         </div>
       </div>
-
+      <h1>Backup Manager</h1>
       <div class="tablediv">
         <table>
           <thead>
             <tr>
-              <th>Column 1</th>
-              <th>Column 2</th>
-              <th>Column 3</th>
-              <th>Column 4</th>
-              <th>Column 5</th>
-              <th>Column 6</th>
-              <th>Column 7</th>
+              <th>Name</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Size</th>
+              <th>Compression Ratio</th>
+              <th>Encryption Status</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            <!-- Rows -->
-            <!-- Change the content inside the <td> tags to populate your table -->
+            {% for backup in backups %}
             <tr>
-              <td>Row 1, Col 1</td>
-              <td>Row 1, Col 2</td>
-              <td>Row 1, Col 3</td>
-              <td>Row 1, Col 4</td>
-              <td>Row 1, Col 5</td>
-              <td>Row 1, Col 6</td>
+              <td>{{ backup.name }}</td>
+              <td>{{ backup.date }}</td>
+              <td>{{ backup.time }}</td>
+              <td>{{ backup.size }}</td>
+              <td>{{ backup.compression_ratio }}</td>
+              <td>{{ backup.encryption_status }}</td>
               <td>
-                <button onclick="showPopup('Add')">ADD</button>
-                <button onclick="showPopup('Delete')">DELETE</button>
+                <button onclick="restoreBackup('{{ backup.name }}')">
+                  Restore
+                </button>
               </td>
             </tr>
-            <tr>
-              <td>Row 2, Col 1</td>
-              <td>Row 2, Col 2</td>
-              <td>Row 2, Col 3</td>
-              <td>Row 2, Col 4</td>
-              <td>Row 2, Col 5</td>
-              <td>Row 2, Col 6</td>
-              <td>Row 2, Col 7</td>
-            </tr>
-            <tr>
-              <td>Row 2, Col 1</td>
-              <td>Row 2, Col 2</td>
-              <td>Row 2, Col 3</td>
-              <td>Row 2, Col 4</td>
-              <td>Row 2, Col 5</td>
-              <td>Row 2, Col 6</td>
-              <td>Row 2, Col 7</td>
-            </tr>
-            <tr>
-              <td>Row 2, Col 1</td>
-              <td>Row 2, Col 2</td>
-              <td>Row 2, Col 3</td>
-              <td>Row 2, Col 4</td>
-              <td>Row 2, Col 5</td>
-              <td>Row 2, Col 6</td>
-              <td>Row 2, Col 7</td>
-            </tr>
-            <tr>
-              <td>Row 2, Col 1</td>
-              <td>Row 2, Col 2</td>
-              <td>Row 2, Col 3</td>
-              <td>Row 2, Col 4</td>
-              <td>Row 2, Col 5</td>
-              <td>Row 2, Col 6</td>
-              <td>Row 2, Col 7</td>
-            </tr>
-            <tr>
-              <td>Row 2, Col 1</td>
-              <td>Row 2, Col 2</td>
-              <td>Row 2, Col 3</td>
-              <td>Row 2, Col 4</td>
-              <td>Row 2, Col 5</td>
-              <td>Row 2, Col 6</td>
-              <td>Row 2, Col 7</td>
-            </tr>
-            <tr>
-              <td>Row 2, Col 1</td>
-              <td>Row 2, Col 2</td>
-              <td>Row 2, Col 3</td>
-              <td>Row 2, Col 4</td>
-              <td>Row 2, Col 5</td>
-              <td>Row 2, Col 6</td>
-              <td>Row 2, Col 7</td>
-            </tr>
-            <tr>
-              <td>Row 2, Col 1</td>
-              <td>Row 2, Col 2</td>
-              <td>Row 2, Col 3</td>
-              <td>Row 2, Col 4</td>
-              <td>Row 2, Col 5</td>
-              <td>Row 2, Col 6</td>
-              <td>Row 2, Col 7</td>
-            </tr>
-            <!-- Repeat the above <tr> block for additional rows -->
-            <!-- You can use a loop to generate rows dynamically if needed -->
+            {% endfor %}
           </tbody>
         </table>
       </div>
@@ -652,62 +603,64 @@
     </div>
 
     <script>
-      let number = document.getElementById("number");
+      let number = document.getElementById('number');
       let counter = 0;
       setInterval(() => {
         if (counter == 65) {
           clearInterval();
         } else {
           counter += 1;
-          number.innerHTML = counter + "%";
+          number.innerHTML = counter + '%';
         }
       }, 20);
       function submitNumber() {
-        var number = document.getElementById("numberInput").value;
+        var number = document.getElementById('numberInput').value;
         console.log(number);
         // You can do whatever you want with the submitted number here
       }
     </script>
     <script>
       function showPopup(action) {
-        var popupContent = document.getElementById("popupContent");
-        if (action === "Add") {
-          popupContent.textContent = "Add action popup content";
-        } else if (action === "Delete") {
-          popupContent.textContent = "Delete action popup content";
+        var popupContent = document.getElementById('popupContent');
+        if (action === 'Add') {
+          popupContent.textContent = 'Add action popup content';
+        } else if (action === 'Delete') {
+          popupContent.textContent = 'Delete action popup content';
         }
-        document.getElementById("popup").style.display = "block";
+        document.getElementById('popup').style.display = 'block';
       }
 
       function closePopup() {
-        document.getElementById("popup").style.display = "none";
+        document.getElementById('popup').style.display = 'none';
       }
     </script>
 
     <script>
+      // ---------- CHARTS ----------
+
       // BAR CHART
       const barChartOptions = {
         series: [
           {
             data: [10, 8, 6, 4, 2],
-            name: "Users",
+            name: 'Users',
           },
         ],
         chart: {
-          type: "bar",
-          background: "transparent",
+          type: 'bar',
+          background: 'transparent',
           height: 350,
           toolbar: {
             show: false,
           },
         },
-        colors: [" #1A237E", "#3F51B5", "#5C6BC0", "#ff6d00", "#C5CAE9"],
+        colors: ['#2962ff', '#d50000', '#2e7d32', '#ff6d00', '#583cb3'],
         plotOptions: {
           bar: {
             distributed: true,
             borderRadius: 4,
             horizontal: false,
-            columnWidth: "40%",
+            columnWidth: '40%',
           },
         },
         dataLabels: {
@@ -717,7 +670,7 @@
           opacity: 1,
         },
         grid: {
-          borderColor: "#55596e",
+          borderColor: '#55596e',
           yaxis: {
             lines: {
               show: true,
@@ -731,67 +684,67 @@
         },
         legend: {
           labels: {
-            colors: "#f5f7ff",
+            colors: '#f5f7ff',
           },
           show: true,
-          position: "top",
+          position: 'top',
         },
         stroke: {
-          colors: ["transparent"],
+          colors: ['transparent'],
           show: true,
           width: 2,
         },
         tooltip: {
           shared: true,
           intersect: false,
-          theme: "dark",
+          theme: 'dark',
         },
         xaxis: {
-          categories: ["Btech", "BCA", "BBA", "MCA", "MBA"],
+          categories: ['Btech', 'BCA', 'BBA', 'MCA', 'MBA'],
           title: {
             style: {
-              color: "#f5f7ff",
+              color: '#f5f7ff',
             },
           },
           axisBorder: {
             show: true,
-            color: "#55596e",
+            color: '#55596e',
           },
           axisTicks: {
             show: true,
-            color: "#55596e",
+            color: '#55596e',
           },
           labels: {
             style: {
-              colors: "#f5f7ff",
+              colors: '#f5f7ff',
             },
           },
         },
         yaxis: {
           title: {
-            text: "Count",
+            text: 'Count',
             style: {
-              color: "#f5f7ff",
+              color: '#f5f7ff',
             },
           },
           axisBorder: {
-            color: "#55596e",
+            color: '#55596e',
             show: true,
           },
           axisTicks: {
-            color: "#55596e",
+            color: '#55596e',
             show: true,
           },
           labels: {
             style: {
-              colors: "#f5f7ff",
+              colors: '#f5f7ff',
             },
           },
         },
       };
 
       const barChart = new ApexCharts(
-        document.querySelector("#bar-chart"),
+        document.querySelector('#bar-chart'),
         barChartOptions
       );
       barChart.render();
@@ -800,25 +753,25 @@
       const areaChartOptions = {
         series: [
           {
-            name: "Users per day",
+            name: 'Backup Frequency',
             data: [31, 40, 28, 51, 42, 109, 100],
           },
           {
-            name: "Average online time",
+            name: 'Backup Integrity',
             data: [11, 32, 45, 32, 34, 52, 41],
           },
         ],
         chart: {
-          type: "area",
-          background: "transparent",
+          type: 'area',
+          background: 'transparent',
           height: 350,
           stacked: false,
           toolbar: {
             show: false,
           },
         },
-        colors: ["#89CFF0", "#3457D5"],
-        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+        colors: ['#00ab57', '#d50000'],
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
         dataLabels: {
           enabled: false,
         },
@@ -828,12 +781,12 @@
             opacityTo: 0.1,
             shadeIntensity: 1,
             stops: [0, 100],
-            type: "vertical",
+            type: 'vertical',
           },
-          type: "gradient",
+          type: 'gradient',
         },
         grid: {
-          borderColor: "#55596e",
+          borderColor: '#000',
           yaxis: {
             lines: {
               show: true,
@@ -847,60 +800,60 @@
         },
         legend: {
           labels: {
-            colors: "#f5f7ff",
+            colors: '#000',
           },
           show: true,
-          position: "top",
+          position: 'top',
         },
         markers: {
           size: 6,
-          strokeColors: "#1b2635",
+          strokeColors: '#000',
           strokeWidth: 3,
         },
         stroke: {
-          curve: "smooth",
+          curve: 'smooth',
         },
         xaxis: {
           axisBorder: {
-            color: "#55596e",
+            color: '#000',
             show: true,
           },
           axisTicks: {
-            color: "#55596e",
+            color: '#000',
             show: true,
           },
           labels: {
             offsetY: 5,
             style: {
-              colors: "#f5f7ff",
+              colors: '#000',
             },
           },
         },
         yaxis: [
           {
             title: {
-              text: "Users per day",
+              text: 'Backup Frequency',
               style: {
-                color: "#f5f7ff",
+                color: '#000',
               },
             },
             labels: {
               style: {
-                colors: ["#f5f7ff"],
+                colors: ['#000'],
               },
             },
           },
           {
             opposite: true,
             title: {
-              text: "Average online time",
+              text: 'Backup Integrity',
               style: {
-                color: "#f5f7ff",
+                color: '#000',
               },
             },
             labels: {
               style: {
-                colors: ["#f5f7ff"],
+                colors: ['#000'],
               },
             },
           },
@@ -908,15 +861,158 @@
         tooltip: {
           shared: true,
           intersect: false,
-          theme: "dark",
+          theme: 'dark',
         },
       };
 
       const areaChart = new ApexCharts(
-        document.querySelector("#area-chart"),
+        document.querySelector('#area-chart'),
         areaChartOptions
       );
       areaChart.render();
+    </script>
+    <script>
+      function restoreBackup(backupName) {
+        if (confirm(`Are you sure you want to restore ${backupName}?`)) {
+          fetch(`/admin/restore_backup/${backupName}`, {
+            method: 'POST',
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              alert(data.message);
+              // Optionally, you can redirect or perform additional actions here
+            })
+            .catch((error) => console.error('Error:', error));
+        }
+      }
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // Function to disable the backup button
+        function disableBackupButton() {
+          document.querySelector('.backup-btn').disabled = true;
+        }
+
+        // Function to enable the backup button
+        function enableBackupButton() {
+          document.querySelector('.backup-btn').disabled = false;
+        }
+
+        // Attach event listener to backup button
+        document
+          .querySelector('.backup-btn')
+          .addEventListener('click', function () {
+            // Disable the backup button
+            disableBackupButton();
+
+            // Send AJAX request to trigger backup
+            fetch('/admin/trigger-backup')
+              .then((response) => {
+                if (response.ok) {
+                  alert('Backup triggered successfully');
+                } else {
+                  throw new Error('Error triggering backup');
+                }
+              })
+              .catch((error) => {
+                alert('Error triggering backup');
+                console.error('Error:', error);
+              })
+              .finally(() => {
+                // Enable the backup button regardless of success or error
+                enableBackupButton();
+              });
+          });
+      });
+    </script>
+
+    <script>
+      function fetchNextBackupTime() {
+        fetch('/next-auto-backup-time')
+          .then((response) => response.json())
+          .then((data) => {
+            // Update the next backup time in the HTML
+            document.getElementById('nextBackupTime').textContent =
+              data.next_backup_time;
+            if (data.next_backup_time == null) {
+              document.getElementById('nextBackupTime').textContent =
+                'Unavalable';
+            }
+          })
+          .catch((error) => {
+            console.error('Error fetching next backup time:', error);
+            document.getElementById('nextBackupTime').textContent =
+              'Unavalable';
+          });
+      }
+      document.addEventListener('DOMContentLoaded', function () {
+        // Add event listener to the save button
+        document
+          .getElementById('saveAutoBackupSettings')
+          .addEventListener('click', function () {
+            // Get the values from the form
+            var autoBackupEnabled =
+              document.getElementById('slideThree').checked;
+            var timeFrameSelect = document.getElementById('timeFrameSelect');
+            var timeFrame =
+              timeFrameSelect.options[timeFrameSelect.selectedIndex].value;
+            var frequency = document.getElementById('semesters').value;
+
+            // Create a data object to send to the backend
+            var data = {
+              enabled: autoBackupEnabled,
+              time_frame: timeFrame,
+              frequency: frequency,
+            };
+
+            // Send a POST request to the backend
+            fetch('/auto-backup-settings', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(data),
+            })
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error('Failed to save auto backup settings');
+                }
+                return response.json();
+              })
+              .then((data) => {
+                // Show a success message or update the UI as needed
+                alert(data.message);
+              })
+              .catch((error) => {
+                // Handle errors, e.g., display an error message to the user
+                console.error('Error:', error);
+                alert('An error occurred while saving auto backup settings');
+              });
+          });
+
+        // Fetch next backup time when the page loads
+        fetchNextBackupTime();
+      });
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // Fetch current auto backup settings
+        fetch('/auto-backup-settings')
+          .then((response) => response.json())
+          .then((data) => {
+            // Update time frame select
+            document.getElementById('timeFrameSelect').value = data.time_frame;
+
+            // Update frequency input
+            document.getElementById('semesters').value = data.frequency;
+
+            // Update checkbox
+            document.getElementById('slideThree').checked = data.enabled;
+          })
+          .catch((error) =>
+            console.error('Error fetching auto backup settings:', error)
+          );
+      });
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
   </body>

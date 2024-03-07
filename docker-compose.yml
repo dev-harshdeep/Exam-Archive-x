@@ -10,6 +10,9 @@ services:
       - db
     environment:
       DATABASE_URL: "mysql://user:password@db:3306/courseInfo"
+      TZ: "Asia/Kolkata"  # Set the timezone to UTC for the web service
+
+
     volumes:
       - paper_files:/app/paperFiles
       - backup_files:/app/backupFiles  # New volume for backup files
