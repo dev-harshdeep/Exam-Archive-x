@@ -25,7 +25,7 @@ from models.auto_backup import AutoBackupSettings
 from models.user import User,AdminRole
 from models.sessions import Session
 from models.token import Token
-from config import Config
+from app.secrets.config import Config
 from data_loader import load_data 
 from views.autoBackup import schedule_initial_backup_job
 from models.cache import cache
