@@ -16,3 +16,5 @@ Pillow==8.3.2
 pytesseract==0.3.8
 APScheduler==3.7.0
 Flask-Caching==1.10.1
+Flask-Mail==0.9.1
+itsdangerous==2.1.2

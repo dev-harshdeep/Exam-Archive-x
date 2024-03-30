@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Management</title>
+    <style>
+      /* Style for buttons */
+      .btn-group {
+        display: flex;
+      }
+      .btn-group form {
+        margin-right: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>User Management</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>User ID</th>
+          <th>Email</th>
+          <th>Is Admin</th>
+          <th>Admin Permissions</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+        <tr>
+          <td>{{ user.id }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ 'Yes' if user.is_admin else 'No' }}</td>
+          <td>
+            {% if user.is_admin %} {% if user.admin_role_id %}
+            <ul>
+              {% set admin_role = admin_roles[user.admin_role_id] %}
+              <li>
+                Access Backup: {{ 'Yes' if admin_role.can_access_backup else
+                'No' }}
+              </li>
+              <li>
+                Edit Posts: {{ 'Yes' if admin_role.can_edit_posts else 'No' }}
+              </li>
+              <li>
+                Edit Courses: {{ 'Yes' if admin_role.can_edit_courses else 'No'
+                }}
+              </li>
+              <li>
+                Upload PDFs: {{ 'Yes' if admin_role.can_upload_pdfs else 'No' }}
+              </li>
+              <li>
+                Manage Admins: {{ 'Yes' if admin_role.can_manage_admins else
+                'No' }}
+              </li>
+            </ul>
+            {% else %} No admin role assigned {% endif %} {% else %} Not an
+            admin {% endif %}
+          </td>
+          <td>
+            {% if user.is_admin %}
+            <form
+              action="{{ url_for('admin_management.edit_permissions', user_id=user.id) }}"
+              method="POST"
+              class="btn-group"
+            >
+              <input
+                type="checkbox"
+                name="can_access_backup"
+                {%
+                if
+                admin_role
+                and
+                admin_role.can_access_backup
+                %}
+                checked
+                {%
+                endif
+                %}
+              />
+              Access Backup
+              <input
+                type="checkbox"
+                name="can_edit_posts"
+                {%
+                if
+                admin_role
+                and
+                admin_role.can_edit_posts
+                %}
+                checked
+                {%
+                endif
+                %}
+              />
+              Edit Posts
+              <input
+                type="checkbox"
+                name="can_edit_courses"
+                {%
+                if
+                admin_role
+                and
+                admin_role.can_edit_courses
+                %}
+                checked
+                {%
+                endif
+                %}
+              />
+              Edit Courses
+              <input
+                type="checkbox"
+                name="can_upload_pdfs"
+                {%
+                if
+                admin_role
+                and
+                admin_role.can_upload_pdfs
+                %}
+                checked
+                {%
+                endif
+                %}
+              />
+              Upload PDFs
+              <input
+                type="checkbox"
+                name="can_manage_admins"
+                {%
+                if
+                admin_role
+                and
+                admin_role.can_manage_admins
+                %}
+                checked
+                {%
+                endif
+                %}
+              />
+              Manage Admins
+              <button type="submit">Update Permissions</button>
+            </form>
+            <form
+              action="{{ url_for('admin_management.remove_admin', user_id=user.id) }}"
+              method="POST"
+            >
+              <button type="submit">Revoke Admin Permissions</button>
+            </form>
+            {% else %}
+            <form
+              action="{{ url_for('admin_management.make_admin', user_id=user.id) }}"
+              method="POST"
+            >
+              <button type="submit">Make Admin</button>
+            </form>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>

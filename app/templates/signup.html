@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signup</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f2f2f2;
+        flex-direction: column;
+      }
+
+      form {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        max-width: 80%;
+      }
+
+      h2 {
+        text-align: center;
+        color: #333;
+      }
+
+      label {
+        font-weight: bold;
+        color: #333;
+      }
+
+      input[type='email'],
+      input[type='password'] {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      input[type='submit'] {
+        width: 100%;
+        background-color: #4caf50;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+      }
+
+      input[type='submit']:hover {
+        background-color: #45a049;
+      }
+
+      .error-message {
+        color: red;
+        margin-top: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Signup</h2>
+    <form id="signupForm" action="/signup" method="POST">
+      <label for="email">Email:</label><br />
+      <input type="email" id="email" name="email" required /><br />
+
+      <label for="password">Password:</label><br />
+      <input type="password" id="password" name="password" required /><br />
+
+      <label for="confirmPassword">Confirm Password:</label><br />
+      <input
+        type="password"
+        id="confirmPassword"
+        name="confirmPassword"
+        required
+      /><br />
+      <div id="passwordError" class="error-message"></div>
+
+      <input type="submit" value="Signup" />
+    </form>
+
+    <script>
+      document
+        .getElementById('signupForm')
+        .addEventListener('submit', function (event) {
+          var password = document.getElementById('password').value;
+          var confirmPassword =
+            document.getElementById('confirmPassword').value;
+          var passwordError = document.getElementById('passwordError');
+
+          if (password !== confirmPassword) {
+            passwordError.textContent = 'Passwords do not match';
+            event.preventDefault(); // Prevent form submission
+          } else {
+            passwordError.textContent = '';
+          }
+        });
+    </script>
+  </body>
+</html>

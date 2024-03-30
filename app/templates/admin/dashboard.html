@@ -375,24 +375,24 @@
 
     <script>
       // Get the <li> element
-      const editCourseLi = document.getElementById("edit-course-li");
+      const editCourseLi = document.getElementById('edit-course-li');
 
       // Add click event listener to the <li>
-      editCourseLi.addEventListener("click", function () {
+      editCourseLi.addEventListener('click', function () {
         // Get the URL from the <a> element inside the <li>
-        const href = this.querySelector("a").getAttribute("href");
+        const href = this.querySelector('a').getAttribute('href');
 
         // Redirect to the specified URL
         window.location.href = href;
       });
 
       // Get the <li> element
-      const addPaperLi = document.getElementById("add-paper-li");
+      const addPaperLi = document.getElementById('add-paper-li');
 
       // Add click event listener to the <li>
-      addPaperLi.addEventListener("click", function () {
+      addPaperLi.addEventListener('click', function () {
         // Get the URL from the <a> element inside the <li>
-        const href = this.querySelector("a").getAttribute("href");
+        const href = this.querySelector('a').getAttribute('href');
 
         // Redirect to the specified URL
         window.location.href = href;
@@ -662,7 +662,7 @@
       // Add a click event listener to it
       logoutSpan.addEventListener('click', function () {
         // Navigate to the logout URL
-        window.location.href = "{{ url_for('auth.logout') }}";
+        window.location.href = "{{ url_for('login.logout') }}";
       });
     </script>
 

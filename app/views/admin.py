@@ -94,8 +94,8 @@ def restore_backup_endpoint(backup_name):
     else:
         # Return response indicating failure if the backup file does not exist
         return jsonify({'status': 'error', 'message': f'Backup {backup_name} does not exist'})
+# @login_is_required
 @admin_bp.route('/dashboard')
-@login_is_required
 def dashboard():
     # Query the database to count the number of question papers
     num_papers = QuestionPaper.query.count()

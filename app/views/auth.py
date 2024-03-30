@@ -28,7 +28,7 @@ flow = Flow.from_client_secrets_file(
 
 Authorised = ['dev.harshjoshi@gmail.com', 'shivanshsharma8899@gmail.com', 'abc@gmail.com', 'pqr@gmail.com']
 
-@auth_bp.route("/login")
+@auth_bp.route("/googlelogin")
 def login():
     session.clear()  # Clear the session before initiating login
     authorization_url, state = flow.authorization_url()

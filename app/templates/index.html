@@ -81,6 +81,17 @@
             <input type="text" placeholder="Search..." />
           </div>
         </div>
+        {% if user %}
+        <!-- Render logout button -->
+        <a href="{{ url_for('login.logout') }}">Logout</a>
+        {% if user.is_admin %}
+        <!-- If user is admin, show additional links -->
+        <a href="{{ url_for('admin.dashboard') }}">Dashboard</a>
+        <!-- Add more admin links here if needed -->
+        {% endif %} {% else %}
+        <!-- Render login button -->
+        <a href="{{ url_for('login.login') }}">Login</a>
+        {% endif %}
       </div>
     </nav>
 
