@@ -1,2 +1,2 @@
-app/secrets/
+app/envsecrets/
 app/config.py
