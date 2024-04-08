@@ -1,8 +1,9 @@
 from datetime import datetime
-from flask import Blueprint, render_template, request, redirect, url_for, flash, session
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session,jsonify
 from models.posts import Post
 from models.database import db
 from models.sessions import Session
+from models.threads import Thread
 from views.checksession import check_session
 from markdown2 import markdown
 
@@ -13,11 +14,49 @@ def index():
     # Fetch all posts from the database
     user, admin_rights = check_session()
     
-    posts = Post.query.all()
+    per_page = 5
+    # posts = Post.query.filter_by(Approved=1).all()
+    posts = Post.query.filter_by(Approved=1).paginate(per_page=per_page)
+    
     for post in posts:
         post.Content = markdown(post.Content)
+        # Fetch the thread associated with the post
+        post.thread = Thread.query.filter_by(PostID=post.PostID).first()
 
-    return render_template('posts.html', posts=posts,user=user)
+    return render_template('posts.html', posts=posts, user=user)
+
+
+
+
+@posts_bp.route('/load-more')
+def load_more_posts():
+    page = request.args.get('page', 1, type=int)  # Get the page number from the request query parameters
+    per_page = 5  # Number of posts to load per page
+
+    # Fetch posts for the requested page
+    posts = Post.query.filter_by(Approved=1).paginate(page=page, per_page=per_page, error_out=False)
+    
+    # Check if there are more posts available
+    has_next = posts.has_next
+    for post in posts:
+        post.Content = markdown(post.Content)
+        # Fetch the thread associated with the post
+        post.thread = Thread.query.filter_by(PostID=post.PostID).first()
+
+
+
+    posts_data = [{
+        'UserID': post.UserID,
+        'Content': markdown(post.Content),
+        'TimeStamp':post.TimeStamp,
+        'DifficultyLevel':post.DifficultyLevel,
+        'ThreadID': post.thread.ThreadID
+    } for post in posts.items]
+
+
+
+    return jsonify({'posts': posts_data, 'has_next': has_next})
+
 
 @posts_bp.route('/submit', methods=['POST'])
 def submit_post():
@@ -56,4 +95,8 @@ def submit_post():
         
     # Redirect to the homepage
     return redirect(url_for('posts.index'))
+
+
+
+
 

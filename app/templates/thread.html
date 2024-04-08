@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thread Comments</title>
+    <style>
+      /* Basic CSS styling for comments */
+      .comment {
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        min-width: 80%;
+        position: relative; /* Position relative for absolute positioning */
+      }
+      .comment .user {
+        font-weight: bold;
+        color: #007bff; /* Blue color for user name */
+      }
+      .comment .timestamp {
+        color: #666; /* Gray color for timestamp */
+        font-size: 0.8em;
+      }
+      .comment .content {
+        margin-top: 5px;
+      }
+      .options {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        display: none;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        padding: 5px;
+        z-index: 1;
+      }
+      .options a {
+        display: block;
+        text-decoration: none;
+        color: #333;
+        margin-bottom: 5px;
+      }
+
+      #relpyto {
+        display: none;
+      }
+
+      #reply-textarea {
+        border: 1px solid #ccc;
+        width: 100%;
+        min-height: 100px;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+
+      .submitbtn {
+        padding: 8px 16px;
+        border: none;
+        background-color: #28a745;
+        color: white;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      #commentbox {
+        border: 1px solid #ddd;
+        width: 60%;
+        margin: auto;
+        padding: 20px;
+      }
+
+      .comment-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .comment-nav .left button,
+      .comment-nav .right button {
+        padding: 8px 16px;
+        border: none;
+        background-color: #f6f8fa;
+        color: #24292e;
+        cursor: pointer;
+        border-radius: 6px;
+      }
+
+      .comment-nav .left button:hover,
+      .comment-nav .right button:hover {
+        background-color: #e1e4e8;
+      }
+      .left {
+        display: flex;
+        gap: 10px;
+      }
+
+      .right {
+        display: flex;
+        gap: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="commentbox">
+      <div class="comment-nav">
+        <div class="left">
+          <div class="write">
+            <button id="write-btn">Write</button>
+          </div>
+          <div class="preview">
+            <button id="preview-btn">Preview</button>
+          </div>
+        </div>
+        <div class="right">
+          <div class="bakchodi1">
+            <button>Backchodi one</button>
+          </div>
+          <div class="backchodi2">
+            <button>Backchodi two</button>
+          </div>
+        </div>
+      </div>
+      <span></span>
+      <form action="/comment/{{ thread.ThreadID }}" method="post">
+        <textarea
+          id="reply-textarea"
+          name="comment_content"
+          rows="4"
+          cols="50"
+          placeholder="Leave a comment"
+        ></textarea>
+        <input type="hidden" name="replyto" id="replyto" />
+        <input class="submitbtn" type="submit" value="Comment" />
+      </form>
+    </div>
+
+    <p>{{ post.Content }}</p>
+    <h1>Thread Comments</h1>
+
+    {% for comment in comments %}
+    <div class="comment">
+      {% if comment.Reply %}
+      <div class="replyiedto">Reply to {{ comment.ReplyContent | safe}}</div>
+      {% endif %}
+
+      <div class="user">{{ comment.UserID }}</div>
+      <div class="timestamp">{{ comment.TimeStamp }}</div>
+      <div class="content">{{ comment.Content | safe }}</div>
+      <div class="commentId">{{comment.CommentID}}</div>
+      <div class="replyyy">{{comment.Reply}}</div>
+      <div class="options">
+        <a href="#" class="reply-btn" data-thread-id="{{ thread.ThreadID }}"
+          >Reply</a
+        >
+        <a href="#">Like</a>
+      </div>
+      <div class="dots">&#8230;</div>
+    </div>
+    {% endfor %}
+
+    <!-- Add your JavaScript for dynamic interactions if needed -->
+    <script>
+      document.querySelectorAll(".dots").forEach(function (dot) {
+        dot.addEventListener("click", function () {
+          var options = this.parentElement.querySelector(".options");
+          options.style.display =
+            options.style.display === "block" ? "none" : "block";
+        });
+      });
+
+      document.querySelectorAll(".reply-btn").forEach(function (btn) {
+        btn.addEventListener("click", function (event) {
+          event.preventDefault();
+          var threadId = this.getAttribute("data-thread-id");
+          var textarea = document.getElementById("reply-textarea");
+          // replytext.value =
+          var spanReply = document
+            .getElementById("commentbox")
+            .getElementsByTagName("span")[0];
+          // textarea.value = ""; // Clear any existing content
+          spanReply.textContent = ""; // Clear any existing content
+
+          // Get the content of the associated comment
+          var commentContent =
+            this.parentElement.parentElement.querySelector(
+              ".content"
+            ).textContent;
+          spanReply.textContent = "Replying to comment: " + commentContent;
+          var replytext = document.getElementById("replyto");
+          var comid =
+            this.parentElement.parentElement.querySelector(
+              ".commentId"
+            ).textContent;
+          replytext.value = comid;
+
+          textarea.focus(); // Focus on the textarea
+          // Scroll the page to the textarea
+          window.scrollTo({
+            top: textarea.offsetTop - 100, // Adjust the offset as needed
+            behavior: "smooth",
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -12,6 +12,8 @@ from views.autoBackup import auto_backup_bp
 from views.signup import signup_blueprint
 from views.login import login_blueprint
 from views.admin_management import admin_management_blueprint
+from views.managepost import manage_post_bp 
+from views.threadview import threads_bp
 from views.posts import posts_bp
 from dotenv import load_dotenv
 from models.database import db
@@ -27,6 +29,8 @@ from models.user import User,AdminRole
 from models.sessions import Session
 from models.token import Token
 from models.posts import Post
+from models.comments import Comments
+from models.threads import Thread
 from envsecrets.config import Config
 from data_loader import load_data 
 from views.autoBackup import schedule_initial_backup_job
@@ -48,6 +52,7 @@ app.register_blueprint(home_bp)
 # app.register_blueprint(auth_bp)
 app.register_blueprint(admin_bp, url_prefix='/admin')
 app.register_blueprint(data_bp, url_prefix='/data')
+app.register_blueprint(manage_post_bp, url_prefix = '/managepost')
 
 app.register_blueprint(pdf_upload_bp)
 app.register_blueprint(archive_bp, url_prefix='/archive')
@@ -61,21 +66,25 @@ app.register_blueprint(signup_blueprint)
 app.register_blueprint(login_blueprint)
 app.register_blueprint(admin_management_blueprint)
 app.register_blueprint(posts_bp,url_prefix='/posts')
+app.register_blueprint(threads_bp)
 # Function to check if tables exist in the 
 def tables_exist():
     with app.app_context():
         inspector = inspect(db.engine)
-        return all(table in inspector.get_table_names() for table in ['courses', 'semesters', 'subjects', 'question_papers', 'questions','auto_backup_settings' , 'users','admin_roles', "sessions" , "posts" ])
+        return all(table in inspector.get_table_names() for table in ['courses', 'semesters', 'subjects', 'question_papers', 'questions','auto_backup_settings' , 'users','admin_roles', "sessions" , "posts","threads" ])
 
 # Function to check if there is any data in the tables
 def data_exists():
     with app.app_context():
-        return any(db.session.query(model).count() > 0 for model in [Course, Semester, Subject, QuestionPaper, Question ,AutoBackupSettings ,  User, AdminRole , Token ,Session ,Post])
+        return any(db.session.query(model).count() > 0 for model in [Course, Semester, Subject, QuestionPaper, Question ,AutoBackupSettings ,  User, AdminRole , Token ,Session ,Post, Thread])
     
 # Create all tables and load data if necessary
 if not tables_exist():
     with app.app_context():
         db.create_all()
+
+
+
 
 
 #Fill tabls if no data exist in the created tables
