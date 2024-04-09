@@ -1,6 +1,8 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Text, Boolean
 from .database import db
+from models.categorypost import CategoryPost
+from models.category import Category
 
 class Post(db.Model):
     __tablename__ = 'posts'

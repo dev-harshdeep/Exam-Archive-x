@@ -4,16 +4,136 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Posts</title>
+    <style>
+      #reply-textarea {
+        border: 1px solid #ccc;
+        width: 100%;
+        min-height: 100px;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+
+      .submitbtn {
+        padding: 8px 16px;
+        border: none;
+        background-color: #28a745;
+        color: white;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      #commentbox {
+        border: 1px solid #ddd;
+        width: 60%;
+        margin: auto;
+        padding: 20px;
+      }
+
+      .group {
+        /* background: #eee; */
+        /* width: 400px; */
+        border-radius: 20px;
+        overflow: hidden;
+      }
+      .title {
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        font-size: x-large;
+        font-weight: 500;
+      }
+      .title img {
+        width: 40px;
+        margin-right: 10px;
+      }
+      .des {
+        padding: 0 20px;
+        color: #555;
+      }
+      .tags-input {
+        margin: 20px;
+        border: 1px solid #b5c8c6;
+        border-radius: 10px;
+        background-color: #fff;
+        padding: 10px;
+      }
+      .tags-input ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .tags-input li {
+        padding: 5px;
+        margin: 0 5px 5px 0;
+        border: 1px solid #5556;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+      }
+      .tags-input li .remove {
+        width: 12px;
+        height: 12px;
+        background-image: url("/static/remove.png");
+        background-size: cover;
+        margin-left: 10px;
+      }
+      .tags-input input {
+        order: 1;
+        border: none;
+        outline: none;
+      }
+      .removeAll {
+        padding: 20px;
+        text-align: right;
+      }
+      .removeAll button {
+        /* background-image: linear-gradient(to bottom, #a12cce, #7248cf); */
+
+        background-color: rgba(113, 65, 65, 0.729);
+        color: #eee;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+      }
+    </style>
   </head>
   <body>
+    <h1>category</h1>
+    <p>{{category}}</p>
+
     <h1>Posts</h1>
 
     {% if user %}
-    <!-- Render logout button -->
-    <form action="{{ url_for('posts.submit_post') }}" method="post">
-      <textarea name="post_content" rows="4" cols="50"></textarea><br />
-      <input type="submit" value="Submit" />
-    </form>
+    <div id="commentbox">
+      <!-- Render logout button -->
+
+      <form
+        action="{{ url_for('posts.submit_post', category=category) }}"
+        method="post"
+      >
+        <textarea
+          id="reply-textarea"
+          name="post_content"
+          rows="4"
+          cols="50"
+        ></textarea
+        ><br />
+        <input class="submitbtn" type="submit" value="Submit" />
+      </form>
+
+      <div class="group">
+        <div class="tags-input">
+          <ul>
+            <input type="text" name="" id="inputTag" placeholder="Enter tags" />
+          </ul>
+        </div>
+        <div class="removeAll">
+          <button>Remove All</button>
+        </div>
+      </div>
+    </div>
     {% endif %}
     <hr />
     <h2>Existing Posts:</h2>
@@ -35,11 +155,13 @@
     <script>
       let page = 2; // Initial page for lazy loading
       let loading = false;
+      let category = "{{ category }}";
 
       function loadMorePosts() {
         if (!loading) {
           loading = true;
-          fetch(`/posts/load-more?page=${page}`)
+          // fetch(`/posts/load-more?page=${page}`);
+          fetch(`/posts/load-more?page=${page}&category=${category}`)
             .then((response) => response.json())
             .then((data) => {
               const posts = data.posts;
@@ -50,14 +172,14 @@
                 posts.forEach((post) => {
                   const postElement = document.createElement("li");
                   postElement.innerHTML = `
-                                  <a href="/thread/${post.ThreadID}">
-                                      <p>UserID: ${post.UserID}</p>
-                                      <p>Content: ${post.Content}</p>
-                                      <p>time stamp: ${post.TimeStamp}</p>
-                                      <p>difficulty: ${post.DifficultyLevel}</p>
-                                      <!-- Add other details as needed -->
-                                  </a>
-                              `;
+                                    <a href="/thread/${post.ThreadID}">
+                                        <p>UserID: ${post.UserID}</p>
+                                        <p>Content: ${post.Content}</p>
+                                        <p>time stamp: ${post.TimeStamp}</p>
+                                        <p>difficulty: ${post.DifficultyLevel}</p>
+                                        <!-- Add other details as needed -->
+                                    </a>
+                                `;
                   postContainer.appendChild(postElement);
                 });
                 if (hasMore) {
@@ -88,6 +210,46 @@
 
       // Load more posts initially
       loadMorePosts();
+    </script>
+
+    <script>
+      let ul = document.querySelector(".tags-input ul");
+      let input = document.querySelector(".tags-input input");
+      let deleteAll = document.querySelector(".removeAll button");
+      let tags = ["html", "css", "javascript"];
+
+      function showTags() {
+        document
+          .querySelectorAll(".tags-input ul li")
+          .forEach((li) => li.remove());
+        tags.forEach((value, key) => {
+          let newTag = document.createElement("li");
+          newTag.innerText = value;
+          let newRemove = document.createElement("div");
+          newRemove.classList.add("remove");
+          newRemove.setAttribute("onclick", `removeTagItem(${key})`);
+          newTag.appendChild(newRemove);
+          ul.appendChild(newTag);
+        });
+      }
+      function removeTagItem(key) {
+        delete tags[key];
+        showTags();
+      }
+      showTags();
+      input.addEventListener("keyup", function (event) {
+        if (event.key === "Enter") {
+          if (!tags.includes(this.value)) {
+            tags.push(this.value);
+            showTags();
+          }
+          this.value = "";
+        }
+      });
+      deleteAll.addEventListener("click", function () {
+        tags = [];
+        showTags();
+      });
     </script>
   </body>
 </html>

@@ -31,6 +31,10 @@ from models.token import Token
 from models.posts import Post
 from models.comments import Comments
 from models.threads import Thread
+from models.category import Category
+from models.tag import Tag
+from models.tagpost import TagPost
+from models.categorypost import CategoryPost
 from envsecrets.config import Config
 from data_loader import load_data 
 from views.autoBackup import schedule_initial_backup_job
@@ -71,12 +75,12 @@ app.register_blueprint(threads_bp)
 def tables_exist():
     with app.app_context():
         inspector = inspect(db.engine)
-        return all(table in inspector.get_table_names() for table in ['courses', 'semesters', 'subjects', 'question_papers', 'questions','auto_backup_settings' , 'users','admin_roles', "sessions" , "posts","threads" ])
+        return all(table in inspector.get_table_names() for table in ['courses', 'semesters', 'subjects', 'question_papers', 'questions','auto_backup_settings' , 'users','admin_roles', "sessions" , "posts","threads" ,"tags","tag_post","categories","category_post" ])
 
 # Function to check if there is any data in the tables
 def data_exists():
     with app.app_context():
-        return any(db.session.query(model).count() > 0 for model in [Course, Semester, Subject, QuestionPaper, Question ,AutoBackupSettings ,  User, AdminRole , Token ,Session ,Post, Thread])
+        return any(db.session.query(model).count() > 0 for model in [Course, Semester, Subject, QuestionPaper, Question ,AutoBackupSettings ,  User, AdminRole , Token ,Session ,Post, Thread , Category,CategoryPost,Tag , TagPost])
     
 # Create all tables and load data if necessary
 if not tables_exist():
