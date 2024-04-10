@@ -51,24 +51,7 @@
           <ul class="links">
             <li><a href="#">HOME</a></li>
             <li>
-              <a href="#">COURSES</a>
-              <i class="bx bxs-chevron-down htmlcss-arrow arrow"></i>
-              <ul class="htmlCss-sub-menu sub-menu">
-                <li><a href="#">COUMPER SCIENCE </a></li>
-                <li><a href="#">BCA </a></li>
-                <li><a href="#">BBA</a></li>
-                <li class="more">
-                  <span
-                    ><a href="#">More</a>
-                    <i class="bx bxs-chevron-right arrow more-arrow"></i>
-                  </span>
-                  <ul class="more-sub-menu sub-menu">
-                    <li><a href="#">MBA</a></li>
-                    <li><a href="#">NURSING</a></li>
-                    <li><a href="#">HOTEL MANAGEMENT</a></li>
-                  </ul>
-                </li>
-              </ul>
+              <a href="{{ url_for('posts.categories') }}">Placement Prep</a>
             </li>
 
             <li><a href="#">ABOUT US</a></li>
@@ -117,19 +100,19 @@
       // Function to handle search redirection
       function redirectToSearch() {
         // Get the search query from the input field
-        var searchQuery = document.querySelector('.search-input1').value.trim();
+        var searchQuery = document.querySelector(".search-input1").value.trim();
 
-        if (searchQuery !== '') {
+        if (searchQuery !== "") {
           // Redirect to the search page with the query in the URL
           window.location.href =
-            '/search_page?query=' + encodeURIComponent(searchQuery);
+            "/search_page?query=" + encodeURIComponent(searchQuery);
         }
       }
 
       // Event listener for the search icon click
       document
-        .querySelector('.bx-search')
-        .addEventListener('click', redirectToSearch);
+        .querySelector(".bx-search")
+        .addEventListener("click", redirectToSearch);
     </script>
     <script src="{{ url_for('static', filename='index.js') }}"></script>
   </body>

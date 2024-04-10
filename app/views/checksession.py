@@ -24,15 +24,7 @@ def check_session():
                     admin_rights = None
                     if user.is_admin:
                         # User is a super admin
-                        admin_rights = {
-                            'can_access_backup': True,
-                            'can_edit_posts': True,
-                            'can_edit_courses': True,
-                            'can_upload_pdfs': True,
-                            'can_manage_admins': True
-                        }
-                    elif user.admin_role_id:
-                        # User has an admin role, fetch the role's permissions
+                        
                         admin_role = AdminRole.query.get(user.admin_role_id)
                         if admin_role:
                             admin_rights = {
@@ -42,7 +34,17 @@ def check_session():
                                 'can_upload_pdfs': admin_role.can_upload_pdfs,
                                 'can_manage_admins': admin_role.can_manage_admins
                             }
-
+                        else:
+                            admin_rights = {
+                            'can_access_backup': False,
+                            'can_edit_posts': False,
+                            'can_edit_courses': False,
+                            'can_upload_pdfs': False,
+                            'can_manage_admins': False
+                            }
+                    # elif user.admin_role_id:
+                        # User has an admin role, fetch the role's permissions
+                       
                     # Return user and admin rights
                     return user, admin_rights
                 else:

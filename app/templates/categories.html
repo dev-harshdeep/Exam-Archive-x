@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Categories</title>
+  </head>
+  <body>
+    <h1>Categories</h1>
+    <ul>
+      {% for category in categories %}
+      <a href="{{ url_for('posts.index', category=category.CategoryName) }}">
+        <li>{{ category.CategoryName }}</li></a
+      >
+      {% endfor %}
+    </ul>
+
+    <h2>Add New Category</h2>
+    <form action="/posts/categories" method="post">
+      <label for="category_name">Category Name:</label>
+      <input type="text" id="category_name" name="category_name" required />
+      <button type="submit">Add Category</button>
+    </form>
+  </body>
+</html>
