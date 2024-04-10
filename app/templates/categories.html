@@ -4,22 +4,116 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Categories</title>
+    <style>
+      .container {
+        display: flex;
+        flex-direction: column;
+        /* justify-content: center; */
+        align-items: center;
+        text-align: center;
+        height: 100vh;
+        width: 100%;
+      }
+      .cat {
+        min-width: 100%;
+        max-height: 100%;
+      }
+      .cat ul {
+        display: grid;
+        grid-template-columns: repeat(
+          3,
+          1fr
+        ); /* Three columns with equal width */
+        grid-gap: 20px; /* Gap between grid items */
+        list-style-type: none; /* Remove default bullet points */
+      }
+      .cat ul a {
+        background-color: #f0f0f0; /* Background color */
+        padding: 20px; /* Padding */
+        border: 1px solid #ccc; /* Border */
+        height: 100%;
+        width: 80%;
+        font-size: 20px;
+        text-decoration: none; /* Optional: remove underline */
+        color: rgba(31, 30, 30, 0.704);
+      }
+      /* 
+      .cat ul a li {
+        margin-top: 10px;
+      } */
+      /* Additional CSS for styling the form */
+      .container form {
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container form label {
+        display: block; /* Ensure labels are on their own line */
+        margin-bottom: 10px; /* Add space below each label */
+        font-size: 18px; /* Increase font size for labels */
+      }
+
+      .container form input[type="text"] {
+        width: 70%; /* Make input field fill the container width */
+        padding: 10px; /* Add padding to input field */
+        margin-bottom: 20px; /* Add space below input field */
+        font-size: 16px; /* Set font size for input field */
+        border: 1px solid #ccc; /* Add border to input field */
+        border-radius: 5px; /* Add border radius to input field */
+        box-sizing: border-box; /* Include padding and border in element's total width and height */
+      }
+
+      .container form button {
+        padding: 10px 18px; /* Add padding to button */
+        font-size: 14px; /* Increase font size for button */
+        background-color: #28a745; /* Set background color for button */
+        color: #fff; /* Set text color for button */
+        border: none; /* Remove border from button */
+        border-radius: 5px; /* Add border radius to button */
+        cursor: pointer; /* Change cursor to pointer on hover */
+        transition: background-color 0.3s ease; /* Add transition effect for background color */
+      }
+
+      .container form button:hover {
+        background-color: #218838; /* Change background color on hover */
+      }
+
+      .form-div {
+        /* border: 2px solid red; */
+        background-color: #f0f0f0;
+        margin-top: 50px;
+        width: 66%;
+        height: 29%;
+        border-radius: 10px;
+      }
+    </style>
   </head>
   <body>
-    <h1>Categories</h1>
-    <ul>
-      {% for category in categories %}
-      <a href="{{ url_for('posts.index', category=category.CategoryName) }}">
-        <li>{{ category.CategoryName }}</li></a
-      >
-      {% endfor %}
-    </ul>
+    <div class="container">
+      <h1>Categories</h1>
+      <div class="cat">
+        <ul>
+          {% for category in categories %}
+          <a
+            href="{{ url_for('posts.index', category=category.CategoryName) }}"
+          >
+            <li>{{ category.CategoryName }}</li></a
+          >
+          {% endfor %}
+        </ul>
+      </div>
 
-    <h2>Add New Category</h2>
-    <form action="/posts/categories" method="post">
-      <label for="category_name">Category Name:</label>
-      <input type="text" id="category_name" name="category_name" required />
-      <button type="submit">Add Category</button>
-    </form>
+      <div class="form-div">
+        <h2>Add New Category</h2>
+        <form action="/posts/categories" method="post">
+          <label for="category_name">Category Name:</label>
+          <input type="text" id="category_name" name="category_name" required />
+          <button type="submit">Add Category</button>
+        </form>
+      </div>
+    </div>
   </body>
 </html>

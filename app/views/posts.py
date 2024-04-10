@@ -9,8 +9,8 @@ from models.categorypost import CategoryPost
 # from .models import Post, Category, CategoryPost
 # from models.category import Category
 from views.checksession import check_session
-from markdown2 import markdown
-
+# from markdown2 import markdown
+import mistune
 posts_bp = Blueprint('posts', __name__)
 
 @posts_bp.route('/<category>')
@@ -29,11 +29,14 @@ def index(category=''):
     posts = Post.query.filter(Post.PostID.in_(post_ids)).filter_by(Approved=1).paginate(per_page=per_page)
     
     for post in posts.items:
-        post.Content = markdown(post.Content)
+        post.Content = mistune.markdown(post.Content)
         # Fetch the thread associated with the post
         post.thread = Thread.query.filter_by(PostID=post.PostID).first()
+        commentTime = post.TimeStamp
+        # dt_object = datetime.strptime(post.TimeStamp, '%Y-%m-%d %H:%M:%S')
+        post.commentTime = commentTime.strftime('%B,%d %Y')
 
-    return render_template('posts.html', posts=posts, user=user, category=category)
+    return render_template('posts.html', posts=posts, user=user, category=category )
 
 
 
@@ -49,7 +52,9 @@ def load_more_posts():
     if category:
         category_id = category.CategoryID
 
-        # Query distinct post IDs associated with the specified category
+        # Query distinct post IDs associated wip.strftime('%B,%d %Y')
+
+# Format the datetime object into your desired formatth the specified category
         post_ids = CategoryPost.query.filter_by(category_id=category_id).with_entities(CategoryPost.post_id).distinct().all()
         post_ids = [post_id for post_id, in post_ids]
 
@@ -59,10 +64,14 @@ def load_more_posts():
         # Check if there are more posts available
         has_next = posts.has_next
         for post in posts.items:
-            post.Content = markdown(post.Content)
+            post.Content = mistune.markdown(post.Content)
             # Fetch the thread associated with the post
+            
             post.thread = Thread.query.filter_by(PostID=post.PostID).first()
-
+            # dt_object = datetime.strptime(, '%Y-%m-%d %H:%M:%S')
+            commentTime = post.TimeStamp
+            # dt_object = datetime.strptime(post.TimeStamp, '%Y-%m-%d %H:%M:%S')
+            post.commentTime = commentTime.strftime('%B,%d %Y')
         # Prepare posts data for JSON response
         posts_data = [{
             'UserID': post.UserID,
@@ -78,17 +87,6 @@ def load_more_posts():
 
 
 
-    posts_data = [{
-        'UserID': post.UserID,
-        'Content': markdown(post.Content),
-        'TimeStamp':post.TimeStamp,
-        'DifficultyLevel':post.DifficultyLevel,
-        'ThreadID': post.thread.ThreadID
-    } for post in posts.items]
-
-
-
-    return jsonify({'posts': posts_data, 'has_next': has_next})
 
 
 @posts_bp.route('/submit/<category>', methods=['POST'])

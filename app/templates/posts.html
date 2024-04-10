@@ -97,59 +97,125 @@
         padding: 10px 20px;
         border-radius: 5px;
       }
+      .main-con {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        flex-direction: column;
+
+        text-decoration: none; /* Removes the underline */
+        color: inherit; /* Keeps the default text color */
+      }
+      .main-post {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: justify;
+        flex-direction: column;
+        list-style-type: none;
+        text-decoration: none; /* Removes the underline */
+        color: inherit; /* Keeps the default text color */
+        text-decoration: none;
+      }
+
+      .main-post ul a li {
+        padding: 10px 20px; /* Add padding to button */
+        font-size: 18px; /* Increase font size for button */
+        border: 1px solid #ccc; /* Add light gray border */
+        border-radius: 5px; /* Add border radius to button */
+        cursor: pointer; /* Change cursor to pointer on hover */
+        transition: background-color 0.3s ease;
+        text-decoration: none; /* Removes the underline */
+        color: inherit; /* Keeps the default text color */
+        color: black;
+        list-style-type: none; /* Remove default bullet points */
+        width: 54%;
+        margin-top: 50px;
+      }
+
+      .main-post ul {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-decoration: none; /* Removes the underline */
+        color: inherit; /* Keeps the default text color */
+      }
+      .main-post ul a {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none; /* Removes the underline */
+        color: inherit; /* Keeps the default text color */
+      }
     </style>
   </head>
   <body>
-    <h1>category</h1>
-    <p>{{category}}</p>
+    <div class="main-con">
+      <h1>{{category}}</h1>
+      <!-- <p></p> -->
 
-    <h1>Posts</h1>
+      <h1>Write a Post</h1>
 
-    {% if user %}
-    <div id="commentbox">
-      <!-- Render logout button -->
+      {% if user %}
+      <div id="commentbox">
+        <!-- Render logout button -->
 
-      <form
-        action="{{ url_for('posts.submit_post', category=category) }}"
-        method="post"
-      >
-        <textarea
-          id="reply-textarea"
-          name="post_content"
-          rows="4"
-          cols="50"
-        ></textarea
-        ><br />
-        <input class="submitbtn" type="submit" value="Submit" />
-      </form>
+        <form
+          action="{{ url_for('posts.submit_post', category=category) }}"
+          method="post"
+        >
+          <textarea
+            id="reply-textarea"
+            name="post_content"
+            rows="4"
+            cols="50"
+          ></textarea
+          ><br />
+          <input class="submitbtn" type="submit" value="Submit" />
+        </form>
 
-      <div class="group">
-        <div class="tags-input">
-          <ul>
-            <input type="text" name="" id="inputTag" placeholder="Enter tags" />
-          </ul>
-        </div>
-        <div class="removeAll">
-          <button>Remove All</button>
+        <div class="group">
+          <div class="tags-input">
+            <ul>
+              <input
+                type="text"
+                name=""
+                id="inputTag"
+                placeholder="Enter tags"
+              />
+            </ul>
+          </div>
+          <div class="removeAll">
+            <button>Remove All</button>
+          </div>
         </div>
       </div>
+      {% endif %}
     </div>
-    {% endif %}
     <hr />
-    <h2>Existing Posts:</h2>
-    <ul id="post-container">
-      {% for post in posts %}
-      <a href="/thread/{{post.thread.ThreadID}}">
-        <li>
-          <p>UserID: {{ post.UserID }}</p>
-          <p>Content: {{ post.Content | safe }}</p>
-          <p>time stamp: {{ post.TimeStamp }}</p>
-          <p>difficulty: {{ post.DifficultyLevel }}</p>
-          <!-- Add other details as needed -->
-        </li>
-      </a>
-      {% endfor %}
-    </ul>
+
+    <div class="main-post">
+      <h2>Existing Posts:</h2>
+      <ul id="post-container">
+        {% for post in posts %}
+        <a href="/thread/{{post.thread.ThreadID}}">
+          <li>
+            <div class="postTime">
+              <p>Commented on {{ post.commentTime }}</p>
+            </div>
+            <!-- <p>UserID: {{ post.UserID }}</p> -->
+            <p>{{ post.Content | safe }}</p>
+            <!-- <p>{{ post.DifficultyLevel }}</p> -->
+            <!-- Add other details as needed -->
+          </li>
+        </a>
+        {% endfor %}
+      </ul>
+    </div>
 
     <!-- JavaScript for lazy loading -->
     <script>
@@ -170,16 +236,20 @@
               if (posts.length > 0) {
                 const postContainer = document.getElementById("post-container");
                 posts.forEach((post) => {
-                  const postElement = document.createElement("li");
-                  postElement.innerHTML = `
-                                    <a href="/thread/${post.ThreadID}">
-                                        <p>UserID: ${post.UserID}</p>
-                                        <p>Content: ${post.Content}</p>
-                                        <p>time stamp: ${post.TimeStamp}</p>
-                                        <p>difficulty: ${post.DifficultyLevel}</p>
-                                        <!-- Add other details as needed -->
-                                    </a>
+                  const postElement = document.createElement("a");
+                  postElement.href = "/thread/" + post.ThreadID;
+                  var listItemElement = document.createElement("li");
+
+                  // Set the inner text of the list item
+                  listItemElement.innerHTML = post.Content;
+                  listItemElement.innerText += `
+
+
+                                ${post.TimeStamp}
+                               ${post.DifficultyLevel}
                                 `;
+                  postElement.appendChild(listItemElement);
+
                   postContainer.appendChild(postElement);
                 });
                 if (hasMore) {

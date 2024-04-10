@@ -10,7 +10,7 @@
         margin-bottom: 20px;
         padding: 10px;
         border: 1px solid #ccc;
-        min-width: 80%;
+        width: 54%;
         position: relative; /* Position relative for absolute positioning */
       }
       .comment .user {
@@ -99,6 +99,33 @@
         display: flex;
         gap: 10px;
       }
+
+      .main-con {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      .whichpost {
+        /* border: 2px solid red; */
+        background: #6666663f;
+        border-radius: 10px;
+        padding: 20px;
+        width: 74%;
+        margin-top: 20px;
+      }
+      .mainwhich {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      .replyiedto {
+        background-color: #827f7f95;
+        padding: 20px;
+      }
     </style>
   </head>
   <body>
@@ -135,29 +162,34 @@
       </form>
     </div>
 
-    <p>{{ post.Content }}</p>
-    <h1>Thread Comments</h1>
-
-    {% for comment in comments %}
-    <div class="comment">
-      {% if comment.Reply %}
-      <div class="replyiedto">Reply to {{ comment.ReplyContent | safe}}</div>
-      {% endif %}
-
-      <div class="user">{{ comment.UserID }}</div>
-      <div class="timestamp">{{ comment.TimeStamp }}</div>
-      <div class="content">{{ comment.Content | safe }}</div>
-      <div class="commentId">{{comment.CommentID}}</div>
-      <div class="replyyy">{{comment.Reply}}</div>
-      <div class="options">
-        <a href="#" class="reply-btn" data-thread-id="{{ thread.ThreadID }}"
-          >Reply</a
-        >
-        <a href="#">Like</a>
-      </div>
-      <div class="dots">&#8230;</div>
+    <div class="mainwhich">
+      <div class="whichpost">{{ post.Content | safe}}</div>
     </div>
-    {% endfor %}
+    <div class="main-con">
+      <h1>Thread Comments</h1>
+
+      {% for comment in comments %}
+      <div class="comment">
+        {% if comment.Reply %}
+        <div class="replyiedto">
+          <strong> Reply to {{ comment.ReplyContent | safe}} </strong>
+        </div>
+        {% endif %}
+
+        <div class="timestamp">Commented on {{ comment.commentTime }}</div>
+        <div class="content">{{ comment.Content | safe }}</div>
+
+        <div class="replyyy">{{comment.Reply}}</div>
+        <div class="options">
+          <a href="#" class="reply-btn" data-thread-id="{{ thread.ThreadID }}"
+            >Reply</a
+          >
+          <a href="#">Like</a>
+        </div>
+        <div class="dots">&#8230;</div>
+      </div>
+      {% endfor %}
+    </div>
 
     <!-- Add your JavaScript for dynamic interactions if needed -->
     <script>

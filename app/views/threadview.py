@@ -1,12 +1,12 @@
 from datetime import datetime
-from flask import Blueprint, render_template, request, redirect, url_for, flash, session , current_app
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session , current_app,jsonify
 from models.posts import Post
 from models.database import db
 from models.sessions import Session
 from models.comments import Comments
 from models.threads import Thread
 from views.checksession import check_session
-from markdown2 import markdown
+import mistune
 
 
 
@@ -27,11 +27,16 @@ def submit_thread(thread_id):
        
 
         post = Post.query.get(thread.PostID)
+        post.Content = mistune.markdown(post.Content)
+
         # Fetch comments related to the thread
         comments = Comments.query.filter_by(ThreadId=thread_id).all()
         
         for comment in comments:
-            comment.Content = markdown(comment.Content)
+            comment.Content = mistune.markdown(comment.Content)
+            commentTime = comment.TimeStamp
+            # dt_object = datetime.strptime(post.TimeStamp, '%Y-%m-%d %H:%M:%S')
+            comment.commentTime = commentTime.strftime('%B,%d %Y')
             if comment.Reply:
                 comment.ReplyContent = Comments.query.filter_by(CommentID = comment.Reply).first().Content
 
@@ -79,4 +84,4 @@ def submit_comment(thread_id):
         # Redirect back to the thread page
         return redirect(url_for('threads.submit_thread', thread_id=thread_id))
     else:
-        return
+        return jsonify({"error":"You are not logged in "})

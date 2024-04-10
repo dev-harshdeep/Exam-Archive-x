@@ -1,6 +1,6 @@
 from datetime import datetime
 from flask import Blueprint, render_template, request, jsonify, current_app
-from markdown2 import markdown
+import mistune
 from models.posts import Post
 from models.database import db
 from models.sessions import Session
@@ -14,7 +14,7 @@ manage_post_bp = Blueprint('managepost', __name__)
 def show_pending_posts():
     pending_posts = Post.query.filter_by(Approved=0).all()
     for post in pending_posts:
-        post.Content = markdown(post.Content)
+        post.Content = mistune.markdown(post.Content)
     return render_template('manage-post.html', pending_posts=pending_posts)
 
 @manage_post_bp.route('/manageaction', methods=["POST"])
