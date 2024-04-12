@@ -6,6 +6,7 @@ from models.sessions import Session
 from models.threads import Thread
 from models.category import Category
 from models.categorypost import CategoryPost
+from models.likes import LikeDislike
 # from .models import Post, Category, CategoryPost
 # from models.category import Category
 from views.checksession import check_session
@@ -36,8 +37,25 @@ def index(category=''):
         # dt_object = datetime.strptime(post.TimeStamp, '%Y-%m-%d %H:%M:%S')
         post.commentTime = commentTime.strftime('%B,%d %Y')
 
+
+        post.likes = LikeDislike.query.filter_by(PostID=post.PostID, Action=1).count()
+        post.dislikes = LikeDislike.query.filter_by(PostID=post.PostID, Action=-1).count()
+
+        if user:
+                # Check if the current user has liked or disliked the comment
+                liked = LikeDislike.query.filter_by(UserID=user.id, PostID=post.PostID, Action=1).first()
+                disliked = LikeDislike.query.filter_by(UserID=user.id, PostID=post.PostID, Action=-1).first()
+                post.has_liked = True if liked else False
+                post.has_disliked = True if disliked else False
+        else:
+                # If the user is not logged in, set both has_liked and has_disliked to False
+                post.has_liked = False
+                post.has_disliked = False
+
     return render_template('posts.html', posts=posts, user=user, category=category )
 
+
+        
 
 
 
@@ -149,8 +167,11 @@ def submit_post(category):
  
 @posts_bp.route('/categories', methods=['GET', 'POST'])
 def categories():
+
+    user, admin_rights = check_session()
     if request.method == 'POST':
         category_name = request.form['category_name']
+        description = request.form['description']  
         if category_name:
             # Check if category name already exists in the database
             existing_category = Category.query.filter_by(CategoryName=category_name).first()
@@ -159,9 +180,55 @@ def categories():
                 return render_template('categories.html', categories=Category.query.all(), error_message="Category already exists.")
             else:
                 # If category does not exist, add it to the database
-                new_category = Category(CategoryName=category_name)
+                new_category = Category(CategoryName=category_name, description=description)
                 db.session.add(new_category)
                 db.session.commit()
                 return redirect(url_for('posts.categories'))
     categories = Category.query.all()
-    return render_template('categories.html', categories=categories)
+    return render_template('categories.html', categories=categories , user=user)
+
+
+
+
+@posts_bp.route('/handle-postlikes/<postId>/<action>', methods=['POST'])
+def handle_likes(postId, action):
+    user, admin_rights = check_session()
+
+    if request.method == 'POST':
+        # Check if the action is either 'like' or 'dislike' or 'removeopinion'
+        if action in ['like', 'dislike', 'removeopinion']:
+            # Check if the action is valid
+            if action == 'like':
+                # Check if the user already has an opinion on this post
+                existing_opinion = LikeDislike.query.filter_by(UserID=user.id, PostID=postId).first()
+                if existing_opinion:
+                    existing_opinion.Action = 1  # Update the existing opinion to like
+                else:
+                    # Create a new entry in the database
+                    new_opinion = LikeDislike(UserID=user.id, PostID=postId, Action=1)
+                    db.session.add(new_opinion)
+                db.session.commit()
+
+            elif action == 'dislike':
+                # Check if the user already has an opinion on this post
+                existing_opinion = LikeDislike.query.filter_by(UserID=user.id, PostID=postId).first()
+                if existing_opinion:
+                    existing_opinion.Action = -1  # Update the existing opinion to dislike
+                else:
+                    # Create a new entry in the database
+                    new_opinion = LikeDislike(UserID=user.id, PostID=postId, Action=-1)
+                    db.session.add(new_opinion)
+                db.session.commit()
+
+            elif action == 'removeopinion':
+                # Check if the user already has an opinion on this post
+                existing_opinion = LikeDislike.query.filter_by(UserID=user.id, PostID=postId).first()
+                if existing_opinion:
+                    db.session.delete(existing_opinion)  # Remove the existing opinion from the database
+                    db.session.commit()
+
+            # Return success message
+            return 'Action successfully performed'
+
+    # Handle invalid actions or other HTTP methods
+    return 'Invalid action or method', 400

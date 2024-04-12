@@ -28,11 +28,10 @@
         list-style-type: none; /* Remove default bullet points */
       }
       .cat ul a {
-        background-color: #f0f0f0; /* Background color */
-        padding: 20px; /* Padding */
-        border: 1px solid #ccc; /* Border */
-        height: 100%;
-        width: 80%;
+        /* Background color */
+        /* Padding */
+        /* Border */
+
         font-size: 20px;
         text-decoration: none; /* Optional: remove underline */
         color: rgba(31, 30, 30, 0.704);
@@ -89,6 +88,59 @@
         height: 29%;
         border-radius: 10px;
       }
+
+      body {
+        font-family: arial;
+      }
+      .main {
+        margin: 2%;
+      }
+
+      .card {
+        width: 100%;
+        display: inline-block;
+        box-shadow: 2px 2px 20px black;
+        border-radius: 5px;
+        margin: 2%;
+      }
+
+      .image img {
+        width: 100%;
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
+      }
+
+      .title {
+        text-align: center;
+        padding: 10px;
+      }
+
+      h1 {
+        font-size: 20px;
+      }
+
+      .des {
+        padding: 3px;
+        text-align: center;
+
+        padding-top: 10px;
+        border-bottom-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+      }
+      .des button {
+        margin-top: 40px;
+        margin-bottom: 10px;
+        background-color: white;
+        border: 1px solid black;
+        border-radius: 5px;
+        padding: 10px;
+      }
+      .des button:hover {
+        background-color: black;
+        color: white;
+        transition: 0.5s;
+        cursor: pointer;
+      }
     </style>
   </head>
   <body>
@@ -97,22 +149,57 @@
       <div class="cat">
         <ul>
           {% for category in categories %}
-          <a
-            href="{{ url_for('posts.index', category=category.CategoryName) }}"
-          >
-            <li>{{ category.CategoryName }}</li></a
-          >
-          {% endfor %}
-        </ul>
-      </div>
 
-      <div class="form-div">
-        <h2>Add New Category</h2>
-        <form action="/posts/categories" method="post">
-          <label for="category_name">Category Name:</label>
-          <input type="text" id="category_name" name="category_name" required />
-          <button type="submit">Add Category</button>
-        </form>
+          <li>
+            <div class="main">
+              <!--cards -->
+
+              <!--cards -->
+
+              <div class="card">
+                <div class="image"></div>
+                <div class="title">
+                  <h1>{{ category.CategoryName }}</h1>
+                </div>
+                <div class="des">
+                  <p>{{ category.Description}}</p>
+                  <a
+                    href="{{ url_for('posts.index', category=category.CategoryName) }}"
+                  >
+                    <button>Open posts</button></a
+                  >
+                </div>
+              </div>
+            </div>
+          </li>
+
+          {% endfor %} {% if user.is_admin %}
+          <li>
+            <div class="card">
+              <h2>Add New Category</h2>
+              <form action="/posts/categories" method="post">
+                <label for="category_name">Category Name:</label>
+                <input
+                  type="text"
+                  id="category_name"
+                  name="category_name"
+                  required
+                />
+
+                <label for="description">Description:</label>
+                <textarea
+                  id="description"
+                  name="description"
+                  rows="4"
+                  cols="50"
+                ></textarea>
+
+                <button type="submit">Add Category</button>
+              </form>
+            </div>
+          </li>
+          {% endif %}
+        </ul>
       </div>
     </div>
   </body>

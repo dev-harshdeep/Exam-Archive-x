@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        color: black;
+        box-sizing: border-box;
+      }
+
+      .container {
+        padding: 35px 10%;
+      }
+
+      .photo {
+        height: 200px;
+        width: 200px;
+        border-radius: 50%;
+        border: 2px solid gray;
+      }
+      .profile {
+        display: flex;
+      }
+
+      .inner-profile {
+        border: 2px solid gray;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .outer-profile {
+        display: flex;
+        flex: 3;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid gray;
+      }
+      .stats {
+        display: flex;
+        justify-content: space-around;
+        width: 50%;
+        height: 50%;
+        align-items: center;
+        background-color: #f3f6f9;
+      }
+
+      table {
+        border-collapse: collapse;
+        height: 12%;
+        width: 94%;
+      }
+
+      tr,
+      td {
+        border: 2px solid black;
+      }
+
+      .otherinfo {
+        display: flex;
+      }
+
+      .noneclass {
+        display: none;
+      }
+
+      .stat {
+        padding: 10px;
+      }
+
+      .details {
+        width: 100%;
+        height: 60%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: baseline;
+        padding: 11px;
+        line-height: 28px;
+        font-weight: 700;
+      }
+      .profile {
+        height: 70vh;
+      }
+      .admin {
+        width: 17%;
+        display: flex;
+        justify-content: center;
+        border: 2px solid gray;
+      }
+      .post {
+        width: 100%;
+        border: 2px solid gray;
+      }
+      .actions {
+        width: 100%;
+        height: 26vh;
+        display: flex;
+        /* flex-direction: column; */
+        align-items: center;
+        justify-content: space-around;
+        border-bottom: 1px solid gray;
+      }
+
+      .link {
+        text-decoration: none;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none; /* Removes the underline */
+        color: inherit; /* Keeps the default text color */
+      }
+
+      .postlist {
+        padding: 10px 20px; /* Add padding to button */
+        font-size: 18px; /* Increase font size for button */
+        border: 1px solid #ccc; /* Add light gray border */
+        border-radius: 5px; /* Add border radius to button */
+        cursor: pointer; /* Change cursor to pointer on hover */
+        transition: background-color 0.3s ease;
+        text-decoration: none; /* Removes the underline */
+        color: inherit; /* Keeps the default text color */
+        color: black;
+        list-style-type: none; /* Remove default bullet points */
+        width: 54%;
+        margin-top: 50px;
+      }
+
+      .posts > h2 {
+        align-self: center;
+      }
+
+      .actions {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .actions button {
+        padding: 10px 20px;
+        margin: 0 5px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: #89cff0; /* Green */
+        color: white;
+        font-size: 16px;
+      }
+
+      .actions button:hover {
+        background-color: #45a049; /* Darker Green */
+      }
+
+      .actions button:focus {
+        outline: none;
+      }
+
+      /* Styling for individual button states */
+      .actions button.pending {
+        background-color: #f1c40f; /* Yellow */
+      }
+
+      .actions button.rejected {
+        background-color: #e74c3c; /* Red */
+      }
+      .stat {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        font-size: 20px;
+        background-color: #dfe4e9;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="profile">
+        <div class="inner-profile">
+          <div class="photo"></div>
+          <div class="details">
+            <p>id</p>
+            <p>{{ user.email }}</p>
+            <p>
+              Email Verified: {% if user.email_verified %} Yes {% else %} No {%
+              endif %}
+            </p>
+
+            <p>Courses</p>
+            <p>sem</p>
+          </div>
+        </div>
+        <div class="outer-profile">
+          <div class="stats">
+            <div class="stat">
+              <p>Posts</p>
+              <p>21</p>
+            </div>
+            <div class="stat">
+              <p>comments</p>
+              <p>45</p>
+            </div>
+            <div class="stat">
+              <p>likes</p>
+              <p>876</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="otherinfo">
+        {% if user.is_admin %}
+        <div class="admin">
+          <table>
+            <caption>
+              admin
+            </caption>
+            <tr>
+              <td>Can Access Backup:</td>
+              <td>
+                {% if admin_rights.can_access_backup %} Yes {% else %} No {%
+                endif %}
+              </td>
+            </tr>
+            <tr>
+              <td>Can Edit Posts:</td>
+              <td>
+                {% if admin_rights.can_edit_posts %} Yes {% else %} No {% endif
+                %}
+              </td>
+            </tr>
+            <tr>
+              <td>Can Edit Courses:</td>
+              <td>
+                {% if admin_rights.can_edit_courses %} Yes {% else %} No {%
+                endif %}
+              </td>
+            </tr>
+            <tr>
+              <td>Can Upload PDFs:</td>
+              <td>
+                {% if admin_rights.can_upload_pdfs %} Yes {% else %} No {% endif
+                %}
+              </td>
+            </tr>
+            <tr>
+              <td>Can Manage Admins:</td>
+              <td>
+                {% if admin_rights.can_manage_admins %} Yes {% else %} No {%
+                endif %}
+              </td>
+            </tr>
+          </table>
+        </div>
+        {% endif %}
+        <div class="post">
+          <div class="actions">
+            <button onclick="showApproved()">approved</button>
+            <button onclick="showPending()">pending</button>
+            <button onclick="showRejected()">rejected</button>
+          </div>
+          <div class="posts">
+            <div class="approve">
+              <h2>Aprooved Posts:</h2>
+              <ul id="post-container">
+                {% for post in approved_posts %}
+                <a class="link" href="/thread/{{post.thread.ThreadID}}">
+                  <li class="postlist">
+                    <div class="postTime">
+                      <p>Commented on {{ post.commentTime }}</p>
+                    </div>
+                    <!-- <p>UserID: {{ post.UserID }}</p> -->
+                    <p>{{ post.Content | safe }}</p>
+                    <!-- <p>{{ post.DifficultyLevel }}</p> -->
+                    <!-- Add other details as needed -->
+                  </li>
+                </a>
+                {% endfor %}
+              </ul>
+            </div>
+            <div class="pending noneclass">
+              <h2>Pending Posts:</h2>
+              <ul id="post-container">
+                {% for post in pending_posts %}
+                <li class="postlist">
+                  <div class="postTime">
+                    <p>Commented on {{ post.commentTime }}</p>
+                  </div>
+                  <!-- <p>UserID: {{ post.UserID }}</p> -->
+                  <p>{{ post.Content | safe }}</p>
+                  <!-- <p>{{ post.DifficultyLevel }}</p> -->
+                  <!-- Add other details as needed -->
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+            <div class="rejected noneclass">
+              <h2>Rejected Posts:</h2>
+              <ul id="post-container">
+                {% for post in rejected_posts %}
+                <li class="postlist">
+                  <div class="postTime">
+                    <p>Commented on {{ post.commentTime }}</p>
+                  </div>
+                  <p>{{ post.Content | safe }}</p>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const showPending = () => {
+        document.querySelector(".approve").classList.add("noneclass");
+        document.querySelector(".pending").classList.remove("noneclass");
+        document.querySelector(".rejected").classList.add("noneclass");
+      };
+      const showApproved = () => {
+        document.querySelector(".approve").classList.remove("noneclass");
+        document.querySelector(".pending").classList.add("noneclass");
+        document.querySelector(".rejected").classList.add("noneclass");
+      };
+      const showRejected = () => {
+        document.querySelector(".approve").classList.add("noneclass");
+        document.querySelector(".pending").classList.add("noneclass");
+        document.querySelector(".rejected").classList.remove("noneclass");
+      };
+    </script>
+  </body>
+</html>
