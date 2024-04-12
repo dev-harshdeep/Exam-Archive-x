@@ -3,6 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Nunito&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/db7ff75cee.js"
+      crossorigin="anonymous"
+    ></script>
+
     <title>Thread Comments</title>
     <style>
       /* Basic CSS styling for comments */
@@ -10,7 +21,7 @@
         margin-bottom: 20px;
         padding: 10px;
         border: 1px solid #ccc;
-        min-width: 80%;
+        width: 54%;
         position: relative; /* Position relative for absolute positioning */
       }
       .comment .user {
@@ -99,9 +110,112 @@
         display: flex;
         gap: 10px;
       }
+
+      .main-con {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      .whichpost {
+        /* border: 2px solid red; */
+        background: #6666663f;
+        border-radius: 10px;
+        padding: 20px;
+        width: 74%;
+        margin-top: 20px;
+      }
+      .mainwhich {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      .replyiedto {
+        background-color: #827f7f95;
+        padding: 20px;
+      }
+
+      .timestamp {
+        border-bottom: 1px solid #666;
+        height: 6vh;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .footer {
+        border-top: 1px solid #666;
+        height: 6vh;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .noneclass {
+        display: none;
+      }
+
+      .footer button span i {
+        height: 10px;
+        width: 25px;
+      }
+      .footer button {
+        border-radius: 30%;
+        border-radius: 50%;
+        border: none;
+        height: 30px;
+        width: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .dislike-button {
+        border-radius: 50%;
+        border: none;
+        height: 30px;
+        width: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .like-button.active .like-icon i,
+      .dislike-button.active .dislike-icon i {
+        color: #40bb0c; /* Default color for like icon */
+      }
+
+      .like-button.active .like-icon i {
+        color: #40bb0c; /* Color for like icon when button is active */
+      }
+
+      .dislike-button.active .dislike-icon i {
+        color: #d90808; /* Color for dislike icon when button is active */
+      }
+      .fone {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .ftwo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      code {
+        padding: 10px;
+        border-radius: 10px;
+        border: 2px solid black;
+        display: inline-block;
+      }
     </style>
   </head>
   <body>
+    {% if user %}
     <div id="commentbox">
       <div class="comment-nav">
         <div class="left">
@@ -113,11 +227,11 @@
           </div>
         </div>
         <div class="right">
-          <div class="bakchodi1">
-            <button>Backchodi one</button>
+          <div class="buttonone">
+            <button>button one</button>
           </div>
-          <div class="backchodi2">
-            <button>Backchodi two</button>
+          <div class="buttontwo">
+            <button>button two</button>
           </div>
         </div>
       </div>
@@ -134,30 +248,66 @@
         <input class="submitbtn" type="submit" value="Comment" />
       </form>
     </div>
+    {% endif %}
 
-    <p>{{ post.Content }}</p>
-    <h1>Thread Comments</h1>
-
-    {% for comment in comments %}
-    <div class="comment">
-      {% if comment.Reply %}
-      <div class="replyiedto">Reply to {{ comment.ReplyContent | safe}}</div>
-      {% endif %}
-
-      <div class="user">{{ comment.UserID }}</div>
-      <div class="timestamp">{{ comment.TimeStamp }}</div>
-      <div class="content">{{ comment.Content | safe }}</div>
-      <div class="commentId">{{comment.CommentID}}</div>
-      <div class="replyyy">{{comment.Reply}}</div>
-      <div class="options">
-        <a href="#" class="reply-btn" data-thread-id="{{ thread.ThreadID }}"
-          >Reply</a
-        >
-        <a href="#">Like</a>
-      </div>
-      <div class="dots">&#8230;</div>
+    <div class="mainwhich">
+      <div class="whichpost">{{ post.Content | safe}}</div>
     </div>
-    {% endfor %}
+    <div class="main-con">
+      <h1>Thread Comments</h1>
+
+      {% for comment in comments %}
+      <div class="comment">
+        {% if comment.Reply %}
+        <div class="replyiedto">
+          <strong> Reply to {{ comment.ReplyContent | safe}} </strong>
+        </div>
+        {% endif %}
+
+        <div class="timestamp">
+          Commented on {{ comment.commentTime }}
+          <div class="dots">&#8230;</div>
+          <div class="options">
+            <a href="#" class="reply-btn" data-thread-id="{{ thread.ThreadID }}"
+              >Reply</a
+            >
+            <a href="#">Like</a>
+          </div>
+        </div>
+        <div class="content {{comment.CommentID}}">
+          {{ comment.Content | safe }}
+        </div>
+
+        <!-- Other comment content -->
+
+        <div class="commentfooter" id="comment_{{ comment.CommentID }}">
+          <div class="footer">
+            <div class="fone">
+              <button
+                class="like-button {% if comment.has_liked %}active{% endif %}"
+                onclick="toggleLike({{ comment.CommentID }})"
+              >
+                <span class="icon like-icon">
+                  <i class="fa-solid fa-arrow-up"></i>
+                </span>
+              </button>
+              <p>{{ comment.likes }}</p>
+              <button
+                class="dislike-button {% if comment.has_disliked %}active{% endif %}"
+                onclick="toggleDislike({{ comment.CommentID }})"
+              >
+                <span class="icon dislike-icon">
+                  <i class="fa-solid fa-arrow-up fa-rotate-180"></i>
+                </span>
+              </button>
+              <p>{{ comment.dislikes }}</p>
+            </div>
+            <div class="ftwo"></div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
 
     <!-- Add your JavaScript for dynamic interactions if needed -->
     <script>
@@ -183,15 +333,18 @@
 
           // Get the content of the associated comment
           var commentContent =
-            this.parentElement.parentElement.querySelector(
+            this.parentElement.parentElement.parentElement.querySelector(
               ".content"
-            ).textContent;
-          spanReply.textContent = "Replying to comment: " + commentContent;
+            ).innerHTML;
+          spanReply.innerHTML = "<p>Replying to comment: </p>" + commentContent;
           var replytext = document.getElementById("replyto");
-          var comid =
-            this.parentElement.parentElement.querySelector(
-              ".commentId"
-            ).textContent;
+          var comid = this.parentElement.parentElement.parentElement
+            .querySelector(".content")
+            .className.split(" ")[1];
+          console.log(comid);
+          // this.parentElement.parentElement.querySelector(
+          //   ".commentId"
+          // ).textContent;
           replytext.value = comid;
 
           textarea.focus(); // Focus on the textarea
@@ -202,6 +355,74 @@
           });
         });
       });
+      function toggleLike(commentID) {
+        var postContainer = document.getElementById("comment_" + commentID);
+        var likeButton = postContainer.querySelector(".like-button");
+
+        // Toggle the 'active' class
+        likeButton.classList.toggle("active");
+
+        // Check if the like button is now active
+        if (likeButton.classList.contains("active")) {
+          // If it's active, make sure the dislike button is inactive
+          var dislikeButton = postContainer.querySelector(".dislike-button");
+          if (dislikeButton.classList.contains("active")) {
+            dislikeButton.classList.remove("active");
+          }
+          // Send a request to the backend to toggle the like
+          sendToggleRequest(commentID, "like");
+        } else {
+          // If the like button is now inactive, send a request to remove the like
+          sendToggleRequest(commentID, "removeopinion");
+        }
+      }
+
+      function toggleDislike(commentID) {
+        var postContainer = document.getElementById("comment_" + commentID);
+        var dislikeButton = postContainer.querySelector(".dislike-button");
+
+        // Toggle the 'active' class
+        dislikeButton.classList.toggle("active");
+
+        // Check if the dislike button is now active
+        if (dislikeButton.classList.contains("active")) {
+          // If it's active, make sure the like button is inactive
+          var likeButton = postContainer.querySelector(".like-button");
+          if (likeButton.classList.contains("active")) {
+            likeButton.classList.remove("active");
+          }
+          // Send a request to the backend to toggle the dislike
+          sendToggleRequest(commentID, "dislike");
+        } else {
+          // If the dislike button is now inactive, send a request to remove the dislike
+          sendToggleRequest(commentID, "removeopinion");
+        }
+      }
+
+      // Function to send a request to the backend
+      function sendToggleRequest(commentID, action) {
+        fetch(`/handle-likes/${commentID}/${action}`, {
+          method: "POST",
+          // Optionally, you can include headers and body if needed
+          // headers: {
+          //   'Content-Type': 'application/json',
+          // },
+          // body: JSON.stringify({}),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            // Optionally, handle the response if needed
+            // return response.json();
+          })
+          .catch((error) => {
+            console.error(
+              "There was a problem with the fetch operation:",
+              error
+            );
+          });
+      }
     </script>
   </body>
 </html>

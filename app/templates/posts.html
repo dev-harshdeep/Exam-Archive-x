@@ -3,6 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Nunito&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/db7ff75cee.js"
+      crossorigin="anonymous"
+    ></script>
     <title>Posts</title>
     <style>
       #reply-textarea {
@@ -97,59 +107,225 @@
         padding: 10px 20px;
         border-radius: 5px;
       }
+      .main-con {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        flex-direction: column;
+
+        text-decoration: none; /* Removes the underline */
+        color: inherit; /* Keeps the default text color */
+      }
+      .main-post {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: justify;
+        flex-direction: column;
+        list-style-type: none;
+        text-decoration: none; /* Removes the underline */
+        color: inherit; /* Keeps the default text color */
+        text-decoration: none;
+      }
+
+      .main-post ul li {
+        padding: 10px 20px; /* Add padding to button */
+        font-size: 18px; /* Increase font size for button */
+        border: 1px solid #ccc; /* Add light gray border */
+        border-radius: 5px; /* Add border radius to button */
+
+        transition: background-color 0.3s ease;
+        text-decoration: none; /* Removes the underline */
+        color: inherit; /* Keeps the default text color */
+        color: black;
+        list-style-type: none; /* Remove default bullet points */
+        width: 54%;
+        margin-top: 50px;
+      }
+
+      .main-post ul {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-decoration: none; /* Removes the underline */
+        color: inherit; /* Keeps the default text color */
+      }
+      .main-post ul a {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none; /* Removes the underline */
+        color: inherit; /* Keeps the default text color */
+      }
+
+      .postTime {
+        border-bottom: 1px solid #666;
+        height: 6vh;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .footer {
+        border-top: 1px solid #666;
+        height: 6vh;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .noneclass {
+        display: none;
+      }
+
+      .footer button span i {
+        height: 10px;
+        width: 25px;
+      }
+      .footer button {
+        border-radius: 30%;
+        border-radius: 50%;
+        border: none;
+        height: 30px;
+        width: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+
+      .dislike-button {
+        border-radius: 50%;
+        border: none;
+        height: 30px;
+        width: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .like-button.active .like-icon i,
+      .dislike-button.active .dislike-icon i {
+        color: #40bb0c; /* Default color for like icon */
+      }
+
+      .like-button.active .like-icon i {
+        color: #40bb0c; /* Color for like icon when button is active */
+      }
+
+      .dislike-button.active .dislike-icon i {
+        color: #d90808; /* Color for dislike icon when button is active */
+      }
+      .fone {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .ftwo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     </style>
   </head>
   <body>
-    <h1>category</h1>
-    <p>{{category}}</p>
+    <div class="main-con">
+      <h1>{{category}}</h1>
+      <!-- <p></p> -->
 
-    <h1>Posts</h1>
+      <h1>Write a Post</h1>
 
-    {% if user %}
-    <div id="commentbox">
-      <!-- Render logout button -->
+      {% if user %}
+      <div id="commentbox">
+        <!-- Render logout button -->
 
-      <form
-        action="{{ url_for('posts.submit_post', category=category) }}"
-        method="post"
-      >
-        <textarea
-          id="reply-textarea"
-          name="post_content"
-          rows="4"
-          cols="50"
-        ></textarea
-        ><br />
-        <input class="submitbtn" type="submit" value="Submit" />
-      </form>
+        <form
+          action="{{ url_for('posts.submit_post', category=category) }}"
+          method="post"
+        >
+          <textarea
+            id="reply-textarea"
+            name="post_content"
+            rows="4"
+            cols="50"
+          ></textarea
+          ><br />
+          <input class="submitbtn" type="submit" value="Submit" />
+        </form>
 
-      <div class="group">
-        <div class="tags-input">
-          <ul>
-            <input type="text" name="" id="inputTag" placeholder="Enter tags" />
-          </ul>
-        </div>
-        <div class="removeAll">
-          <button>Remove All</button>
+        <div class="group">
+          <div class="tags-input">
+            <ul>
+              <input
+                type="text"
+                name=""
+                id="inputTag"
+                placeholder="Enter tags"
+              />
+            </ul>
+          </div>
+          <div class="removeAll">
+            <button>Remove All</button>
+          </div>
         </div>
       </div>
+      {% endif %}
     </div>
-    {% endif %}
     <hr />
-    <h2>Existing Posts:</h2>
-    <ul id="post-container">
-      {% for post in posts %}
-      <a href="/thread/{{post.thread.ThreadID}}">
+
+    <div class="main-post">
+      <h2>Existing Posts:</h2>
+      <ul id="post-container">
+        {% for post in posts %}
+
         <li>
-          <p>UserID: {{ post.UserID }}</p>
-          <p>Content: {{ post.Content | safe }}</p>
-          <p>time stamp: {{ post.TimeStamp }}</p>
-          <p>difficulty: {{ post.DifficultyLevel }}</p>
+          <div class="postTime">
+            <p>Commented on {{ post.commentTime }}</p>
+          </div>
+          <!-- <p>UserID: {{ post.UserID }}</p> -->
+          <p class="content {{post.PostID}}">{{ post.Content | safe }}</p>
+          <!-- <p>{{ post.DifficultyLevel }}</p> -->
           <!-- Add other details as needed -->
+
+          <div class="Postfooter" id="post_{{ post.PostID }}">
+            <div class="footer">
+              <div class="fone">
+                <button
+                  class="like-button {% if post.has_liked %}active{% endif %}"
+                  onclick="toggleLike({{ post.PostID }})"
+                >
+                  <span class="icon like-icon">
+                    <i class="fa-solid fa-arrow-up"></i>
+                  </span>
+                </button>
+                <p>{{ post.likes }}</p>
+                <button
+                  class="dislike-button {% if post.has_disliked %}active{% endif %}"
+                  onclick="toggleDislike({{ post.PostID }})"
+                >
+                  <span class="icon dislike-icon">
+                    <i class="fa-solid fa-arrow-up fa-rotate-180"></i>
+                  </span>
+                </button>
+                <p>{{ post.dislikes }}</p>
+              </div>
+              <div class="ftwo">
+                <a href="/thread/{{post.thread.ThreadID}}"
+                  ><button>@</button></a
+                >
+              </div>
+            </div>
+          </div>
         </li>
-      </a>
-      {% endfor %}
-    </ul>
+
+        {% endfor %}
+      </ul>
+    </div>
 
     <!-- JavaScript for lazy loading -->
     <script>
@@ -170,16 +346,20 @@
               if (posts.length > 0) {
                 const postContainer = document.getElementById("post-container");
                 posts.forEach((post) => {
-                  const postElement = document.createElement("li");
-                  postElement.innerHTML = `
-                                    <a href="/thread/${post.ThreadID}">
-                                        <p>UserID: ${post.UserID}</p>
-                                        <p>Content: ${post.Content}</p>
-                                        <p>time stamp: ${post.TimeStamp}</p>
-                                        <p>difficulty: ${post.DifficultyLevel}</p>
-                                        <!-- Add other details as needed -->
-                                    </a>
+                  const postElement = document.createElement("a");
+                  postElement.href = "/thread/" + post.ThreadID;
+                  var listItemElement = document.createElement("li");
+
+                  // Set the inner text of the list item
+                  listItemElement.innerHTML = post.Content;
+                  listItemElement.innerText += `
+
+
+                                ${post.TimeStamp}
+                               ${post.DifficultyLevel}
                                 `;
+                  postElement.appendChild(listItemElement);
+
                   postContainer.appendChild(postElement);
                 });
                 if (hasMore) {
@@ -213,43 +393,112 @@
     </script>
 
     <script>
-      let ul = document.querySelector(".tags-input ul");
-      let input = document.querySelector(".tags-input input");
-      let deleteAll = document.querySelector(".removeAll button");
-      let tags = ["html", "css", "javascript"];
+      // let ul = document.querySelector(".tags-input ul");
+      // let input = document.querySelector(".tags-input input");
+      // let deleteAll = document.querySelector(".removeAll button");
+      // let tags = ["html", "css", "javascript"];
 
-      function showTags() {
-        document
-          .querySelectorAll(".tags-input ul li")
-          .forEach((li) => li.remove());
-        tags.forEach((value, key) => {
-          let newTag = document.createElement("li");
-          newTag.innerText = value;
-          let newRemove = document.createElement("div");
-          newRemove.classList.add("remove");
-          newRemove.setAttribute("onclick", `removeTagItem(${key})`);
-          newTag.appendChild(newRemove);
-          ul.appendChild(newTag);
-        });
-      }
-      function removeTagItem(key) {
-        delete tags[key];
-        showTags();
-      }
-      showTags();
-      input.addEventListener("keyup", function (event) {
-        if (event.key === "Enter") {
-          if (!tags.includes(this.value)) {
-            tags.push(this.value);
-            showTags();
+      // function showTags() {
+      //   document
+      //     .querySelectorAll(".tags-input ul li")
+      //     .forEach((li) => li.remove());
+      //   tags.forEach((value, key) => {
+      //     let newTag = document.createElement("li");
+      //     newTag.innerText = value;
+      //     let newRemove = document.createElement("div");
+      //     newRemove.classList.add("remove");
+      //     newRemove.setAttribute("onclick", `removeTagItem(${key})`);
+      //     newTag.appendChild(newRemove);
+      //     ul.appendChild(newTag);
+      //   });
+      // }
+      // function removeTagItem(key) {
+      //   delete tags[key];
+      //   showTags();
+      // }
+      // showTags();
+      // input.addEventListener("keyup", function (event) {
+      //   if (event.key === "Enter") {
+      //     if (!tags.includes(this.value)) {
+      //       tags.push(this.value);
+      //       showTags();
+      //     }
+      //     this.value = "";
+      //   }
+      // });
+      // deleteAll.addEventListener("click", function () {
+      //   tags = [];
+      //   showTags();
+      // });
+
+      function toggleLike(PostID) {
+        var postContainer = document.getElementById("post_" + PostID);
+        var likeButton = postContainer.querySelector(".like-button");
+
+        // Toggle the 'active' class
+        likeButton.classList.toggle("active");
+
+        // Check if the like button is now active
+        if (likeButton.classList.contains("active")) {
+          // If it's active, make sure the dislike button is inactive
+          var dislikeButton = postContainer.querySelector(".dislike-button");
+          if (dislikeButton.classList.contains("active")) {
+            dislikeButton.classList.remove("active");
           }
-          this.value = "";
+          // Send a request to the backend to toggle the like
+          sendToggleRequest(PostID, "like");
+        } else {
+          // If the like button is now inactive, send a request to remove the like
+          sendToggleRequest(PostID, "removeopinion");
         }
-      });
-      deleteAll.addEventListener("click", function () {
-        tags = [];
-        showTags();
-      });
+      }
+
+      function toggleDislike(PostID) {
+        var postContainer = document.getElementById("post_" + PostID);
+        var dislikeButton = postContainer.querySelector(".dislike-button");
+
+        // Toggle the 'active' class
+        dislikeButton.classList.toggle("active");
+
+        // Check if the dislike button is now active
+        if (dislikeButton.classList.contains("active")) {
+          // If it's active, make sure the like button is inactive
+          var likeButton = postContainer.querySelector(".like-button");
+          if (likeButton.classList.contains("active")) {
+            likeButton.classList.remove("active");
+          }
+          // Send a request to the backend to toggle the dislike
+          sendToggleRequest(PostID, "dislike");
+        } else {
+          // If the dislike button is now inactive, send a request to remove the dislike
+          sendToggleRequest(PostID, "removeopinion");
+        }
+      }
+
+      // Function to send a request to the backend
+      function sendToggleRequest(PostID, action) {
+        fetch(`/posts/handle-postlikes/${PostID}/${action}`, {
+          method: "POST",
+          // Optionally, you can include headers and body if needed
+          // headers: {
+          //   'Content-Type': 'application/json',
+          // },
+          // body: JSON.stringify({}),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            // Optionally, handle the response if needed
+            // return response.json();
+          })
+          .catch((error) => {
+            console.error(
+              "There was a problem with the fetch operation:",
+              error
+            );
+          });
+      }
     </script>
   </body>
 </html>

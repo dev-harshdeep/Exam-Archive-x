@@ -4,27 +4,97 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Manage Actions</title>
+    <style>
+      .main-con {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .inner-con {
+        padding: 10px 20px; /* Add padding to button */
+        font-size: 18px; /* Increase font size for button */
+        border: 1px solid #ccc; /* Add light gray border */
+        border-radius: 5px; /* Add border radius to button */
+        cursor: pointer; /* Change cursor to pointer on hover */
+        transition: background-color 0.3s ease;
+        text-decoration: none; /* Removes the underline */
+        color: inherit; /* Keeps the default text color */
+        color: black;
+        list-style-type: none; /* Remove default bullet points */
+        width: 54%;
+        margin-top: 50px;
+      }
+
+      .appr {
+        background-color: #4caf50; /* Green */
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 13px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+
+      .appr:hover {
+        background-color: #45a049; /* Darker Green */
+      }
+
+      .unappr {
+        background-color: #f44336; /* Red */
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 13px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+
+      .unappr:hover {
+        background-color: #d32f2f; /* Darker Red */
+      }
+    </style>
   </head>
   <body>
-    <ul>
-      {% for post in pending_posts %}
-      <li>
-        <p>PostID: {{ post.PostID }}</p>
-        <p>UserID: {{ post.UserID }}</p>
-        <p>Content: {{ post.Content | safe }}</p>
-        <p>time stamp: {{ post.TimeStamp }}</p>
-        <p>difficulty: {{ post.DifficultyLevel }}</p>
+    <div class="main-con">
+      <ul>
+        {% for post in pending_posts %}
+        <div class="inner-con">
+          <li>
+            <p>PostID: {{ post.PostID }}</p>
+            <p>UserID: {{ post.UserID }}</p>
+            <p>Content: {{ post.Content | safe }}</p>
+            <p>time stamp: {{ post.TimeStamp }}</p>
+            <p>difficulty: {{ post.DifficultyLevel }}</p>
 
-        <button onclick="performAction('approve', {{ post.PostID }})">
-          Approve
-        </button>
-        <button onclick="performAction('unapprove', {{ post.PostID }})">
-          Unapprove
-        </button>
-        <!-- Add other details as needed -->
-      </li>
-      {% endfor %}
-    </ul>
+            <button
+              class="appr"
+              onclick="performAction('approve', {{ post.PostID }})"
+            >
+              Approve
+            </button>
+            <button
+              class="unappr"
+              onclick="performAction('unapprove', {{ post.PostID }})"
+            >
+              Unapprove
+            </button>
+            <!-- Add other details as needed -->
+          </li>
+        </div>
+        {% endfor %}
+      </ul>
+    </div>
     <script>
       function performAction(action, postId) {
         fetch("/managepost/manageaction", {

@@ -15,6 +15,7 @@ from views.admin_management import admin_management_blueprint
 from views.managepost import manage_post_bp 
 from views.threadview import threads_bp
 from views.posts import posts_bp
+from views.profile import profile_bp
 from dotenv import load_dotenv
 from models.database import db
 from models.course import Course
@@ -35,6 +36,8 @@ from models.category import Category
 from models.tag import Tag
 from models.tagpost import TagPost
 from models.categorypost import CategoryPost
+from models.likes import LikeDislike
+from models.commentlikes import Commentlikes
 from envsecrets.config import Config
 from data_loader import load_data 
 from views.autoBackup import schedule_initial_backup_job
@@ -56,6 +59,7 @@ app.register_blueprint(home_bp)
 # app.register_blueprint(auth_bp)
 app.register_blueprint(admin_bp, url_prefix='/admin')
 app.register_blueprint(data_bp, url_prefix='/data')
+app.register_blueprint(profile_bp)
 app.register_blueprint(manage_post_bp, url_prefix = '/managepost')
 
 app.register_blueprint(pdf_upload_bp)
@@ -75,12 +79,12 @@ app.register_blueprint(threads_bp)
 def tables_exist():
     with app.app_context():
         inspector = inspect(db.engine)
-        return all(table in inspector.get_table_names() for table in ['courses', 'semesters', 'subjects', 'question_papers', 'questions','auto_backup_settings' , 'users','admin_roles', "sessions" , "posts","threads" ,"tags","tag_post","categories","category_post" ])
+        return all(table in inspector.get_table_names() for table in ['courses', 'semesters', 'subjects', 'question_papers', 'questions','auto_backup_settings' , 'users','admin_roles', "sessions" , "posts","threads" ,"tags","tag_post","categories","category_post","likes_dislikes","commentlikes" ])
 
 # Function to check if there is any data in the tables
 def data_exists():
     with app.app_context():
-        return any(db.session.query(model).count() > 0 for model in [Course, Semester, Subject, QuestionPaper, Question ,AutoBackupSettings ,  User, AdminRole , Token ,Session ,Post, Thread , Category,CategoryPost,Tag , TagPost])
+        return any(db.session.query(model).count() > 0 for model in [Course, Semester, Subject, QuestionPaper, Question ,AutoBackupSettings ,  User, AdminRole , Token ,Session ,Post, Thread , Category,CategoryPost,Tag , TagPost,LikeDislike,Commentlikes])
     
 # Create all tables and load data if necessary
 if not tables_exist():
