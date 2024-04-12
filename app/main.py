@@ -1,6 +1,5 @@
 from flask import Flask, render_template, jsonify
 from views.home import home_bp
-from views.auth import auth_bp
 from views.admin import admin_bp
 from views.data import data_bp
 from views.pdfUpload import pdf_upload_bp
@@ -84,7 +83,7 @@ def tables_exist():
 # Function to check if there is any data in the tables
 def data_exists():
     with app.app_context():
-        return any(db.session.query(model).count() > 0 for model in [Course, Semester, Subject, QuestionPaper, Question ,AutoBackupSettings ,  User, AdminRole , Token ,Session ,Post, Thread , Category,CategoryPost,Tag , TagPost,LikeDislike,Commentlikes])
+        return any(db.session.query(model).count() > 0 for model in [Course, Semester, Subject, QuestionPaper, Question ,AutoBackupSettings ,  User, AdminRole , Token ,Session ,Post, Thread , Category,CategoryPost,Tag , TagPost,LikeDislike,Commentlikes,Comments])
     
 # Create all tables and load data if necessary
 if not tables_exist():

@@ -2,7 +2,6 @@ import math
 import os
 from flask import Blueprint, render_template, session, redirect,current_app,jsonify
 from models.question_paper import QuestionPaper
-from views.auth import login_is_required
 from datetime import datetime
 from models.restore import restore_backup
 from models.backup import backup_database_and_files
@@ -94,7 +93,7 @@ def restore_backup_endpoint(backup_name):
     else:
         # Return response indicating failure if the backup file does not exist
         return jsonify({'status': 'error', 'message': f'Backup {backup_name} does not exist'})
-# @login_is_required
+
 @admin_bp.route('/dashboard')
 def dashboard():
     # Query the database to count the number of question papers
@@ -118,12 +117,3 @@ def get_folder_size(folder_path):
             folder_size += os.path.getsize(file_path)
         break  # We only need the size of the immediate folder, so break after the first iteration
     return folder_size
-@admin_bp.route('/edit-course-info')
-@login_is_required
-def edit_course_info():    
-    return "Edit Course Info Page"
-
-@admin_bp.route('/add-question-paper')
-@login_is_required
-def add_question_paper():
-    return "Add Question Paper Page"
